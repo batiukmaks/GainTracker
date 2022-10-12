@@ -1,0 +1,561 @@
+openapi: '3.0.2'
+info:
+  title: GainTracker
+  version: '1.0'
+  description: |-
+    Application to record results in your training sessions.
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: gaintrackerteam@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+  - url: https://gaintracker
+tags:
+  - name: user
+  - name: workout
+    description: Workout - set of exercises
+  - name: session
+    description: Particular session, where you used workout and recorded results.
+
+paths:
+  /user:
+    post:
+      tags:
+        - user
+      summary: Create user
+      description: Create a new user
+      operationId: createUser
+      requestBody:
+        description: Create user object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/userCreation'
+        required: true
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/userInfo'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    put:
+      tags:
+        - user
+      summary: Update user
+      description: 
+        'This can only be done by the logged in user, only his own info.'
+      operationId: updateUser
+      requestBody:
+        description: Update an existent user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/userInfo'
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/userInfo'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /user/login:
+    get:
+      tags: 
+        - user
+      summary: Logs user into the system
+      description: ''
+      operationId: loginUser
+      parameters:
+        - name: username
+          in: query
+          description: The username for login
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: The password for login
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/userInfo'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /user/logout:
+    get:
+      tags:
+        - user
+      summary: Logs out current logged in user
+      description: ''
+      operationId: logoutUser
+      responses:
+        '200':
+          description: Successfully logged out.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /user/measurements:
+    get:
+      tags:
+        - user
+      summary: Get all measurements
+      description: ''
+      operationId: getMeasurementsList
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/measurements'    
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      tags:
+        - user
+      summary: Make new measurement record
+      description: ''
+      operationId: makeMeasurementsRecord
+      requestBody:
+        description: Make measurement record
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/measurement'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/measurement'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /workouts:
+    get:
+      tags:
+        - workout
+      summary: Get all workouts
+      description: ''
+      operationId: getWorkoutsList
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/workoutInfo'    
+
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      tags:
+        - workout
+      summary: Create new workout
+      description: ''
+      operationId: createWorkout
+      requestBody:
+        description: Create workout
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/workoutCreation'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/workoutInfo'    
+
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /workouts/{id}:
+    get:
+      tags:
+        - workout
+      summary: Get workout by id
+      description: ''
+      operationId: getWorkoutInfo
+      parameters: 
+        - name: id
+          in: path
+          description: Workout id
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/workoutInfo' 
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      tags:
+        - workout
+      summary: Delete workout
+      description: ''
+      operationId: deleteWorkout
+      parameters: 
+        - name: id
+          in: path
+          description: Workout id
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Deleted successsfully...     
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /sessions:
+    get:
+      tags:
+        - session
+      summary: Get all sessions
+      description: ''
+      operationId: getSessionsList
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/sessionInfo'    
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      tags:
+        - session
+      summary: Create new session
+      description: ''
+      operationId: createSession
+      requestBody:
+        description: Create session
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/sessionCreation'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sessionInfo'    
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /sessions/{id}:
+    get:
+      tags:
+        - session
+      summary: Get session by id
+      description: ''
+      operationId: getSessionInfo
+      parameters: 
+        - name: id
+          in: path
+          description: Session id
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sessionInfo' 
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      tags:
+        - session
+      summary: Delete session
+      description: ''
+      operationId: deleteSession
+      parameters: 
+        - name: id
+          in: path
+          description: Session id
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Deleted successsfully...     
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+          
+components:
+  schemas:
+    userCreation: 
+      type: object
+      properties:
+        username:
+          type: string
+          example: batiukmaks3000
+        password:
+          type: string
+          example: str0ng_Passw0ord
+        first_name:
+          type: string
+          example: Maksym
+        last_name:
+          type: string
+          example: Batiuk
+        birthday:
+          type: string
+          format: date
+    userInfo: 
+      type: object
+      properties:
+        id: 
+          type: integer
+          format: int64
+          example: 13
+        username:
+          type: string
+          example: batiukmaks3000
+        password:
+          type: string
+          example: str0ng_Passw0ord
+        first_name:
+          type: string
+          example: Maksym
+        last_name:
+          type: string
+          example: Batiuk
+        birthday:
+          type: string
+          format: date
+    exerciseInfo: 
+      type: object
+      properties:
+        id: 
+          type: integer
+          format: int64
+          example: 13
+        name:
+          type: string
+          example: push ups
+        equipment:
+          type: string
+          example: required
+          enum:
+            - required
+            - not required
+        description:
+          type: string
+          example: DO SMTH!
+    workoutInfo: 
+      type: object
+      properties:
+        id: 
+          type: integer
+          format: int64
+          example: 13
+        name:
+          type: string
+          example: Upper Body
+        exercises:
+          type: array
+          items:
+            $ref: '#/components/schemas/exerciseInfo'
+    workoutCreation: 
+      type: object
+      properties:
+        name:
+          type: string
+          example: Upper Body
+        exercises:
+          type: array
+          items:
+            $ref: '#/components/schemas/exerciseInfo'
+    record:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 13
+        sets:
+          type: array
+          items:
+            type: integer
+        exercise:
+          $ref: '#/components/schemas/exerciseInfo'   
+    sessionInfo: 
+      type: object
+      properties:
+        id: 
+          type: integer
+          format: int64
+          example: 13
+        date:
+          type: string
+          format: date-time
+          example: 01-03-2004 19:00
+        workout:
+          $ref: '#/components/schemas/workoutInfo'
+        records:
+          type: array
+          items:
+            $ref: '#/components/schemas/record'
+    sessionCreation: 
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
+          example: 01-03-2004 19:00
+        workout:
+          $ref: '#/components/schemas/workoutInfo'
+        records:
+          type: array
+          items:
+            $ref: '#/components/schemas/record'
+    measurements:
+      type: object
+      properties:
+        weight:
+          type: array
+          items:
+            $ref: '#/components/schemas/measurement'
+        height:
+          type: array
+          items:
+            $ref: '#/components/schemas/measurement'
+        waist:
+          type: array
+          items:
+            $ref: '#/components/schemas/measurement'
+        hips:
+          type: array
+          items:
+            $ref: '#/components/schemas/measurement'
+        chest:
+          type: array
+          items:
+            $ref: '#/components/schemas/measurement'
+    measurement:
+      type: object
+      properties:
+        name: 
+          type: string
+          example: waist
+          enum:
+            - weight
+            - height
+            - waist 
+            - hips
+            - chest
+        record: 
+          type: number
+          format: float
+          example: 53.2
+    error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+        - code
+        - message
+    
+  responses:
+    BadRequest:
+      description: Invalid input.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/error'
+    Unauthorized:
+      description: Unauthorized user.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/error'
+    Forbidden:
+      description: The user does not have the necessary permissions for the resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/error'
+    NotFound:
+      description: The resourse is not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/error'
