@@ -1,47 +1,10 @@
-use actix_web::{get,post, web::{self,Json}, App, HttpServer, HttpResponse};
-use serde :: {Serialize, Deserialize};
+use actix_web::{ web::{self}, App, HttpServer};
 use std::{sync::Mutex, collections::HashMap};
 use actix_web::middleware::Logger;
 
-#[derive(Debug, Deserialize, Serialize)]
-struct Exersize{
-    name: String,
-}
+use crate::workouts::*;
 
-
-
-struct AppStateWithList{
-    exersize_list: Mutex<HashMap<i32,Exersize>>,
-}
-
-#[get("/ex/{num}")]
-async fn get_ex(data: web::Data<AppStateWithList>, path :web::Path<i32>) -> HttpResponse {
-    let list = data.exersize_list.lock().unwrap();
-    let num = path.into_inner();
-
-    if list.contains_key(&num){
-        let ex = list.get(&num).unwrap();
-        HttpResponse::Ok().json(ex)
-    }else{
-        HttpResponse::BadRequest().body("incorect id")
-    }
-}
-
-#[post("/ex/{num}")]
-async fn add_ex(data: web::Data<AppStateWithList>, path :web::Path<i32>,info: Json<Exersize>) -> HttpResponse {
-    let mut list = data.exersize_list.lock().unwrap();
-    let num = path.into_inner();
-
-    if list.contains_key(&num){
-        HttpResponse::BadRequest().body("incorect id")
-    }else{
-        let ex = Exersize{
-            name: info.name.clone(),
-        };
-        list.insert(num,ex);
-        HttpResponse::Ok().json(info)
-    }
-}
+mod workouts;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -50,17 +13,27 @@ async fn main() -> std::io::Result<()> {
     env_logger::init();
 
     // Note: web::Data created _outside_ HttpServer::new closure
-    let mut list = HashMap::new();
-    let ex1 = Exersize{
+    let mut list_ex = HashMap::new();
+    let ex1 = Exercise{
         name: String::from("bench press"),   
     };
-    let ex2 = Exersize{
+    let ex2 = Exercise{
         name: String::from("leg press"),   
     };
-    list.insert(1, ex1);
-    list.insert(2, ex2);
-    let exersize_list = web::Data::new(AppStateWithList {
-        exersize_list:  Mutex::new(list),
+    list_ex.insert(1, ex1.clone());
+    list_ex.insert(2, ex2.clone());
+    let mut workout_list = HashMap::new();
+
+    let workout1 = Workout{
+        name: String::from("basic workout"),
+        id: 1,
+        list_of_exs: vec![ex1,ex2],
+    };
+
+    workout_list.insert(1, workout1);
+    let data_state = web::Data::new(AppState {
+        exercise_list:  Mutex::new(list_ex),
+        workouts_list:  Mutex::new(workout_list),
     });
 
     HttpServer::new(move || {
@@ -68,9 +41,13 @@ async fn main() -> std::io::Result<()> {
         // move counter into the closure
         App::new()
             .wrap(logger)
-            .app_data(exersize_list.clone())// <- register the created data
+            .app_data(data_state.clone())// <- register the created data
             .service(get_ex)
             .service(add_ex)
+            .service(get_workout)
+            .service(get_all_workouts)
+            .service(delete_workout)
+            .service(add_workout)
     })
     .bind(("127.0.0.1", 8080))?
     .run()
