@@ -24,11 +24,18 @@ struct WorkoutAdd{
     pub list_of_exs_ids: Vec<i32>
 }
 
+#[derive(Debug,Clone, Deserialize, Serialize)]
+struct ExerciseAdd{
+    pub id: i32,
+    pub name: String,
+}
+
 
 pub struct AppState{
     pub exercise_list: Mutex<HashMap<i32,Exercise>>,
     pub workouts_list: Mutex<HashMap<i32,Workout>>,
 }
+
 
 #[post("/workouts")]
 async fn add_workout(data: web::Data<AppState>,info: Json<WorkoutAdd>) -> HttpResponse {
@@ -109,13 +116,13 @@ async fn get_ex(data: web::Data<AppState>, path :web::Path<i32>) -> HttpResponse
     }
 }
 
-#[post("/ex/{id}")]
-async fn add_ex(data: web::Data<AppState>, path :web::Path<i32>,info: Json<Exercise>) -> HttpResponse {
+#[post("/ex")]
+async fn add_ex(data: web::Data<AppState>, info: Json<ExerciseAdd>) -> HttpResponse {
     let mut list = data.exercise_list.lock().unwrap();
-    let id = path.into_inner();
+    let id = info.id;
 
     if list.contains_key(&id){
-        HttpResponse::BadRequest().body("incorect id")
+        HttpResponse::BadRequest().body("id already exists")
     }else{
         let ex = Exercise{
             name: info.name.clone(),
