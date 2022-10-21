@@ -18,9 +18,28 @@ tags:
     description: Workout - set of exercises
   - name: session
     description: Particular session, where you used workout and recorded results.
+  - name: exercise
+    description: blabla
 
 paths:
   /user:
+    get:
+      tags:
+        - user
+      summary: Get user by id
+      description: ''
+      operationId: getUserInfo
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/userInfo' 
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
     post:
       tags:
         - user
@@ -253,6 +272,98 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+  /exercises:
+    get:
+      tags:
+        - exercise
+      summary: Get all exercises
+      description: ''
+      operationId: getExercisesList
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/exerciseInfo'    
+
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      tags:
+        - exercise
+      summary: Create new exercise
+      description: ''
+      operationId: createExercise
+      requestBody:
+        description: Create exercise
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/exerciseCreation'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exerciseInfo'    
+
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /exercises/{id}:
+    get:
+      tags:
+        - exercise
+      summary: Get exercise by id
+      description: ''
+      operationId: getExerciseInfo
+      parameters: 
+        - name: id
+          in: path
+          description: Exercise id
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exerciseInfo' 
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      tags:
+        - exercise
+      summary: Delete exercise
+      description: ''
+      operationId: deleteExercise
+      parameters: 
+        - name: id
+          in: path
+          description: Exercise id
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Deleted successsfully...     
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
   /sessions:
     get:
       tags:
@@ -361,6 +472,12 @@ components:
         last_name:
           type: string
           example: Batiuk
+        sex: 
+          type: string
+          example: male
+          enum:
+            - male
+            - female
         birthday:
           type: string
           format: date
@@ -383,9 +500,48 @@ components:
         last_name:
           type: string
           example: Batiuk
+        sex: 
+          type: string
+          example: male
+          enum:
+            - male
+            - female
         birthday:
           type: string
           format: date
+    exerciseCreation: 
+      type: object
+      properties:
+        name:
+          type: string
+          example: push ups
+        equipment:
+          type: string
+          example: required
+          enum:
+            - required
+            - not required
+        type:
+          type: string
+          example: required
+          enum:
+            - cardio
+            - strength
+        muscles:
+          type: array
+          items:
+            type: string
+            example: required
+            enum:
+              - chest
+              - arms
+              - legs
+              - back
+              - core
+              - booty
+        description:
+          type: string
+          example: DO SMTH!
     exerciseInfo: 
       type: object
       properties:
@@ -402,6 +558,24 @@ components:
           enum:
             - required
             - not required
+        type:
+          type: string
+          example: required
+          enum:
+            - cardio
+            - strength
+        muscles:
+          type: array
+          items:
+            type: string
+            example: required
+            enum:
+              - chest
+              - arms
+              - legs
+              - back
+              - core
+              - booty
         description:
           type: string
           example: DO SMTH!
@@ -428,7 +602,7 @@ components:
         exercises:
           type: array
           items:
-            $ref: '#/components/schemas/exerciseInfo'
+            type: integer
     record:
       type: object
       properties:
@@ -441,7 +615,7 @@ components:
           items:
             type: integer
         exercise:
-          $ref: '#/components/schemas/exerciseInfo'   
+          type: integer
     sessionInfo: 
       type: object
       properties:
@@ -467,7 +641,7 @@ components:
           format: date-time
           example: 01-03-2004 19:00
         workout:
-          $ref: '#/components/schemas/workoutInfo'
+          type: integer
         records:
           type: array
           items:
