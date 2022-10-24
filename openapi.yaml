@@ -560,7 +560,7 @@ components:
             - not required
         type:
           type: string
-          example: required
+          example: endurance
           enum:
             - endurance
             - strength
