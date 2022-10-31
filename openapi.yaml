@@ -52,7 +52,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/userAndMeasurementsInfo'
+                $ref: '#/components/schemas/userInfo'
         '400':
           $ref: '#/components/responses/BadRequest'
   /user/login:
@@ -81,7 +81,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/userAndMeasurementsInfo'
+                $ref: '#/components/schemas/userInfo'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -533,6 +533,8 @@ components:
             exercise_name:
               type: string
               example: push ups
+            graph:
+              $ref: '#/components/schemas/graph'
             records:
               type: array
               items:
@@ -545,11 +547,9 @@ components:
             muscle_name:
               type: string
               example: chest
-            records:
-              type: array
-              items:
-                $ref: '#/components/schemas/recordInfo'
-
+            graph:
+              $ref: '#/components/schemas/graph'
+                
     workoutInfo: 
       type: object
       properties:
@@ -613,7 +613,7 @@ components:
         description:
           type: string
           example: Pushups are an exercise in which a person, keeping a prone position, with the hands palms down under the shoulders, the balls of the feet on the ground, and the back straight, pushes the body up and lets it down by an alternate straightening and bending of the arms.
-
+          
     sessionFullInfo: 
       allOf:
         - $ref: '#/components/schemas/sessionInfoForList'
@@ -632,24 +632,26 @@ components:
           example: 13
         date:
           type: string
-          format: date-time
-          example: 01-03-2004 19:00
-        workout:
-          $ref: '#/components/schemas/workoutInfo'
+          format: date
+          example: 01-03-2004
+        workout_id:
+          type: integer
+        workout_name:
+          type: string
+          example: Upper Body
     sessionCreation: 
       type: object
       properties:
         date:
           type: string
-          format: date-time
-          example: 01-03-2004 19:00
+          format: date
+          example: 01-03-2004
         workout:
           type: integer
         records:
           type: array
           items:
             $ref: '#/components/schemas/recordCreation'
-
     recordCreation:
       type: object
       properties:
@@ -677,8 +679,23 @@ components:
           properties:
             id: 
               type: integer
+            date: 
+              type: string
+              format: date
         - $ref: '#/components/schemas/recordCreation'
-
+    graph:
+      type: array
+      items:
+        type: object
+        properties:
+          value:
+            type: number
+            format: float
+            example: 12.7
+          date:
+            type: string
+            format: date
+            example: 01-03-2004
     error:
       type: object
       properties:
