@@ -414,6 +414,9 @@ components:
         username:
           type: string
           example: batiukmaks3000
+        email:
+          type: string
+          example: killer5000@gmail.com
         password:
           type: string
           example: str0ng_Passw0ord
@@ -442,6 +445,9 @@ components:
         username:
           type: string
           example: batiukmaks3000
+        email:
+          type: string
+          example: killer5000@gmail.com
         first_name:
           type: string
           example: Maksym
