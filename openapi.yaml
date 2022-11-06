@@ -628,7 +628,13 @@ components:
             records:
               type: array
               items:
-                $ref: '#/components/schemas/recordInfo'
+                allOf:
+                  - type: object
+                    properties:
+                      exercise_name:
+                        type: string
+                        example: "deadlift"
+                  - $ref: '#/components/schemas/recordInfo'
     sessionInfoForList: 
       type: object
       properties:
@@ -690,18 +696,24 @@ components:
               format: date
         - $ref: '#/components/schemas/recordCreation'
     graph:
-      type: array
-      items:
-        type: object
-        properties:
-          value:
-            type: number
-            format: float
-            example: 12.7
-          date:
-            type: string
-            format: date
-            example: 01-03-2004
+      type: object
+      properties:
+        graph_name:
+          type: string
+          example: weight
+        coordinates:
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type: number
+                format: float
+                example: 12.7
+              date:
+                type: string
+                format: date
+                example: 01-03-2004
     error:
       type: object
       properties:
