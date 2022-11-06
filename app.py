@@ -1,17 +1,23 @@
 from db import *
 from models import *
+from flask import Flask
 
 session_init()
 session = get_session()
 
-maks = User(username='batiukmaks', email='email@gmail.com', password='qwerty123',
-    first_name='Maks', last_name='Batiuk', sex='Male', birthday='2004-03-01')
+import os
 
-alex = User(username='alex3000', email='emailalex@gmail.com', password='qwerty321',
-    first_name='Alex', last_name='Alexovich', sex='Male', birthday='2004-02-09')
+def create_app(test_config=None):
+    # create and configure the app
+    app = Flask(__name__, instance_relative_config=True)
 
-session.add_all([maks, alex])
-session.commit()
+    from db import session_init
+    session_init()
 
-for user in session.query(User).all():
-    print(user.first_name, user.last_name, user.birthday)
+    from api import auth, progress, workout, session
+    app.register_blueprint(auth.auth)
+    app.register_blueprint(progress.progress)
+    app.register_blueprint(workout.workout)
+    app.register_blueprint(session.session)
+
+    return app
