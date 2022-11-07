@@ -563,6 +563,10 @@ components:
           type: integer
           format: int64
           example: 13
+        owner_id: 
+          type: integer
+          format: int64
+          example: 13
         name:
           type: string
           example: Upper Body
