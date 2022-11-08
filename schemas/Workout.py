@@ -1,12 +1,16 @@
 from marshmallow import Schema, fields, post_load
 from models import Workout
 
+class MuscleInfoSchema(Schema):
+    id = fields.Int()
+    name = fields.Str()
+
 class ExerciseInfoSchema(Schema):
     id = fields.Int()
     name = fields.Str()
     equipment = fields.Str()
     type = fields.Str()
-    # muscles = List()
+    muscles = fields.List(fields.Nested(MuscleInfoSchema))
     description = fields.Str()
 
 class WorkoutCreationSchema(Schema):

@@ -27,7 +27,7 @@ def add_workout():
         exercises = session.query(Exercise).all()
         exercises_info = []
         for exercise in exercises:
-            exercises_info.append(ExerciseInfoSchema().dump(exercise))
+            exercises_info.append(get_exercise_info_schema(exercise.id, session))
         return jsonify(exercises_info)
     elif request.method == 'POST':
         try:
@@ -79,9 +79,16 @@ def get_workout_info_schema(id, session):
         WorkoutExercise.workout_id == id).all()
 
     for exercise in workout_exercises:
-        exercise_info = ExerciseInfoSchema().dump(
-            session.query(Exercise).filter(
-                Exercise.id == exercise.exercise_id).first()
-        )
-        workout_info["exercises"].append(exercise_info)
+        workout_info["exercises"].append(get_exercise_info_schema(exercise.exercise_id, session))
     return workout_info
+
+def get_exercise_info_schema(id, session):
+    exercise = session.query(Exercise).filter(Exercise.id == id).first()
+    exercise_info = ExerciseInfoSchema().dump(exercise)
+    exercise_info['muscles'] = []
+    muscles_worked = session.query(MuscleWorked).filter(MuscleWorked.exercise_id==id)
+    for muscle_worked in muscles_worked:
+        muscle = session.query(Muscle).filter(Muscle.id==muscle_worked.muscle_id).first()
+        exercise_info['muscles'].append(MuscleInfoSchema().dump(muscle))
+        print (exercise_info['muscles'])
+    return exercise_info
