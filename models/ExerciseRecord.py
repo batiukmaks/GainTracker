@@ -17,6 +17,7 @@ class ExerciseSet(Base):
     __tablename__ = 'exercise_set'
 
     id = Column(Integer, primary_key=True)
+    sequence_number = Column(Integer)
     reps = Column(Integer)
     time = Column(Float)
     weight = Column(Float)

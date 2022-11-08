@@ -362,7 +362,7 @@ paths:
       description: Create new session, using already existing workout
       operationId: getExercisesForSession
       parameters: 
-        - name: id
+        - name: workout_id
           in: query
           description: Workout id, that is passed to query when user clicks `Create session` in `/workout/{id}`
           schema:
@@ -667,6 +667,9 @@ components:
           items:
             type: object
             properties:
+              sequence_number:
+                type: integer
+                example: 1
               reps:
                 type: integer
                 example: 15
