@@ -118,9 +118,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/measurementsList'
+                $ref: '#/components/schemas/measurementsList'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
@@ -487,24 +485,10 @@ components:
           example: 19.8
           default: -1
     measurementsList:
-      type: object
-      properties:
-        weight:
-          type: array
-          items:
-            $ref: '#/components/schemas/measurementInfo'
-        waist:
-          type: array
-          items:
-            $ref: '#/components/schemas/measurementInfo'
-        hips:
-          type: array
-          items:
-            $ref: '#/components/schemas/measurementInfo'
-        chest:
-          type: array
-          items:
-            $ref: '#/components/schemas/measurementInfo'
+      type: array
+      items:
+        $ref: '#/components/schemas/measurementInfo'
+
     measurementInfo:
       type: object
       properties:
@@ -530,7 +514,12 @@ components:
     userAndMeasurementsInfo:
       allOf:
         - $ref: '#/components/schemas/userInfo'
-        - $ref: '#/components/schemas/measurementsList'
+        - type: object
+          properties:
+            measurement_records: 
+              type: array
+              items:
+                $ref: "#/components/schemas/graph"
     userAndExerciseInfo:
       allOf:
         - $ref: '#/components/schemas/userInfo'
