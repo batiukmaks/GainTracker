@@ -552,7 +552,7 @@ components:
           type: integer
           format: int64
           example: 13
-        owner_id: 
+        author_id: 
           type: integer
           format: int64
           example: 13
@@ -635,15 +635,15 @@ components:
           type: integer
           format: int64
           example: 13
-        date:
-          type: string
-          format: date
-          example: 01-03-2004
         workout_id:
           type: integer
         workout_name:
           type: string
           example: Upper Body
+        date:
+          type: string
+          format: date
+          example: 01-03-2004
     sessionCreation: 
       type: object
       properties:
@@ -651,7 +651,7 @@ components:
           type: string
           format: date
           example: 01-03-2004
-        workout:
+        workout_id:
           type: integer
         records:
           type: array
@@ -684,9 +684,8 @@ components:
           properties:
             id: 
               type: integer
-            date: 
+            exercise_name: 
               type: string
-              format: date
         - $ref: '#/components/schemas/recordCreation'
     graph:
       type: object
