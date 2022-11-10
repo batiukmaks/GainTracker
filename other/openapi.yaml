@@ -63,9 +63,9 @@ paths:
       description: Logs user into the system
       operationId: loginUser
       parameters:
-        - name: username
+        - name: username_or_email
           in: query
-          description: The username for login
+          description: The username or email for login
           required: true
           schema:
             type: string
