@@ -4,19 +4,19 @@ from sqlalchemy import desc
 from schemas import *
 from models import *
 from .workout import get_workout_info_schema
-from db import get_session
+from db import get_db
 session = Blueprint('sessions', __name__, url_prefix='/sessions')
 
 
 @session.route('/', methods=['GET'])
 def get_sessions():
-    session = get_session()
+    db = get_db()
     user_id = request.args.get("user_id")  # temporary
 
-    sessions = session.query(Session).filter(Session.user_id == user_id).order_by(desc(Session.date))
+    sessions = db.query(Session).filter(Session.user_id == user_id).order_by(desc(Session.date))
     sessions_info = []
     for sess in sessions:
-        workout = session.query(Workout).filter(
+        workout = db.query(Workout).filter(
             Workout.id == sess.workout_id).first()
         sessions_info.append(SessionInfoForListSchema().dump(sess))
         sessions_info[-1]["workout_name"] = workout.name
@@ -25,16 +25,16 @@ def get_sessions():
 
 @session.route('/<id>', methods=['GET'])
 def get_session_by_id(id):
-    session = get_session()
-    sess = session.query(Session).filter(Session.id == id).first()
+    db = get_db()
+    sess = db.query(Session).filter(Session.id == id).first()
     if not sess:
         return jsonify({'Error': 'There is no such session.'})
-    return jsonify(get_session_info_schema(id, session))
+    return jsonify(get_session_info_schema(id, db))
 
 
 @session.route('/add', methods=['GET', 'POST'])
 def create_session():
-    session = get_session()
+    db = get_db()
 
     if request.method == 'GET':
         workout_id = request.args.get("workout_id")
@@ -50,9 +50,9 @@ def create_session():
             user_id=user_id,
             workout_id=new_session_schema["workout_id"]
         )
-        session.add(sess)
-        session.flush()
-        session.refresh(sess)
+        db.add(sess)
+        db.flush()
+        db.refresh(sess)
 
         for record in new_session_schema["records"]:
             exercise_record = ExerciseRecord(
@@ -60,21 +60,21 @@ def create_session():
                 session_id=sess.id,
                 exercise_id=record["exercise_id"]
             )
-            session.add(exercise_record)
-            session.flush()
-            session.refresh(exercise_record)
+            db.add(exercise_record)
+            db.flush()
+            db.refresh(exercise_record)
             for set in record["sets"]:
                 set.exercise_record_id = exercise_record.id
-                session.add(set)
-        session.commit()
-        return get_session_info_schema(sess.id, session)
+                db.add(set)
+        db.commit()
+        return get_session_info_schema(sess.id, db)
 
 
-def get_session_info_schema(id, session):
-    sess = session.query(Session).filter(Session.id == id).first()
-    workout = session.query(Workout).filter(
+def get_session_info_schema(id, db):
+    sess = db.query(Session).filter(Session.id == id).first()
+    workout = db.query(Workout).filter(
         Workout.id == sess.workout_id).first()
-    exercise_records = session.query(ExerciseRecord).filter(
+    exercise_records = db.query(ExerciseRecord).filter(
         ExerciseRecord.session_id == id)
 
     session_schema = SessionInfoForListSchema().dump(sess)
@@ -82,17 +82,17 @@ def get_session_info_schema(id, session):
     session_schema["records"] = []
     for exercise_record in exercise_records:
         session_schema['records'].append(
-            get_record_info_schema(exercise_record.id, session))
+            get_record_info_schema(exercise_record.id, db))
 
     return session_schema
 
 
-def get_record_info_schema(id, session):
-    exercise_record = session.query(ExerciseRecord).filter(
+def get_record_info_schema(id, db):
+    exercise_record = db.query(ExerciseRecord).filter(
         ExerciseRecord.id == id).first()
-    exercise = session.query(Exercise).filter(
+    exercise = db.query(Exercise).filter(
         Exercise.id == exercise_record.exercise_id).first()
-    exercise_sets = session.query(ExerciseSet).filter(
+    exercise_sets = db.query(ExerciseSet).filter(
         ExerciseSet.exercise_record_id == exercise_record.id).order_by(ExerciseSet.sequence_number)
 
     exercise_record_schema = {
