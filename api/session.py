@@ -6,11 +6,10 @@ from models import *
 from .workout import get_workout_info_schema
 from db import get_db
 session = Blueprint('sessions', __name__, url_prefix='/sessions')
-
+db = get_db()
 
 @session.route('/', methods=['GET'])
 def get_sessions():
-    db = get_db()
     user_id = request.args.get("user_id")  # temporary
 
     sessions = db.query(Session).filter(Session.user_id == user_id).order_by(desc(Session.date))
@@ -25,7 +24,6 @@ def get_sessions():
 
 @session.route('/<id>', methods=['GET'])
 def get_session_by_id(id):
-    db = get_db()
     sess = db.query(Session).filter(Session.id == id).first()
     if not sess:
         return jsonify({'Error': 'There is no such session.'})
@@ -34,11 +32,9 @@ def get_session_by_id(id):
 
 @session.route('/add', methods=['GET', 'POST'])
 def create_session():
-    db = get_db()
-
     if request.method == 'GET':
         workout_id = request.args.get("workout_id")
-        return jsonify(get_workout_info_schema(workout_id, session))
+        return jsonify(get_workout_info_schema(workout_id))
     elif request.method == 'POST':
         user_id = request.args.get("user_id")  # temporary
         try:
@@ -67,10 +63,10 @@ def create_session():
                 set.exercise_record_id = exercise_record.id
                 db.add(set)
         db.commit()
-        return get_session_info_schema(sess.id, db)
+        return get_session_info_schema(sess.id)
 
 
-def get_session_info_schema(id, db):
+def get_session_info_schema(id):
     sess = db.query(Session).filter(Session.id == id).first()
     workout = db.query(Workout).filter(
         Workout.id == sess.workout_id).first()
@@ -82,12 +78,12 @@ def get_session_info_schema(id, db):
     session_schema["records"] = []
     for exercise_record in exercise_records:
         session_schema['records'].append(
-            get_record_info_schema(exercise_record.id, db))
+            get_record_info_schema(exercise_record.id))
 
     return session_schema
 
 
-def get_record_info_schema(id, db):
+def get_record_info_schema(id):
     exercise_record = db.query(ExerciseRecord).filter(
         ExerciseRecord.id == id).first()
     exercise = db.query(Exercise).filter(

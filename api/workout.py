@@ -4,30 +4,28 @@ from schemas import *
 from models import *
 from db import get_db
 workout = Blueprint('workouts', __name__, url_prefix='/workouts')
-
+db = get_db()
 
 @workout.route('/', methods=['GET'])
 def get_workouts():
-    db = get_db()
     author_id = request.args.get("author_id")  # temporary
 
     workouts = db.query(Workout).filter(Workout.author_id == author_id)
     workouts_info = []
     for workout in workouts:
-        workouts_info.append(get_workout_info_schema(workout.id, session))
+        workouts_info.append(get_workout_info_schema(workout.id))
     return jsonify(workouts_info)
 
 
 @workout.route('/add', methods=['GET', 'POST'])
 def add_workout():
-    db = get_db()
     author_id = request.args.get("author_id")  # temporary
 
     if request.method == 'GET':  # return list of exercises
         exercises = db.query(Exercise).all()
         exercises_info = []
         for exercise in exercises:
-            exercises_info.append(get_exercise_info_schema(exercise.id, db))
+            exercises_info.append(get_exercise_info_schema(exercise.id))
         return jsonify(exercises_info)
     elif request.method == 'POST':
         try:
@@ -51,18 +49,17 @@ def add_workout():
 
         db.add_all(workout_exercises)
         db.commit()
-        return get_workout_info_schema(workout.id, db)
+        return get_workout_info_schema(workout.id)
 
 
 @workout.route('/<id>', methods=['GET', 'DELETE'])
 def get_workout_by_id(id):
-    db = get_db()
     workout = db.query(Workout).filter(Workout.id == id).first()
     if not workout:
         return jsonify({'Error': 'There is no such workout'}), 404
 
     if request.method == 'GET':
-        return jsonify(get_workout_info_schema(id, db))
+        return jsonify(get_workout_info_schema(id))
     elif request.method == 'DELETE':
         db.query(Workout).filter(Workout.id == id).delete()
         db.commit()
@@ -71,7 +68,7 @@ def get_workout_by_id(id):
         return jsonify({'Message': 'Workout successfully deleted'})
 
 
-def get_workout_info_schema(id, db):
+def get_workout_info_schema(id):
     workout = db.query(Workout).filter(Workout.id == id).first()
     workout_info = WorkoutInfoSchema().dump(workout)
     workout_info['exercises'] = []
@@ -79,10 +76,10 @@ def get_workout_info_schema(id, db):
         WorkoutExercise.workout_id == id).all()
 
     for exercise in workout_exercises:
-        workout_info["exercises"].append(get_exercise_info_schema(exercise.exercise_id, db))
+        workout_info["exercises"].append(get_exercise_info_schema(exercise.exercise_id))
     return workout_info
 
-def get_exercise_info_schema(id, db):
+def get_exercise_info_schema(id):
     exercise = db.query(Exercise).filter(Exercise.id == id).first()
     exercise_info = ExerciseInfoSchema().dump(exercise)
     exercise_info['muscles'] = []

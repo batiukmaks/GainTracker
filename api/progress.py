@@ -4,6 +4,7 @@ from db import get_db
 from models import *
 from schemas import *
 progress = Blueprint('progress', __name__, url_prefix='/user/progress')
+db = get_db()
 
 
 @progress.route('/progress')
@@ -13,7 +14,6 @@ def hello():
 
 @progress.route('/measurements/add', methods=['POST'])
 def add_measurements():
-    db = get_db()
     user_id = request.args.get("user_id")  # temporary
     records = request.json
 

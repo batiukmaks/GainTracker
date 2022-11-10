@@ -5,11 +5,11 @@ from schemas import *
 from models import *
 from db import get_db
 auth = Blueprint('auth', __name__, url_prefix='/user')
+db = get_db()
 
 
 @auth.route('/signup', methods=['POST'])
 def signup():
-    db = get_db()
     try:
         new_user = UserCreationSchema().load(request.json)
         new_user.password = generate_password_hash(new_user.password)
@@ -30,7 +30,6 @@ def signup():
 
 @auth.route('/login', methods=['GET'])
 def login():
-    db = get_db()
     login = request.args.get("username_or_email")
     password = request.args.get("password")
     user = db.query(User).filter(User.email == login).first(
