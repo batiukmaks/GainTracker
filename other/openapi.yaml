@@ -110,7 +110,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/measurementsCreation'
+              type: array
+              items:
+                $ref: '#/components/schemas/measurementRecordCreation'
         required: true
       responses:
         '200':
@@ -461,35 +463,22 @@ components:
         birthday:
           type: string
           format: date
-    measurementsCreation:
+    measurementRecordCreation:
       type: object
       properties:
-        weight:
+        name:
+          type: string
+          example: waist
+        record:
           type: number
           format: float
-          example: 63.4
-          default: -1
-        chest:
-          type: number
-          format: float
-          example: 83.6
-          default: -1
-        waist:
-          type: number
-          format: float
-          example: 45.3
-          default: -1
-        hips:
-          type: number
-          format: float
-          example: 19.8
-          default: -1
+          example: 42.3
     measurementsList:
       type: array
       items:
-        $ref: '#/components/schemas/measurementInfo'
+        $ref: '#/components/schemas/measurementRecordInfo'
 
-    measurementInfo:
+    measurementRecordInfo:
       type: object
       properties:
         id: 
