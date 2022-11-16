@@ -636,10 +636,6 @@ components:
     sessionCreation: 
       type: object
       properties:
-        date:
-          type: string
-          format: date
-          example: 01-03-2004
         workout_id:
           type: integer
         records:
