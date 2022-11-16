@@ -1,16 +1,17 @@
 from flask import Blueprint, request, abort, jsonify, redirect, url_for
+from flask_jwt_extended import jwt_required, current_user
 from marshmallow import ValidationError
 from schemas import *
 from models import *
 from db import get_db
+
 workout = Blueprint('workouts', __name__, url_prefix='/workouts')
 db = get_db()
 
 @workout.route('/', methods=['GET'])
+@jwt_required()
 def get_workouts():
-    author_id = request.args.get("author_id")  # temporary
-
-    workouts = db.query(Workout).filter(Workout.author_id == author_id)
+    workouts = db.query(Workout).filter(Workout.author_id == current_user.id)
     workouts_info = []
     for workout in workouts:
         workouts_info.append(get_workout_info_schema(workout.id))
@@ -18,9 +19,8 @@ def get_workouts():
 
 
 @workout.route('/add', methods=['GET', 'POST'])
+@jwt_required()
 def add_workout():
-    author_id = request.args.get("author_id")  # temporary
-
     if request.method == 'GET':  # return list of exercises
         exercises = db.query(Exercise).all()
         exercises_info = []
@@ -30,7 +30,7 @@ def add_workout():
     elif request.method == 'POST':
         try:
             new_workout = WorkoutCreationSchema().load(request.json)
-            new_workout["author_id"] = author_id
+            new_workout["author_id"] = current_user.id
         except ValidationError:
             return jsonify({'Error': 'Invalid input for WorkoutCreation'}), 400
 
@@ -53,10 +53,13 @@ def add_workout():
 
 
 @workout.route('/<id>', methods=['GET', 'DELETE'])
+@jwt_required()
 def get_workout_by_id(id):
     workout = db.query(Workout).filter(Workout.id == id).first()
     if not workout:
         return jsonify({'Error': 'There is no such workout'}), 404
+    if not workout.author_id == current_user.id:
+        return jsonify({'Error': 'You have no permission on this workout'}), 401
 
     if request.method == 'GET':
         return jsonify(get_workout_info_schema(id))
@@ -70,22 +73,22 @@ def get_workout_by_id(id):
 
 def get_workout_info_schema(id):
     workout = db.query(Workout).filter(Workout.id == id).first()
-    workout_info = WorkoutInfoSchema().dump(workout)
-    workout_info['exercises'] = []
+    workout_schema = WorkoutInfoSchema().dump(workout)
+    workout_schema['exercises'] = []
     workout_exercises = db.query(WorkoutExercise).filter(
         WorkoutExercise.workout_id == id).all()
 
     for exercise in workout_exercises:
-        workout_info["exercises"].append(get_exercise_info_schema(exercise.exercise_id))
-    return workout_info
+        workout_schema["exercises"].append(get_exercise_info_schema(exercise.exercise_id))
+    return workout_schema
 
 def get_exercise_info_schema(id):
     exercise = db.query(Exercise).filter(Exercise.id == id).first()
-    exercise_info = ExerciseInfoSchema().dump(exercise)
-    exercise_info['muscles'] = []
+    exercise_schema = ExerciseInfoSchema().dump(exercise)
+    exercise_schema['muscles'] = []
     muscles_worked = db.query(MuscleWorked).filter(MuscleWorked.exercise_id==id)
     for muscle_worked in muscles_worked:
         muscle = db.query(Muscle).filter(Muscle.id==muscle_worked.muscle_id).first()
-        exercise_info['muscles'].append(MuscleInfoSchema().dump(muscle))
-        print (exercise_info['muscles'])
-    return exercise_info
+        exercise_schema['muscles'].append(MuscleInfoSchema().dump(muscle))
+        print (exercise_schema['muscles'])
+    return exercise_schema
