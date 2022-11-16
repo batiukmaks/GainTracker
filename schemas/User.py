@@ -15,6 +15,9 @@ class UserCreationSchema(Schema):
     def make_set(self, data, **kwargs):
         return User(**data)
 
+class UserFullInfoSchema(UserCreationSchema):
+    id = fields.Integer()
+
 
 class UserInfoSchema(Schema):
     id = fields.Integer()

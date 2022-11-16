@@ -1,12 +1,17 @@
 from flask import Blueprint, request, jsonify
+from flask_jwt_extended import (
+    create_access_token, jwt_required, current_user,
+    set_access_cookies, unset_jwt_cookies
+)
 from werkzeug.security import generate_password_hash, check_password_hash
 from marshmallow import ValidationError
 from schemas import *
 from models import *
+from .authentication import *
 from db import get_db
+
 auth = Blueprint('auth', __name__, url_prefix='/user')
 db = get_db()
-
 
 @auth.route('/signup', methods=['POST'])
 def signup():
@@ -22,26 +27,35 @@ def signup():
         return jsonify({'Error': 'The user with such username already exists.'}), 400
 
     db.add(new_user)
-    db.flush()
-    db.refresh(new_user)
     db.commit()
+    db.refresh(new_user)
     return jsonify(UserInfoSchema().dump(new_user))
 
 
-@auth.route('/login', methods=['GET'])
+@auth.route("/login", methods=["GET"])
 def login():
-    login = request.args.get("username_or_email")
+    username = request.args.get("username")
     password = request.args.get("password")
-    user = db.query(User).filter(User.email == login).first(
-    ) or db.query(User).filter(User.username == login).first()
-    if not user:
-        return jsonify({'Error': 'User is not found'}), 404
+    if username is None:
+        return {'Error': 'Invalid input'}, 400
+    user = db.query(User).filter(User.username==username).first() or db.query(User).filter(User.email==username).first()
+    if user is None:
+        return jsonify({"msg": "Bad username"}), 404
     if not check_password_hash(user.password, password):
-        return jsonify({'Error': 'Incorrect passwort'}), 401
+        return jsonify({"msg": "Bad password"}), 401
+    
+    access_token = create_access_token(identity=user)
+    user_schema = UserFullInfoSchema().dump(user)
+    user_schema['token'] = access_token
+    response = jsonify(user_schema)
+    set_access_cookies(response, access_token)
+    return response
 
-    return jsonify(UserInfoSchema().dump(user))
 
-
-@auth.route('/logout', methods=['GET'])
+@auth.route("/logout", methods=["GET"])
+@jwt_required()
 def logout():
-    return jsonify({'Message': 'Logged out'})
+    response = jsonify({"msg": "logout successful"})
+    unset_jwt_cookies(response)
+    return response
+
