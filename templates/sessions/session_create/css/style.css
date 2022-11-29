@@ -1,0 +1,221 @@
+li, a, button{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: black;
+    text-decoration: none;
+}
+
+header {
+    box-sizing: border-box;
+    /* margin: 50px 100px; */
+    height: 80px;
+    padding: 0;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+
+    align-items: center;
+    padding: 30px 10%;
+    padding: 0;
+    border-bottom: rgb(183, 183, 183) solid 1px;
+}
+
+.navigation-links{
+    list-style: none;
+}
+
+.navigation-links li {
+    display: inline-block;
+    padding: 0px 20px;
+}   
+
+.navigation-links li a { 
+    width: 15px;
+    height: 45px;
+    
+    padding: 1%;
+}   
+.Session-underline{
+    border-bottom: 1px solid #1e2f45;
+}
+.parent {
+    display: flex;
+    flex-direction: row;
+    }
+
+
+.container{
+    font-family: 'Montserrat', sans-serif;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 20px;
+    color: black;
+    text-decoration: none;
+    display: flex;
+    padding: 30px 10%;
+    padding: 0;
+    margin-bottom: -50%;
+    width: 990px;
+    height: 80px; 
+    text-align: center;
+    margin-left: -120px;
+
+}
+.create-button{
+    font-size: 12px;
+    border-radius: 5px;
+    width: 90px;
+    height: 25px; 
+    margin: 20px 3px;
+    margin-right: 10px;
+    margin-left: 133px;
+    cursor: pointer;
+
+    font-family: 'Montserrat', sans-serif;
+    background-color: white;
+    border: rgb(15, 98, 3);
+    color:rgb(34, 128, 8);
+    border-style: solid;
+    border-width: 1px;
+}
+.flexboxes{
+    display: inline-block;
+    width: 81%;
+    height: 20px;
+    margin-top: 2%;
+    margin-left: 85px;
+    justify-content: center;
+    align-items: center;
+}
+
+.flexbox1{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 15px;
+    margin-top: 10px;
+    margin-right: 15px;
+    
+}
+.text-of-box{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 22px;
+    color: black;
+    margin-right: -47px;
+    
+}
+.text-of-box1{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 22px;
+    color: black;
+    
+}
+.exersice-container {
+    margin-left: 100px;
+    margin-right: 60px;
+  }
+
+
+
+.exersice-container > * {
+    display: inline-block;
+    width: calc((100% - 70px) / 3);
+    
+    margin-right: 5px;
+    margin-top: 40px;
+    
+  }
+
+.exersice-container :nth-child(3) {
+    margin: 0px;
+}
+
+
+.exercise-wrapper {
+    height: 240px;
+    border-radius: 20px;
+    border-width: 1px;
+    margin: 0;
+    overflow: hidden;    
+    border:#7F878C;
+    background-color:white;
+    border-style: solid;
+    margin-bottom: -35px;
+
+}
+
+.exercise-header {
+    display: flex;
+    align-items: center;
+    margin: 30px 0px;
+}
+
+.exercise-header input {
+    height: 15px;
+    width: 15px;
+    margin-right: 15px;
+    margin-left: 30px;
+}
+
+
+.exercise-name {
+    color: rgb(93, 93, 93);
+    font-size: 20px;
+    top: 30px;
+    left: 115px;
+}
+
+.excercise-icon-wrapper {
+    width: 32px;
+   
+}
+
+.excercise-icon-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.exercise-description {
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    color: grey;
+    margin: 0px 30px;
+}
+
+
+.numbers{
+    color: rgb(93, 93, 93);
+    font-size: 20px;
+    top: 30px;
+    width: 15px;
+    margin-right: 15px;
+    margin-left: 30px;
+}
+form{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.btn-pls{
+    height: 20px;
+    width: 20px;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+    cursor: pointer;
+    border:none;
+    border-radius: 5px;
+    margin-top: 10px;
+    
+}
+.btn-pls:hover{
+    
+    border:none;
+}
+.btn-pls:onclick{
+    border:none;
+}
