@@ -2,41 +2,79 @@
 <html> 
   <head>
     <title>GainTracker</title>
-    <link rel = "stylesheet" href = "css/reset.css">
-    <link rel = "stylesheet" href = "css/style.css">
+    <!-- <link rel = "stylesheet" href = "css/reset.css"> -->
+    <!-- <link rel = "stylesheet" href = "css/style.css"> -->
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='workouts/css/reset.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='workouts/css/style.css') }}">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-
   
   </head>
   <body> 
     <header>
       <nav>
         <ul class = "navigation-links">
-          <li><a href = "#">Workouts</a></li>
+          <li><a href = "{{url_for('workouts.add_workout')}}">Workouts</a></li>
           <li><a href = "#">Sessions</a></li>
           <li><a href = "#">User</a></li>
         </ul>
       </nav>
     </header>
 
-    <div class="upper-buttons">      
-      <button class="session-creation-button">Create session</button>
-      <button class="workout-delete-button">Delete workout</button>
-
-    </div>
-    
-    <p class="workout-description-name">Core Workout Description</p>
-
+    <form action="add" method="post">
+      <div class="upper-buttons">
+        <ul class="excercise-filters">
+          <li><button class="list-button">All</button></li>
+          <li><button class="list-button">Arms</button></li>
+          <li><button class="list-button">Back</button></li>
+          <li><button class="list-button">Chest</button></li>
+          <li><button class="list-button">Core</button></li>
+          <li><button class="list-button">Glutes</button></li>
+          <li><button class="list-button">Legs</button></li>
+        </ul>
+        <button class="workout-creation-button" type="submit">Create workout</button>
+      </div>
+      
+      <input type="text" name="name" placeholder="Set Workout Name Here"/>
+      <ul class="exersice-container">
+        {% for exercise in exercises %}
+        <li>
+          <div class="exercise-wrapper">
+            <div class="exercise-header">
+              <input type="checkbox" value="{{ exercise.id }}" name="exercises">
+              <p class="exercise-name">{{ exercise.name }}</p>
+              <div class="excercise-icon-wrapper"><img src="{{url_for('static', filename='workouts/img/icons/no_equipment.png' if exercise.equipment == 'not required' else 'workouts/img/icons/equipment.png')}}"></div>
+            </div>
+                        
+            <div class = "exercise-description">
+              <p class = "each-punkt"> Type: {{ exercise.type }} </p>
+              <p class = "each-punkt"> Muscles: 
+                {% set muscles = [] %}
+                {% for muscle in exercise.muscles %}
+                {{muscle.name}}
+                {{ muscles.append(muscle.name) or "" }}
+                {% endfor %}
+                {{ muscles|join(", ") }} 
+              </p>
+              {% if exercise.description %}
+              <p class = "each-punkt"> Description: {{ exercise.description }} </p>
+              {% endif %}
+            </div>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </form>
+      <!-- 
     <ul class="exersice-container">
       <li>
         <div class="exercise-wrapper">
           <div class="exercise-header">
-            <p class="numbers">1</p>
+            <input type="checkbox" >
             <p class="exercise-name">Side crunches</p>
-            <div class="excercise-icon-wrapper"><img src="img/icons/no_equipment.png"></div>
+            <div class="excercise-icon-wrapper"><img src="{{url_for('static', filename='workouts/img/icons/no_equipment.png')}}"></div>
           </div>
                       
         <div class = "exercise-description">
@@ -50,9 +88,9 @@
       <li>
         <div class="exercise-wrapper">
           <div class="exercise-header">
-            <p class="numbers">2</p>
+            <input type="checkbox" >
             <p class="exercise-name">Rotational Twists</p>
-            <div class="excercise-icon-wrapper"><img src="img/icons/equipment.png"></div>
+            <div class="excercise-icon-wrapper"><img src="{{url_for('static', filename='workouts/img/icons/equipment.png')}}"></div>
           </div>
                       
         <div class = "exercise-description">
@@ -67,9 +105,9 @@
       <li>
         <div class="exercise-wrapper">
           <div class="exercise-header">
-            <p class="numbers">3</p>
+            <input type="checkbox" >
             <p class="exercise-name">Halos</p>
-            <div class="excercise-icon-wrapper"><img src="img/icons/no_equipment.png"></div>
+            <div class="excercise-icon-wrapper"><img src="{{url_for('static', filename='workouts/img/icons/no_equipment.png')}}"></div>
           </div>
                       
         <div class = "exercise-description">
@@ -85,9 +123,9 @@
       <li>
         <div class="exercise-wrapper">
           <div class="exercise-header">
-            <p class="numbers">4</p>
+            <input type="checkbox" >
             <p class="exercise-name">Extended Arm Plank</p>
-            <div class="excercise-icon-wrapper"><img src="img/icons/no_equipment.png"></div>
+            <div class="excercise-icon-wrapper"><img src="{{url_for('static', filename='workouts/img/icons/no_equipment.png')}}"></div>
           </div>
                       
         <div class = "exercise-description">
@@ -101,9 +139,9 @@
       <li>
         <div class="exercise-wrapper">
           <div class="exercise-header">
-            <p class="numbers">5</p>
+            <input type="checkbox" >
             <p class="exercise-name">Mountain climbers</p>
-            <div class="excercise-icon-wrapper"><img src="img/icons/equipment.png"></div>
+            <div class="excercise-icon-wrapper"><img src="{{url_for('static', filename='workouts/img/icons/equipment.png')}}"></div>
           </div>
                       
         <div class = "exercise-description">
@@ -118,9 +156,9 @@
       <li>
         <div class="exercise-wrapper">
           <div class="exercise-header">
-            <p class="numbers">6</p>
+            <input type="checkbox" >
             <p class="exercise-name">Trunk twist</p>
-            <div class="excercise-icon-wrapper"><img src="img/icons/no_equipment.png"></div>
+            <div class="excercise-icon-wrapper"><img src="{{url_for('static', filename='workouts/img/icons/no_equipment.png')}}"></div>
           </div>
                       
         <div class = "exercise-description">
@@ -136,9 +174,9 @@
       <li>
         <div class="exercise-wrapper">
           <div class="exercise-header">
-            <p class="numbers">7</p>
+            <input type="checkbox" >
             <p class="exercise-name">RDLs</p>
-            <div class="excercise-icon-wrapper"><img src="img/icons/equipment.png"></div>
+            <div class="excercise-icon-wrapper"><img src="{{url_for('static', filename='workouts/img/icons/equipment.png')}}"></div>
           </div>
                       
         <div class = "exercise-description">
@@ -153,9 +191,9 @@
       <li>
         <div class="exercise-wrapper">
           <div class="exercise-header">
-            <p class="numbers">8</p>
+            <input type="checkbox" >
             <p class="exercise-name">Sumo squads</p>
-            <div class="excercise-icon-wrapper"><img src="img/icons/equipment.png"></div>
+            <div class="excercise-icon-wrapper"><img src="{{url_for('static', filename='workouts/img/icons/equipment.png')}}"></div>
           </div>
                       
         <div class = "exercise-description">
@@ -170,9 +208,9 @@
       <li>
         <div class="exercise-wrapper">
           <div class="exercise-header">
-            <p class="numbers">9</p>
+            <input type="checkbox" >
             <p class="exercise-name">Kickbacks</p>
-            <div class="excercise-icon-wrapper"><img src="img/icons/no_equipment.png"></div>
+            <div class="excercise-icon-wrapper"><img src="{{url_for('static', filename='workouts/img/icons/no_equipment.png')}}"></div>
           </div>
                       
         <div class = "exercise-description">
@@ -183,7 +221,6 @@
         </div>
       </li>
     </ul>
-
-    
+     -->
   </body>
 </html>

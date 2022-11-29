@@ -34,7 +34,7 @@ def signup():
 
 @auth.route("/login", methods=["GET"])
 def login():
-    username = request.args.get("username")
+    username = request.args.get("username_or_email")
     password = request.args.get("password")
     if username is None:
         return {'Error': 'Invalid input'}, 400

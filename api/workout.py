@@ -1,4 +1,4 @@
-from flask import Blueprint, request, abort, jsonify, redirect, url_for
+from flask import Blueprint, request, abort, jsonify, redirect, url_for, render_template
 from flask_jwt_extended import jwt_required, current_user
 from marshmallow import ValidationError
 from schemas import *
@@ -26,13 +26,21 @@ def add_workout():
         exercises_info = []
         for exercise in exercises:
             exercises_info.append(get_exercise_info_schema(exercise.id))
+        
+        return render_template("workouts/workout_create.html", exercises=exercises_info)
         return jsonify(exercises_info)
     elif request.method == 'POST':
-        try:
-            new_workout = WorkoutCreationSchema().load(request.json)
-            new_workout["author_id"] = current_user.id
-        except ValidationError:
-            return jsonify({'Error': 'Invalid input for WorkoutCreation'}), 400
+        # try:
+        #     new_workout = WorkoutCreationSchema().load(request.json)
+        #     new_workout["author_id"] = current_user.id
+        # except ValidationError:
+        #     return jsonify({'Error': 'Invalid input for WorkoutCreation'}), 400
+
+        new_workout = {}
+        new_workout['name'] = request.form.get('name')
+        new_workout['exercises'] = request.form.getlist('exercises')
+        new_workout['author_id'] = current_user.id
+        print('\n\n\n\n\n\n', new_workout, '\n\n\n')
 
         workout = Workout(
             name=new_workout["name"], author_id=new_workout["author_id"])
@@ -49,10 +57,11 @@ def add_workout():
 
         db.add_all(workout_exercises)
         db.commit()
+        return redirect(f'{workout.id}')
         return get_workout_info_schema(workout.id)
 
 
-@workout.route('/<id>', methods=['GET', 'DELETE'])
+@workout.route('/<id>', methods=['GET', 'POST'])
 @jwt_required()
 def get_workout_by_id(id):
     workout = db.query(Workout).filter(Workout.id == id).first()
@@ -62,13 +71,18 @@ def get_workout_by_id(id):
         return jsonify({'Error': 'You have no permission on this workout'}), 401
 
     if request.method == 'GET':
+        return render_template('workouts/workout_info.html', workout=get_workout_info_schema(id))
         return jsonify(get_workout_info_schema(id))
-    elif request.method == 'DELETE':
+    elif request.method == 'POST' and request.form.get('_method') == 'DELETE':
         db.query(Workout).filter(Workout.id == id).delete()
         db.commit()
         if db.query(Workout).filter(Workout.id == id).first():
             return jsonify({'Error': 'Cannot delete the workout'})
+        return redirect('/workouts')
         return jsonify({'Message': 'Workout successfully deleted'})
+
+
+
 
 
 def get_workout_info_schema(id):
@@ -85,10 +99,24 @@ def get_workout_info_schema(id):
 def get_exercise_info_schema(id):
     exercise = db.query(Exercise).filter(Exercise.id == id).first()
     exercise_schema = ExerciseInfoSchema().dump(exercise)
+    exercise_schema['type'] = db.query(ExerciseType).filter(ExerciseType.id==exercise.type_id).first().name
     exercise_schema['muscles'] = []
     muscles_worked = db.query(MuscleWorked).filter(MuscleWorked.exercise_id==id)
     for muscle_worked in muscles_worked:
         muscle = db.query(Muscle).filter(Muscle.id==muscle_worked.muscle_id).first()
         exercise_schema['muscles'].append(MuscleInfoSchema().dump(muscle))
-        print (exercise_schema['muscles'])
     return exercise_schema
+
+
+@workout.route('/test', methods=['GET', 'POST'])
+def test():
+    if request.method == 'GET':
+        return redirect(f'65')
+        print('\n\n\nThis is GET request\n\n\n')
+        return jsonify({'Message': 'This is GET request'}), 200
+    elif request.method == 'POST':
+        print('\n\n\nThis is POST request\n')
+        print(request.form)
+        print(request.form.get('name'))
+        print(request.form.getlist('exercises'))
+        return jsonify({'Message': 'This is POST request'}), 200
