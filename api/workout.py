@@ -15,6 +15,7 @@ def get_workouts():
     workouts_info = []
     for workout in workouts:
         workouts_info.append(get_workout_info_schema(workout.id))
+    return render_template('workouts/workouts_list.html', workouts=workouts_info)
     return jsonify(workouts_info)
 
 

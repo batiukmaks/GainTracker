@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% block head %}
+    <title>GainTracker</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='workouts/css/reset.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='workouts/css/style.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    {% endblock %}
+</head>
+
+<body>
+    {% block header %}
+    <header>
+        <nav>
+            <ul class="navigation-links">
+                <li><a href="/workouts">Workouts</a></li>
+                <li><a href="/sessions">Sessions</a></li>
+                <li><a href="/user/progress/measurements">User</a></li>
+            </ul>
+        </nav>
+    </header>
+    {% endblock %}
+
+    {% block content %}{% endblock %}
+
+</body>
+
+</html>

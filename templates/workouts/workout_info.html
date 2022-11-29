@@ -1,221 +1,47 @@
-<!DOCTYPE html>
-<html> 
-  <head>
-    <title>GainTracker</title>
-    <!-- <link rel = "stylesheet" href = "css/reset.css"> -->
-    <!-- <link rel = "stylesheet" href = "css/style.css"> -->
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='workouts/css/reset.css') }}">
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='workouts/css/style.css') }}">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+{% extends "workouts/base.html" %}
+{% block head %}
 
-  
-  </head>
-  <body> 
-    <header>
-      <nav>
-        <ul class = "navigation-links">
-          <li><a href = "#">Workouts</a></li>
-          <li><a href = "#">Sessions</a></li>
-          <li><a href = "#">User</a></li>
-        </ul>
-      </nav>
-    </header>
 
-    <div class="upper-buttons">      
-      <button class="session-creation-button">Create session</button>
-      <form action="{{workout.id}}" method="post">
-        <input type="hidden" name="_method" value="DELETE" />
-        <button class="workout-delete-button" type="submit">Delete workout</button>
-      </form>
+
+{% block content %}
+
+<div class="upper-buttons">
+  <button class="session-creation-button">Create session</button>
+  <form action="{{workout.id}}" method="post">
+    <input type="hidden" name="_method" value="DELETE" />
+    <button class="workout-delete-button" type="submit">Delete workout</button>
+  </form>
+</div>
+
+<p class="workout-description-name">{{ workout.name }}</p>
+<ul class="exersice-container">
+  {% for exercise in workout.exercises %}
+  <li>
+    <div class="exercise-wrapper">
+      <div class="exercise-header">
+        <p class="numbers">1</p>
+        <p class="exercise-name">{{ exercise.name }}</p>
+        <div class="excercise-icon-wrapper"><img
+            src="{{url_for('static', filename='workouts/img/icons/no_equipment.png' if exercise.equipment == 'not required' else 'workouts/img/icons/equipment.png')}}">
+        </div>
+      </div>
+
+      <div class="exercise-description">
+        <p class="each-punkt"> Type: {{ exercise.type }} </p>
+        <p class="each-punkt"> Muscles:
+          {% set muscles = [] %}
+          {% for muscle in exercise.muscles %}
+          {{muscle.name}}
+          {{ muscles.append(muscle.name) or "" }}
+          {% endfor %}
+          {{ muscles|join(", ") }}
+        </p>
+        {% if exercise.description %}
+        <p class="each-punkt"> Description: {{ exercise.description }} </p>
+        {% endif %}
+      </div>
     </div>
-    
-    <p class="workout-description-name">{{ workout.name }}</p>
-    <ul class="exersice-container">
-      {% for exercise in workout.exercises %}
-      <li>
-        <div class="exercise-wrapper">
-          <div class="exercise-header">
-            <p class="numbers">1</p>
-            <p class="exercise-name">{{ exercise.name }}</p>
-            <div class="excercise-icon-wrapper"><img src="{{url_for('static', filename='workouts/img/icons/no_equipment.png' if exercise.equipment == 'not required' else 'workouts/img/icons/equipment.png')}}"></div>
-          </div>
-                      
-          <div class = "exercise-description">
-            <p class = "each-punkt"> Type: {{ exercise.type }} </p>
-            <p class = "each-punkt"> Muscles: 
-              {% set muscles = [] %}
-              {% for muscle in exercise.muscles %}
-              {{muscle.name}}
-              {{ muscles.append(muscle.name) or "" }}
-              {% endfor %}
-              {{ muscles|join(", ") }} 
-            </p>
-            {% if exercise.description %}
-            <p class = "each-punkt"> Description: {{ exercise.description }} </p>
-            {% endif %}
-          </div>
-        </div>
-      </li>
-      {% endfor %}
-    </ul>
-<!-- 
-    <ul class="exersice-container">
-      <li>
-        <div class="exercise-wrapper">
-          <div class="exercise-header">
-            <p class="numbers">1</p>
-            <p class="exercise-name">Side crunches</p>
-            <div class="excercise-icon-wrapper"><img src="img/icons/no_equipment.png"></div>
-          </div>
-                      
-        <div class = "exercise-description">
-          <p class = "each-punkt"> Type: Strength </p>
-          <p class = "each-punkt"> Muscles: Core </p>
-          <p class = "each-punkt"> Description: Do not forget to inhale and exhale correctly </p>
-        </div>
-        </div>
-      </li>
-
-      <li>
-        <div class="exercise-wrapper">
-          <div class="exercise-header">
-            <p class="numbers">2</p>
-            <p class="exercise-name">Rotational Twists</p>
-            <div class="excercise-icon-wrapper"><img src="img/icons/equipment.png"></div>
-          </div>
-                      
-        <div class = "exercise-description">
-          <p class = "each-punkt"> Type: Strength </p>
-          <p class = "each-punkt"> Muscles: Core </p>
-          <p class = "each-punkt"> Description: Do not forget to inhale and exhale correctly </p>
-          <p class = "each-punkt"> Equipment: Dumbbells </p>
-        </div>
-        </div>
-      </li>
-
-      <li>
-        <div class="exercise-wrapper">
-          <div class="exercise-header">
-            <p class="numbers">3</p>
-            <p class="exercise-name">Halos</p>
-            <div class="excercise-icon-wrapper"><img src="img/icons/no_equipment.png"></div>
-          </div>
-                      
-        <div class = "exercise-description">
-          <p class = "each-punkt"> Type: Strength </p>
-          <p class = "each-punkt"> Muscles: Core </p>
-          <p class = "each-punkt"> Description: Do not forget to inhale and exhale correctly </p>
-        </div>
-        </div>
-      </li>
-    </ul>
-    
-    <ul class="exersice-container">
-      <li>
-        <div class="exercise-wrapper">
-          <div class="exercise-header">
-            <p class="numbers">4</p>
-            <p class="exercise-name">Extended Arm Plank</p>
-            <div class="excercise-icon-wrapper"><img src="img/icons/no_equipment.png"></div>
-          </div>
-                      
-        <div class = "exercise-description">
-          <p class = "each-punkt"> Type: Strength </p>
-          <p class = "each-punkt"> Muscles: Core </p>
-          <p class = "each-punkt"> Description: Do not forget to inhale and exhale correctly </p>
-        </div>
-        </div>
-      </li>
-
-      <li>
-        <div class="exercise-wrapper">
-          <div class="exercise-header">
-            <p class="numbers">5</p>
-            <p class="exercise-name">Mountain climbers</p>
-            <div class="excercise-icon-wrapper"><img src="img/icons/equipment.png"></div>
-          </div>
-                      
-        <div class = "exercise-description">
-          <p class = "each-punkt"> Type: Strength </p>
-          <p class = "each-punkt"> Muscles: Core </p>
-          <p class = "each-punkt"> Description: Do not forget to inhale and exhale correctly </p>
-          <p class = "each-punkt"> Equipment: Barbells </p>
-        </div>
-        </div>
-      </li>
-
-      <li>
-        <div class="exercise-wrapper">
-          <div class="exercise-header">
-            <p class="numbers">6</p>
-            <p class="exercise-name">Trunk twist</p>
-            <div class="excercise-icon-wrapper"><img src="img/icons/no_equipment.png"></div>
-          </div>
-                      
-        <div class = "exercise-description">
-          <p class = "each-punkt"> Type: Strength </p>
-          <p class = "each-punkt"> Muscles: Core </p>
-          <p class = "each-punkt"> Description: Do not forget to inhale and exhale correctly </p>
-        </div>
-        </div>
-      </li>
-    </ul>
-
-    <ul class="exersice-container">
-      <li>
-        <div class="exercise-wrapper">
-          <div class="exercise-header">
-            <p class="numbers">7</p>
-            <p class="exercise-name">RDLs</p>
-            <div class="excercise-icon-wrapper"><img src="img/icons/equipment.png"></div>
-          </div>
-                      
-        <div class = "exercise-description">
-          <p class = "each-punkt"> Type: Strength </p>
-          <p class = "each-punkt"> Muscles: Core </p>
-          <p class = "each-punkt"> Description: Do not forget to inhale and exhale correctly </p>
-          <p class = "each-punkt"> Equipment: Dumbbells </p>
-        </div>
-        </div>
-      </li>
-
-      <li>
-        <div class="exercise-wrapper">
-          <div class="exercise-header">
-            <p class="numbers">8</p>
-            <p class="exercise-name">Sumo squads</p>
-            <div class="excercise-icon-wrapper"><img src="img/icons/equipment.png"></div>
-          </div>
-                      
-        <div class = "exercise-description">
-          <p class = "each-punkt"> Type: Strength </p>
-          <p class = "each-punkt"> Muscles: Core </p>
-          <p class = "each-punkt"> Description: Do not forget to inhale and exhale correctly </p>
-          <p class = "each-punkt"> Equipment: Dumbbells </p>
-        </div>
-        </div>
-      </li>
-
-      <li>
-        <div class="exercise-wrapper">
-          <div class="exercise-header">
-            <p class="numbers">9</p>
-            <p class="exercise-name">Kickbacks</p>
-            <div class="excercise-icon-wrapper"><img src="img/icons/no_equipment.png"></div>
-          </div>
-                      
-        <div class = "exercise-description">
-          <p class = "each-punkt"> Type: Strength </p>
-          <p class = "each-punkt"> Muscles: Core </p>
-          <p class = "each-punkt"> Description: Do not forget to inhale and exhale correctly </p>
-        </div>
-        </div>
-      </li>
-    </ul>
- -->
-    
-  </body>
-</html>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}

@@ -1,226 +1,85 @@
-<!DOCTYPE html>
-<html> 
-  <head>
-    <title>GainTracker</title>
-    <!-- <link rel = "stylesheet" href = "css/reset.css"> -->
-    <!-- <link rel = "stylesheet" href = "css/style.css"> -->
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='workouts/css/reset.css') }}">
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='workouts/css/style.css') }}">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-  
-  </head>
-  <body> 
-    <header>
-      <nav>
-        <ul class = "navigation-links">
-          <li><a href = "{{url_for('workouts.add_workout')}}">Workouts</a></li>
-          <li><a href = "#">Sessions</a></li>
-          <li><a href = "#">User</a></li>
-        </ul>
-      </nav>
-    </header>
+{% extends "workouts/base.html" %}
+{% block content %}
+<form id="workoutCreation" action="add" method="post">
+  <div class="upper-buttons">
+    <ul class="excercise-filters">
+      <li><button class="list-button">All</button></li>
+      <li><button class="list-button">Arms</button></li>
+      <li><button class="list-button">Back</button></li>
+      <li><button class="list-button">Chest</button></li>
+      <li><button class="list-button">Core</button></li>
+      <li><button class="list-button">Glutes</button></li>
+      <li><button class="list-button">Legs</button></li>
+    </ul>
+    <button class="workout-creation-button" type="submit">Create workout</button>
+  </div>
 
-    <form action="add" method="post">
-      <div class="upper-buttons">
-        <ul class="excercise-filters">
-          <li><button class="list-button">All</button></li>
-          <li><button class="list-button">Arms</button></li>
-          <li><button class="list-button">Back</button></li>
-          <li><button class="list-button">Chest</button></li>
-          <li><button class="list-button">Core</button></li>
-          <li><button class="list-button">Glutes</button></li>
-          <li><button class="list-button">Legs</button></li>
-        </ul>
-        <button class="workout-creation-button" type="submit">Create workout</button>
+  <input type="text" name="name" placeholder="Set Workout Name Here" required />
+  <ul class="exersice-container">
+    {% for exercise in exercises %}
+    <li>
+      <div class="exercise-wrapper">
+        <div class="exercise-header">
+          <input type="checkbox" value="{{ exercise.id }}" name="exercises">
+          <p class="exercise-name">{{ exercise.name }}</p>
+          <div class="excercise-icon-wrapper"><img
+              src="{{url_for('static', filename='workouts/img/icons/no_equipment.png' if exercise.equipment == 'not required' else 'workouts/img/icons/equipment.png')}}">
+          </div>
+        </div>
+
+        <div class="exercise-description">
+          <p class="each-punkt"> Type: {{ exercise.type }} </p>
+          <p class="each-punkt"> Muscles:
+            {% set muscles = [] %}
+            {% for muscle in exercise.muscles %}
+            {{muscle.name}}
+            {{ muscles.append(muscle.name) or "" }}
+            {% endfor %}
+            {{ muscles|join(", ") }}
+          </p>
+          {% if exercise.description %}
+          <p class="each-punkt"> Description: {{ exercise.description }} </p>
+          {% endif %}
+        </div>
       </div>
-      
-      <input type="text" name="name" placeholder="Set Workout Name Here"/>
-      <ul class="exersice-container">
-        {% for exercise in exercises %}
-        <li>
-          <div class="exercise-wrapper">
-            <div class="exercise-header">
-              <input type="checkbox" value="{{ exercise.id }}" name="exercises">
-              <p class="exercise-name">{{ exercise.name }}</p>
-              <div class="excercise-icon-wrapper"><img src="{{url_for('static', filename='workouts/img/icons/no_equipment.png' if exercise.equipment == 'not required' else 'workouts/img/icons/equipment.png')}}"></div>
-            </div>
-                        
-            <div class = "exercise-description">
-              <p class = "each-punkt"> Type: {{ exercise.type }} </p>
-              <p class = "each-punkt"> Muscles: 
-                {% set muscles = [] %}
-                {% for muscle in exercise.muscles %}
-                {{muscle.name}}
-                {{ muscles.append(muscle.name) or "" }}
-                {% endfor %}
-                {{ muscles|join(", ") }} 
-              </p>
-              {% if exercise.description %}
-              <p class = "each-punkt"> Description: {{ exercise.description }} </p>
-              {% endif %}
-            </div>
-          </div>
-        </li>
-        {% endfor %}
-      </ul>
-    </form>
-      <!-- 
-    <ul class="exersice-container">
-      <li>
-        <div class="exercise-wrapper">
-          <div class="exercise-header">
-            <input type="checkbox" >
-            <p class="exercise-name">Side crunches</p>
-            <div class="excercise-icon-wrapper"><img src="{{url_for('static', filename='workouts/img/icons/no_equipment.png')}}"></div>
-          </div>
-                      
-        <div class = "exercise-description">
-          <p class = "each-punkt"> Type: Strength </p>
-          <p class = "each-punkt"> Muscles: Core </p>
-          <p class = "each-punkt"> Description: Do not forget to inhale and exhale correctly </p>
-        </div>
-        </div>
-      </li>
+    </li>
+    {% endfor %}
+  </ul>
+</form>
 
-      <li>
-        <div class="exercise-wrapper">
-          <div class="exercise-header">
-            <input type="checkbox" >
-            <p class="exercise-name">Rotational Twists</p>
-            <div class="excercise-icon-wrapper"><img src="{{url_for('static', filename='workouts/img/icons/equipment.png')}}"></div>
-          </div>
-                      
-        <div class = "exercise-description">
-          <p class = "each-punkt"> Type: Strength </p>
-          <p class = "each-punkt"> Muscles: Core </p>
-          <p class = "each-punkt"> Description: Do not forget to inhale and exhale correctly </p>
-          <p class = "each-punkt"> Equipment: Dumbbells </p>
-        </div>
-        </div>
-      </li>
 
-      <li>
-        <div class="exercise-wrapper">
-          <div class="exercise-header">
-            <input type="checkbox" >
-            <p class="exercise-name">Halos</p>
-            <div class="excercise-icon-wrapper"><img src="{{url_for('static', filename='workouts/img/icons/no_equipment.png')}}"></div>
-          </div>
-                      
-        <div class = "exercise-description">
-          <p class = "each-punkt"> Type: Strength </p>
-          <p class = "each-punkt"> Muscles: Core </p>
-          <p class = "each-punkt"> Description: Do not forget to inhale and exhale correctly </p>
-        </div>
-        </div>
-      </li>
-    </ul>
-    
-    <ul class="exersice-container">
-      <li>
-        <div class="exercise-wrapper">
-          <div class="exercise-header">
-            <input type="checkbox" >
-            <p class="exercise-name">Extended Arm Plank</p>
-            <div class="excercise-icon-wrapper"><img src="{{url_for('static', filename='workouts/img/icons/no_equipment.png')}}"></div>
-          </div>
-                      
-        <div class = "exercise-description">
-          <p class = "each-punkt"> Type: Strength </p>
-          <p class = "each-punkt"> Muscles: Core </p>
-          <p class = "each-punkt"> Description: Do not forget to inhale and exhale correctly </p>
-        </div>
-        </div>
-      </li>
+<!-- At least one exercise is chosen -->
+<script>
+  (function () {
+    const form = document.querySelector('#workoutCreation');
+    const checkboxes = form.querySelectorAll('input[type=checkbox]');
+    const checkboxLength = checkboxes.length;
+    const firstCheckbox = checkboxLength > 0 ? checkboxes[0] : null;
 
-      <li>
-        <div class="exercise-wrapper">
-          <div class="exercise-header">
-            <input type="checkbox" >
-            <p class="exercise-name">Mountain climbers</p>
-            <div class="excercise-icon-wrapper"><img src="{{url_for('static', filename='workouts/img/icons/equipment.png')}}"></div>
-          </div>
-                      
-        <div class = "exercise-description">
-          <p class = "each-punkt"> Type: Strength </p>
-          <p class = "each-punkt"> Muscles: Core </p>
-          <p class = "each-punkt"> Description: Do not forget to inhale and exhale correctly </p>
-          <p class = "each-punkt"> Equipment: Barbells </p>
-        </div>
-        </div>
-      </li>
+    function init() {
+      if (firstCheckbox) {
+        for (let i = 0; i < checkboxLength; i++) {
+          checkboxes[i].addEventListener('change', checkValidity);
+        }
 
-      <li>
-        <div class="exercise-wrapper">
-          <div class="exercise-header">
-            <input type="checkbox" >
-            <p class="exercise-name">Trunk twist</p>
-            <div class="excercise-icon-wrapper"><img src="{{url_for('static', filename='workouts/img/icons/no_equipment.png')}}"></div>
-          </div>
-                      
-        <div class = "exercise-description">
-          <p class = "each-punkt"> Type: Strength </p>
-          <p class = "each-punkt"> Muscles: Core </p>
-          <p class = "each-punkt"> Description: Do not forget to inhale and exhale correctly </p>
-        </div>
-        </div>
-      </li>
-    </ul>
+        checkValidity();
+      }
+    }
 
-    <ul class="exersice-container">
-      <li>
-        <div class="exercise-wrapper">
-          <div class="exercise-header">
-            <input type="checkbox" >
-            <p class="exercise-name">RDLs</p>
-            <div class="excercise-icon-wrapper"><img src="{{url_for('static', filename='workouts/img/icons/equipment.png')}}"></div>
-          </div>
-                      
-        <div class = "exercise-description">
-          <p class = "each-punkt"> Type: Strength </p>
-          <p class = "each-punkt"> Muscles: Core </p>
-          <p class = "each-punkt"> Description: Do not forget to inhale and exhale correctly </p>
-          <p class = "each-punkt"> Equipment: Dumbbells </p>
-        </div>
-        </div>
-      </li>
+    function isChecked() {
+      for (let i = 0; i < checkboxLength; i++) {
+        if (checkboxes[i].checked) return true;
+      }
 
-      <li>
-        <div class="exercise-wrapper">
-          <div class="exercise-header">
-            <input type="checkbox" >
-            <p class="exercise-name">Sumo squads</p>
-            <div class="excercise-icon-wrapper"><img src="{{url_for('static', filename='workouts/img/icons/equipment.png')}}"></div>
-          </div>
-                      
-        <div class = "exercise-description">
-          <p class = "each-punkt"> Type: Strength </p>
-          <p class = "each-punkt"> Muscles: Core </p>
-          <p class = "each-punkt"> Description: Do not forget to inhale and exhale correctly </p>
-          <p class = "each-punkt"> Equipment: Dumbbells </p>
-        </div>
-        </div>
-      </li>
+      return false;
+    }
 
-      <li>
-        <div class="exercise-wrapper">
-          <div class="exercise-header">
-            <input type="checkbox" >
-            <p class="exercise-name">Kickbacks</p>
-            <div class="excercise-icon-wrapper"><img src="{{url_for('static', filename='workouts/img/icons/no_equipment.png')}}"></div>
-          </div>
-                      
-        <div class = "exercise-description">
-          <p class = "each-punkt"> Type: Strength </p>
-          <p class = "each-punkt"> Muscles: Core </p>
-          <p class = "each-punkt"> Description: Do not forget to inhale and exhale correctly </p>
-        </div>
-        </div>
-      </li>
-    </ul>
-     -->
-  </body>
-</html>
+    function checkValidity() {
+      const errorMessage = !isChecked() ? 'At least one checkbox must be selected.' : '';
+      firstCheckbox.setCustomValidity(errorMessage);
+    }
+
+    init();
+  })();
+</script>
+{% endblock %}
