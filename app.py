@@ -14,7 +14,8 @@ def create_app(test_config=None):
     # If true this will only allow the cookies that contain your JWTs to be sent
     # over https. In production, this should always be set to True
     app.config["JWT_COOKIE_SECURE"] = False
-    app.config["JWT_TOKEN_LOCATION"] = ["cookies", "headers"]
+    app.config["JWT_TOKEN_LOCATION"] = ["headers"]
+    # app.config["JWT_TOKEN_LOCATION"] = ["cookies", "headers"]
     # """
     app.config["JWT_SECRET_KEY"] = "super-secret"  # Change this!
     app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(minutes=90)

@@ -151,7 +151,7 @@ paths:
       description: ''
       operationId: getUserExercisesInfo
       parameters:
-        - name: Exercise Name
+        - name: exercise_name
           in: query
           required: false
           schema:
@@ -177,7 +177,7 @@ paths:
       description: ''
       operationId: getUserMusclesInfo
       parameters:
-        - name: Muscle Name
+        - name: muscle_name
           in: query
           required: false
           schema:
@@ -514,23 +514,17 @@ components:
         - $ref: '#/components/schemas/userInfo'
         - type: object
           properties:
-            exercise_name:
-              type: string
-              example: push ups
             graph:
               $ref: '#/components/schemas/graph'
-            records:
-              type: array
-              items:
-                $ref: '#/components/schemas/recordInfo'
+            # records:
+            #   type: array
+            #   items:
+            #     $ref: '#/components/schemas/recordInfo'
     userAndMuscleInfo:
       allOf:
         - $ref: '#/components/schemas/userInfo'
         - type: object
           properties:
-            muscle_name:
-              type: string
-              example: chest
             graph:
               $ref: '#/components/schemas/graph'
                 
