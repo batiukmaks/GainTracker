@@ -1,6 +1,5 @@
 {% extends "sessions/base.html" %}
 
-
 {% block content %}
 <style>
   body {
@@ -9,13 +8,11 @@
 </style>
 
 <div class="container text-center mt-4">
-  <h1 style="text-align:left; width: 49%; display: inline-block">Upper body</h1>
-  <h1 style="text-align:right; width: 50%; display: inline-block">11.11.2022</h1>
+  <h1 style="text-align:left; width: 49%; display: inline-block">{{session.workout_name}}</h1>
+  <h1 style="text-align:right; width: 50%; display: inline-block">{{session.date}}</h1>
 </div>
-
 <div class="container mt-4">
   <div class="row row-cols-3 gx-5 gy-4">
-
     {% for exercise in session.records %}
     <div class="col">
       <div class="p-3 border border-dark rounded-4">
@@ -41,10 +38,6 @@
       </div>
     </div>
     {% endfor %}
-
-
-
   </div>
 </div>
-
 {% endblock %}
