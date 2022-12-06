@@ -1,0 +1,17 @@
+{% extends "sessions/base.html" %}
+{% block styles_link %}{{ url_for('static', filename='sessions/css/session_list.css')}}{% endblock %}
+{% block content %}
+<p class="page-title">List of sessions</p>
+<div class="parent">
+  {% for session in sessions %}
+  <a href="{{session.id}}">
+    <div class="flexbox-next">
+      <div class=flexbox1>
+        <p class="text-of-box">{{session.workout_name}}</p>
+        <p class="text-of-box">{{session.date}}</p>
+      </div>
+    </div>
+  </a>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -25,7 +25,7 @@ class RecordInfoSchema(RecordCreationSchema):
 
 
 class SessionCreationSchema(Schema):
-    date = fields.Date(format='%d-%m-%Y')
+    date = fields.Date(format="%d-%m-%Y")
     workout_id = fields.Integer()
     records = fields.List(fields.Nested(RecordCreationSchema))
 
@@ -34,7 +34,7 @@ class SessionInfoForListSchema(Schema):
     id = fields.Integer()
     workout_id = fields.Integer()
     workout_name = fields.String()
-    date = fields.Date(format='%d-%m-%Y')
+    date = fields.Date(format="%d-%m-%Y")
 
 
 class SessionFullInfoSchema(SessionInfoForListSchema):
