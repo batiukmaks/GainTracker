@@ -1,12 +1,12 @@
 {% extends "workouts/base.html" %}
-{% block head %}
-
-
 
 {% block content %}
 
 <div class="upper-buttons">
-  <button class="session-creation-button">Create session</button>
+  <form action="/sessions/add" method="GET">
+    <input type="hidden" name="workout_id" value="{{workout.id}}" />
+    <button class="session-creation-button" type="submit">Create session</button>
+  </form>
   <form action="{{workout.id}}" method="post">
     <input type="hidden" name="_method" value="DELETE" />
     <button class="workout-delete-button" type="submit">Delete workout</button>

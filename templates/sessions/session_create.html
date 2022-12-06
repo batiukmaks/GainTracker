@@ -1,0 +1,74 @@
+<!-- https://mattstauffer.com/blog/a-little-trick-for-grouping-fields-in-an-html-form/ -->
+
+{% extends "sessions/base.html" %}
+
+{% block content %}
+<form method="post" action="/sessions/add">
+  <input type="hidden" name="workout_id" value="{{workout.id}}" />
+  <div class="container mt-4">
+    <div style="text-align:left; width: 20%; display: inline-block">
+      <button class='btn btn-outline-success'>Create session</button>
+    </div>
+    <h1 style="text-align:center; width: 60%; display: inline-block">{{workout.name}}</h1>
+  </div>
+
+  <div class="container mt-4">
+    <div class="row row-cols-3 gx-5 gy-4">
+      {% for exercise in workout.exercises %}
+      <div class="col">
+        <div class="p-3 border border-dark rounded-4">
+          <div>
+            <h3 style="text-align:left; width: 15%; display: inline-block; vertical-align: top;">{{loop.index}}</h3>
+            <h3 style="text-align:center; width: 70%; display: inline-block">{{exercise.name}}</h3>
+            <div style="text-align:right; width: 12%; display: inline-block; vertical-align: top;">
+              <button type="button" class="btn btn-outline-dark rounded-circle" onclick="add_new_set({{exercise.id}})">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus"
+                  viewBox="0 0 16 16">
+                  <path
+                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z">
+                  </path>
+                </svg>
+                <span class="visually-hidden">Button</span>
+              </button>
+            </div>
+          </div>
+          <table class="table text-center">
+            <thead>
+              <th scope="col">Weight</th>
+              <th scope="col">Reps</th>
+              <th scope="col">Time</th>
+            </thead>
+            <tbody id="sets_{{exercise.id}}">
+              <tr scope="row">
+                <td><input type="number" class="form-control rounded-4" name="records[{{exercise.id}}][weight]"></td>
+                <td><input type="number" class="form-control rounded-4" name="records[{{exercise.id}}][reps]"></td>
+                <td><input type="number" class="form-control rounded-4" name="records[{{exercise.id}}][time]"></td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</form>
+
+<script>
+  const iterators = Array(100).fill(2);
+  function add_new_set(exercise_id) {
+    let template = `
+      <tr scope="row">
+        <td><input type="number" class="form-control rounded-4" name="records[${exercise_id}][weight]"></td>
+        <td><input type="number" class="form-control rounded-4" name="records[${exercise_id}][reps]"></td>
+        <td><input type="number" class="form-control rounded-4" name="records[${exercise_id}][time]"></td>
+      </tr>`;
+
+    let container = document.getElementById('sets_' + exercise_id);
+    let tr = document.createElement('tr');
+    tr.innerHTML = template;
+    container.appendChild(tr);
+    iterators[exercise_id]++;
+  }
+</script>
+{% endblock %}
