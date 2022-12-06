@@ -31,7 +31,6 @@
         <p class="each-punkt"> Muscles:
           {% set muscles = [] %}
           {% for muscle in exercise.muscles %}
-          {{muscle.name}}
           {{ muscles.append(muscle.name) or "" }}
           {% endfor %}
           {{ muscles|join(", ") }}
