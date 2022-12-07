@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Login</title>
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="login.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <header>
+      <a href="#">
+        <div class="header-title">
+          <h1>GainTracker</h1>
+        </div>
+      </a>
+    </header>
+
+    <div class="login-container">
+      <p>
+        Hi there,<br />
+        Log into account
+      </p>
+
+      <form method="post" action="action_page.php">
+        <div>
+          <div class="log-in-placeholder">
+            <input type="text" placeholder="username" name="uname" required />
+          </div>
+          <div class="log-in-placeholder">
+            <input type="password" placeholder="password" name="psw" required />
+          </div>
+
+          <div class="check-box-container">
+            <div>
+              <label class="check-box">
+                <input type="checkbox" />
+                keep me signed in
+              </label>
+            </div>
+
+            <div><a href="#" class="forgot_psw">forgot ur password?</a></div>
+          </div>
+        </div>
+        <div>
+          <button class="login_button" type="submit">log in</button>
+        </div>
+        <div class="dont_have_ac">
+          Don't have account yet? <br /><a
+            href="C:/Users/admin/Desktop/gaintracker/signup/signup.html"
+            class="sign_up_linc"
+            >Sign up</a
+          >
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
