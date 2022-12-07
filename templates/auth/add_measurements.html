@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>measurements/add</title>
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="measurements.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul class="navigation-links">
+          <li><a href="#">Workouts</a></li>
+          <li><a href="#">Sessions</a></li>
+          <li><a href="#">User</a></li>
+          <!-- <input class = "search-workout" type = "text" placeholder ="Search workout"> -->
+        </ul>
+      </nav>
+    </header>
+
+    <div class="measurements-add-container">
+      <p>
+        Add measurements to<br />
+        track the progress!
+      </p>
+
+      <form method="post">
+        <div class="measurements-placeholder">
+          <input type="number" placeholder="weight" name="weightm" />
+        </div>
+        <div class="measurements-placeholder">
+          <input type="number" placeholder="chest" name="chestm" />
+        </div>
+        <div class="measurements-placeholder">
+          <input type="number" placeholder="waist" name="waistm" />
+        </div>
+        <div class="measurements-placeholder">
+          <input type="number" placeholder="hips" name="hipsm" />
+        </div>
+
+        <div>
+          <button class="add-meas-button" type="submit">add</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
