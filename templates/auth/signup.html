@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Signup</title>
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="signup.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <a href="#">
+        <div class="header-title">
+          <h1>GainTracker</h1>
+        </div>
+      </a>
+    </header>
+
+    <div class="signup-container">
+      <p>
+        Hi there, <br />
+        create an account!
+      </p>
+
+      <form method="post">
+        <div class="signup-buttons">
+          <div class="signup-placeholder">
+            <input type="text" placeholder="username" name="uname" required />
+          </div>
+          <div class="signup-placeholder">
+            <input
+              type="text"
+              placeholder="birthday date"
+              name="bd"
+              onfocus="(this.type='date')"
+              onblur="(this.type='text')"
+              required
+            /><span class="validity"></span>
+          </div>
+          <div class="signup-placeholder">
+            <input type="text" placeholder="first name" name="fname" required />
+          </div>
+          <div class="signup-placeholder">
+            <input type="text" placeholder="last name" name="lname" required />
+          </div>
+          <div class="signup-placeholder">
+            <input type="password" placeholder="password" name="psw" required />
+          </div>
+
+          <div class="sex-custom-select">
+            <select name="sex">
+              <option value="none" selected>sex</option>
+              <option value="male">male</option>
+              <option value="female">female</option>
+              <option value="other">other</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <button class="signup_button" type="submit">create</button>
+        </div>
+        <div class="dont_have_ac">
+          Already have account? <br /><a
+            href="C:/Users/admin/Desktop/gaintracker/signup/login.html"
+            class="sign_up_linc"
+            >Log In</a
+          >
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
