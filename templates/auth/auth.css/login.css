@@ -1,0 +1,120 @@
+.login-container {
+  box-sizing: border-box;
+  position: absolute;
+  display: inline-block;
+  /*transform: translate(-50%, -50%);*/
+  left: 290px;
+  right: 290px;
+  top: 138px;
+  /*bottom: 148;*/
+  /*height: 450px;*/
+  /*width: 60%;*/
+  width: 55%;
+  border: 1px solid #000000;
+  border-radius: 24px;
+  text-align: center;
+
+  /* justify-content: space-between;*/
+}
+
+.login-container p {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 30px;
+  color: #7f878c;
+  text-decoration: none;
+  font-style: normal;
+  text-align: center;
+  line-height: 39px;
+  width: auto;
+  padding-top: 25px;
+}
+
+.log-in-placeholder input {
+  font-family: "Montserrat", sans-serif;
+  line-height: 35px;
+  margin: auto;
+  margin-top: 23px;
+  border-radius: 12px;
+  outline: none;
+  display: block;
+  width: 60%;
+  font-size: 24px;
+  padding-left: 3%;
+  border: 1px solid #000000;
+}
+.log-in-placeholder input::placeholder {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  color: #7f878c;
+}
+
+.login_button {
+  background-color: white;
+  border: 1px solid #7f878c;
+  border-radius: 12px;
+  color: #797979;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 24px;
+  cursor: pointer;
+  width: 30%;
+
+  padding: 5px;
+  margin: 4px 2px;
+}
+
+.login_button:hover {
+  background-color: #797979;
+  color: white;
+}
+
+.check-box-container {
+  box-sizing: border-box;
+  position: relative;
+  /*display: inline-block;*/
+  display: inline-flex;
+  width: 64%;
+  margin-top: 10px;
+  padding-bottom: 3%;
+}
+/*display: flex;*/
+.check-box {
+  font-family: "Montserrat", sans-serif;
+  color: #7f878c;
+  float: left;
+  cursor: pointer;
+}
+
+.forgot_psw {
+  font-family: "Montserrat", sans-serif;
+  color: #7f878c;
+  float: right;
+  margin-left: 100px;
+  text-decoration: underline;
+}
+
+.dont_have_ac {
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 29px;
+
+  font-family: "Montserrat", sans-serif;
+
+  color: #7f878c;
+  text-decoration: none;
+  font-style: normal;
+  text-align: center;
+  width: auto;
+  padding-top: 20px;
+
+  padding-bottom: 20px;
+}
+
+.sign_up_linc {
+  font-family: "Montserrat", sans-serif;
+  font-size: 20px;
+  color: #7f878c;
+  text-decoration: underline;
+}
