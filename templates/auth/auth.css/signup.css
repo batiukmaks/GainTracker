@@ -1,0 +1,107 @@
+.signup-container {
+  box-sizing: border-box;
+  position: absolute;
+  display: inline-block;
+  left: 20%;
+  right: 20%;
+  /*top: 138px;*/
+  width: 60%;
+  height: 70%;
+  top: 22%;
+  bottom: 20%;
+  border: 1px solid #000000;
+  border-radius: 24px;
+  text-align: center;
+}
+
+.signup-container p {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 75%;
+  font-size: 30px;
+  color: #7f878c;
+  text-decoration: none;
+  font-style: normal;
+  text-align: center;
+  line-height: 39px;
+  width: auto;
+  padding-top: 25px;
+}
+
+.signup-container .signup-buttons {
+  display: grid;
+  /*flex-wrap: wrap;*/
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.signup-placeholder input {
+  font-family: "Montserrat", sans-serif;
+  line-height: 35px;
+  margin: auto;
+  margin-top: 4%;
+  border-radius: 12px;
+  outline: none;
+  display: block;
+  width: 60%;
+  font-size: 24px;
+  padding-left: 8.5%;
+  border: 1px solid #000000;
+}
+.signup-placeholder input::placeholder {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  color: #7f878c;
+  /* width: 100%;*/
+}
+.signup-placeholder input:hover {
+  font-family: "Montserrat", sans-serif;
+  color: #7f878c;
+  width: 60%;
+}
+
+.signup_button {
+  background-color: white;
+  border: 1px solid #7f878c;
+  border-radius: 12px;
+  color: #797979;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 24px;
+  cursor: pointer;
+  width: 30%;
+  margin-top: 4%;
+  margin-bottom: 1%;
+  padding: 5px;
+  /*margin: 4px 2px;*/
+}
+
+.signup_button:hover {
+  background-color: #797979;
+  color: white;
+}
+
+.sex-custom-select {
+  position: relative;
+
+  width: 60%;
+}
+
+.sex-custom-select select {
+  font-family: "Montserrat", sans-serif;
+  line-height: 35px;
+  /*margin: auto;*/
+  margin-top: 8.5%;
+  border-radius: 12px;
+  outline: none;
+  /* display: block;*/
+  width: 100%;
+  font-size: 24px;
+  padding-left: 8.5%;
+  font-weight: 400;
+  border: 1px solid #000000;
+  color: #7f878c;
+}
+
+/*<div class="signup-placeholder">
+            <input type="text" placeholder="sex" name="seex" required />
+          </div>*/
