@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, render_template
 from flask_jwt_extended import jwt_required, current_user
 from sqlalchemy.sql.expression import func
 from datetime import datetime
@@ -9,11 +9,13 @@ import models
 progress = Blueprint('progress', __name__, url_prefix='/user/progress')
 db = get_db()
 
-@progress.route('/measurements/add', methods=['POST'])
+@progress.route('measurements/add', methods=['GET', 'POST'])
 @jwt_required()
 def add_measurements():
-    records = request.json
+    if request.method == 'GET':
+        return render_template("auth/add_measurements.html")
 
+    records = request.json
     new_records = []
     for record in records:
         criteria = db.query(BodyMeasurementCriteria).filter(
