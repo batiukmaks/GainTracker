@@ -29,12 +29,13 @@ def create_app(test_config=None):
 
     db_init()
 
-    from api import auth, progress, workout, session
+    from api import auth, progress, workout, session, general
 
     app.register_blueprint(auth.auth)
     app.register_blueprint(progress.progress)
     app.register_blueprint(workout.workout)
     app.register_blueprint(session.session)
+    app.register_blueprint(general.general)
 
     return app
 

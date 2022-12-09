@@ -1,69 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>About</title>
-    <link rel="stylesheet" href="reset.css" />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="about.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <header>
-      <a href="#">
-        <div class="header-title">
-          <div class="header-about-buttons">
-            <div>
-              <button id="btn1-about" class="header-about-button" type="submit">
+
+<head>
+  <title>About</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='auth/css/reset.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='auth/css/style.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='auth/css/about.css') }}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <header>
+    <a href="#">
+      <div class="header-title">
+        <div class="header-about-buttons">
+          <div>
+            <a href="user/signup">
+              <button id="btn1-about" class="header-about-button">
                 Sign up
               </button>
-            </div>
-            <div>
-              <button id="btn2-about" class="header-about-button" type="submit">
+            </a>
+          </div>
+          <div>
+            <a href="user/login">
+              <button id="btn2-about" class="header-about-button">
                 Log in
               </button>
-            </div>
+            </a>
           </div>
         </div>
-      </a>
-    </header>
-    <div class="about-gaintracker-text">
-      <div><h1>GainTracker</h1></div>
-      <div>
-        <p>
-          Our website helps u to note and check <br />
-          the progress u have made during the certain time
-        </p>
       </div>
-    </div>
-
+    </a>
+  </header>
+  <div class="about-gaintracker-text">
     <div>
+      <h1>GainTracker</h1>
+    </div>
+    <div>
+      <p>
+        Our website helps u to note and check <br />
+        the progress u have made during the certain time
+      </p>
+    </div>
+  </div>
 
-        <div id="img-holder-about">
-            <image class="about-image" src="about.jpg">
-            <image class="about-image" src="about.jpg">
-            <image class="about-image" src="about.jpg">
-            <image class="about-image" src="about.jpg">
-            <image class="about-image" src="about.jpg">
-            <image class="about-image" src="about.jpg">
-        </div>
-    
-
-
-      <div id="img-text-holder-about">
-        <p class="about-text-image">Morozevych Olena</p>
-        <p class="about-text-image">Levonova Khrystyna</p>
-        <p class="about-text-image">Scam</p>
-        <p class="about-text-image">Anasteisha</p>
-        <p class="about-text-image">Mill Vetal</p>
-        <p class="about-text-image">Julia</p>
-      </div>
+  <div>
+    <div id="img-holder-about">
+      <image class="about-image" src="about.jpg"></image>
+      <image class="about-image" src="about.jpg"></image>
+      <image class="about-image" src="about.jpg"></image>
+      <image class="about-image" src="about.jpg"></image>
+      <image class="about-image" src="about.jpg"></image>
+      <image class="about-image" src="about.jpg"></image>
     </div>
 
-    
-  </body>
+    <div id="img-text-holder-about">
+      <p class="about-text-image">Morozevych Olena</p>
+      <p class="about-text-image">Levonova Khrystyna</p>
+      <p class="about-text-image">Scam</p>
+      <p class="about-text-image">Anasteisha</p>
+      <p class="about-text-image">Mill Vetal</p>
+      <p class="about-text-image">Julia</p>
+    </div>
+  </div>
+
+
+</body>
+
 </html>
