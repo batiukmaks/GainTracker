@@ -1,0 +1,224 @@
+/* .workouts-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 20px;
+    row-gap: 20px;
+    justify-content: center;
+
+
+} */
+
+li,
+a,
+button {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: black;
+  text-decoration: none;
+}
+
+header {
+  box-sizing: border-box;
+  /* margin: 50px 100px; */
+  height: 100px;
+  padding: 0;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+
+  align-items: center;
+  padding: 30px 10%;
+  padding: 0;
+  border-bottom: rgb(183, 183, 183) solid 1px;
+}
+
+.navigation-links {
+  list-style: none;
+}
+
+.navigation-links li {
+  display: inline-block;
+  padding: 0px 20px;
+}
+
+.navigation-links li a:hover {
+  background-color: rgb(183, 183, 183);
+  width: 150px;
+  height: 45px;
+  border-radius: 5px;
+  padding: 10%;
+}
+
+/* button{
+    padding: 10px;
+    display: block;
+    margin-left: 10px;
+    font-family: 'Montserrat', sans-serif;
+    background-color: white;
+    border: rgb(16, 110, 16);
+    color:rgb(16, 110, 16);
+    border-style: solid;
+    border-width: 2px;
+    width: 150px;
+    height: 45px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 1s;
+    margin-right: 20px;
+    margin-top: 20px;
+  }
+
+button:hover{
+    background-color:rgb(16, 110, 16);
+    color:white;
+    border: none;
+    opacity: 0.5;
+} */
+
+.widgets {
+  display: block;
+  width: 350px;
+  height: 350px;
+  object-fit: cover;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.search-workout {
+  margin-bottom: 10px;
+  display: inline-block;
+  border: black;
+  border: solid;
+  font-family: "Montserrat", sans-serif;
+  font-size: 17px;
+  margin-left: 12px;
+  border-radius: 5px;
+  border-style: solid;
+  border-style: solid;
+  border-width: 1.5px;
+}
+
+/* Workout Section */
+
+.list-buttons {
+  margin: 0px 100px;
+}
+
+.list-buttons > * {
+  display: inline-block;
+}
+
+.list-button {
+  font-size: 14px;
+  border-radius: 10px;
+  height: 30px;
+  margin: 20px 3px;
+
+  font-family: "Montserrat", sans-serif;
+  background-color: white;
+  border: grey;
+  color: grey;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.exersices-container {
+  margin: 0px 100px;
+}
+
+.exersices-container > * {
+  display: inline-block;
+  width: calc((100% - 68px) / 3);
+  margin: 0px 10px 25px 10px;
+}
+
+.workout-image-wrapper {
+  position: relative;
+  display: inline-block;
+  border-radius: 4%;
+  width: 100%;
+  height: 500px;
+  margin: 0;
+  overflow: hidden;
+}
+
+.workout-image-wrapper img {
+  filter: brightness(70%);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.workout-name {
+  position: absolute;
+  color: white;
+  font-size: 24px;
+  top: 30px;
+  left: 25px;
+}
+
+.timer-wrapper {
+  display: flex;
+  flex-direction: row;
+  vertical-align: top;
+  position: absolute;
+  bottom: 30px;
+  left: 25px;
+  width: 100px;
+  height: 30px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.icon-wrapper {
+  margin: 5px 10px;
+  width: 20px;
+  height: 20px;
+}
+
+.icon-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.timer-wrapper p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  width: 50px;
+  height: 30px;
+}
+
+/* End Workout Session */
+/* 
+.workout-programs{
+
+    vertical-align: top;
+    width: 100%;
+
+}
+
+
+.workout-title{
+    
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+.workout-exercises{
+
+    font-family: 'Montserrat', sans-serif;
+
+} */
+
+.header-title {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 35px;
+  color: black;
+  text-decoration: none;
+  font-style: normal;
+}

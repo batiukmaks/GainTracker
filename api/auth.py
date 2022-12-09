@@ -1,7 +1,10 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, render_template, redirect
 from flask_jwt_extended import (
-    create_access_token, jwt_required, current_user,
-    set_access_cookies, unset_jwt_cookies
+    create_access_token,
+    jwt_required,
+    current_user,
+    set_access_cookies,
+    unset_jwt_cookies,
 )
 from werkzeug.security import generate_password_hash, check_password_hash
 from marshmallow import ValidationError
@@ -10,43 +13,64 @@ from models import *
 from .authentication import *
 from db import get_db
 
-auth = Blueprint('auth', __name__, url_prefix='/user')
+auth = Blueprint("auth", __name__, url_prefix="/user")
 db = get_db()
 
-@auth.route('/signup', methods=['POST'])
+
+@auth.route("/signup", methods=["GET", "POST"])
 def signup():
+    if request.method == "GET":
+        return render_template("auth/signup.html")
+    
+    new_user_schema = {
+        'username': request.form.get("username"),
+        'email': request.form.get("email"),
+        'password': generate_password_hash(request.form.get("password")),
+        'first_name': request.form.get("first_name"),
+        'last_name': request.form.get("last_name"),
+        'sex': request.form.get("sex"),
+        'birthday': request.form.get("birthday")
+    }
+    # temporary solution
+    if new_user_schema["email"] is None:
+        new_user_schema["email"] = f'{new_user_schema["username"]}@email.com'
+
     try:
-        new_user = UserCreationSchema().load(request.json)
-        new_user.password = generate_password_hash(new_user.password)
+        new_user = UserCreationSchema().load(new_user_schema)
     except ValidationError:
-        return jsonify({'Error': 'Invalid input'}), 400
+        return jsonify({"Error": "Invalid input"}), 400
 
     if db.query(User).filter(User.email == new_user.email).first():
-        return jsonify({'Error': 'The user with such email already exists.'}), 400
+        return jsonify({"Error": "The user with such email already exists."}), 400
     if db.query(User).filter(User.username == new_user.username).first():
-        return jsonify({'Error': 'The user with such username already exists.'}), 400
+        return jsonify({"Error": "The user with such username already exists."}), 400
 
     db.add(new_user)
     db.commit()
-    db.refresh(new_user)
-    return jsonify(UserInfoSchema().dump(new_user))
+    return redirect('login')
 
 
-@auth.route("/login", methods=["GET"])
+@auth.route("/login", methods=["GET", "POST"])
 def login():
-    username = request.args.get("username_or_email")
-    password = request.args.get("password")
+    if request.method == "GET":
+        return render_template("auth/login.html")
+
+    username = request.form.get("username_or_email")
+    password = request.form.get("password")
     if username is None:
-        return {'Error': 'Invalid input'}, 400
-    user = db.query(User).filter(User.username==username).first() or db.query(User).filter(User.email==username).first()
+        return {"Error": "Invalid input"}, 400
+    user = (
+        db.query(User).filter(User.username == username).first()
+        or db.query(User).filter(User.email == username).first()
+    )
     if user is None:
         return jsonify({"msg": "Bad username"}), 404
     if not check_password_hash(user.password, password):
         return jsonify({"msg": "Bad password"}), 401
-    
+
     access_token = create_access_token(identity=user)
     user_schema = UserFullInfoSchema().dump(user)
-    user_schema['token'] = access_token
+    user_schema["token"] = access_token
     response = jsonify(user_schema)
     set_access_cookies(response, access_token)
     return response
@@ -58,4 +82,3 @@ def logout():
     response = jsonify({"msg": "logout successful"})
     unset_jwt_cookies(response)
     return response
-
