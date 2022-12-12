@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, render_template, redirect
+from flask import Blueprint, request, jsonify, render_template, redirect, make_response
 from flask_jwt_extended import (
     create_access_token,
     jwt_required,
@@ -68,10 +68,8 @@ def login():
     if not check_password_hash(user.password, password):
         return jsonify({"msg": "Bad password"}), 401
 
+    response = redirect('/user/progress/measurements')
     access_token = create_access_token(identity=user)
-    user_schema = UserFullInfoSchema().dump(user)
-    user_schema["token"] = access_token
-    response = jsonify(user_schema)
     set_access_cookies(response, access_token)
     return response
 
@@ -79,6 +77,6 @@ def login():
 @auth.route("/logout", methods=["GET"])
 @jwt_required()
 def logout():
-    response = jsonify({"msg": "logout successful"})
+    response = redirect('login')
     unset_jwt_cookies(response)
     return response

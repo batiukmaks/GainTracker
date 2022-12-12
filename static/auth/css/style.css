@@ -43,12 +43,13 @@ header {
 }
 
 .navigation-links li a:hover {
-  background-color: rgb(183, 183, 183);
-  width: 150px;
-  height: 45px;
-  border-radius: 5px;
-  padding: 10%;
-}
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    text-decoration: underline;
+    width: 150px;
+    height: 45px;
+    border-radius: 5px;
+}  
 
 /* button{
     padding: 10px;

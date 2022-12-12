@@ -13,9 +13,7 @@
 
 .header-about-button {
   display: inline-block;
-
   padding: 0px 20px;
-
   background-color: white;
   border: 1px solid #7f878c;
   border-radius: 12px;
@@ -25,9 +23,7 @@
   display: inline-block;
   font-size: 24px;
   cursor: pointer;
-
   padding: 5px;
-  /*margin: 4px 2px;*/
 }
 
 .header-about-button:hover {
@@ -38,6 +34,7 @@
 #btn1-about {
   float: left;
 }
+
 #btn2-about {
   float: right;
 }
@@ -51,6 +48,7 @@
   line-height: 49px;
   margin-top: 2%;
 }
+
 .about-gaintracker-text p {
   margin-top: 1%;
 }
@@ -90,6 +88,7 @@
   font-weight: 400;
   font-size: 120%;
 }
+
 .about-text-image {
   width: 12%;
   position: relative;

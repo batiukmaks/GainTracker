@@ -41,8 +41,3 @@ def create_app(test_config=None):
 
 
 app = create_app()
-
-
-@app.errorhandler(410)
-def Test(e):
-    return render_template("workouts/workout_create.html")

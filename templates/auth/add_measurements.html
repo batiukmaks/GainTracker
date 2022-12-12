@@ -7,9 +7,9 @@
 {% block header_measurements %}
 <nav>
   <ul class="navigation-links">
-    <li><a href="#">Workouts</a></li>
-    <li><a href="#">Sessions</a></li>
-    <li><a href="#">User</a></li>
+    <li><a href="/workouts">Workouts</a></li>
+    <li><a href="/sessions">Sessions</a></li>
+    <li><a href="/user/progress/measurements">User</a></li>
   </ul>
 </nav>
 {% endblock %}
@@ -23,16 +23,16 @@
 
   <form method="post">
     <div class="measurements-placeholder">
-      <input type="number" placeholder="weight" name="weightm" />
+      <input type="number" step="0.01" placeholder="weight" name="weight" />
     </div>
     <div class="measurements-placeholder">
-      <input type="number" placeholder="chest" name="chestm" />
+      <input type="number" step="0.01" placeholder="chest" name="chest" />
     </div>
     <div class="measurements-placeholder">
-      <input type="number" placeholder="waist" name="waistm" />
+      <input type="number" step="0.01" placeholder="waist" name="waist" />
     </div>
     <div class="measurements-placeholder">
-      <input type="number" placeholder="hips" name="hipsm" />
+      <input type="number" step="0.01" placeholder="hips" name="hips" />
     </div>
 
     <div>

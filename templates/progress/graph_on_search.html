@@ -1,0 +1,65 @@
+{% extends "progress/base.html" %}
+
+{% block content %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  {% autoescape false %}
+  const schema = {{ schema }}
+  {% endautoescape %}
+
+  console.log(schema)
+  function show_chart() {
+    data = {
+      datasets: []
+    }
+    for (const [key, val] of Object.entries(schema.graph.coordinates)) {
+      data.datasets.push(
+        {
+          data: schema.graph.coordinates[key].map(row => ({ x: row.date, y: row.value })),
+          label: key,
+        }
+      )
+    }
+
+    config = {
+      type: 'line',
+      data: data,
+      options: {
+      }
+    }
+
+    new Chart(document.getElementById('myChart'), config);
+  }
+</script>
+
+<div class="container mt-4">
+  <div class="row row-cols-12">
+    <div class="col col-3">
+      <form class="form-inline" action="{% block form_action %}{% endblock %}" method="post">
+        <div class="input-group">
+          <button class="btn btn-outline-secondary" type="submit">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+              viewBox="0 0 16 16">
+              <path
+                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+            </svg>
+          </button>
+          {% block search_input %}{% endblock %}
+        </div>
+      </form>
+    </div>
+    {% if 'graph' in schema %}
+    <div class="col-9">
+      <div class="card">
+        <div class="card-body text-center">
+          <p class="exercise-name">{{ schema.graph.graph_name|title }}</p>
+          <canvas id="myChart" height="80vh">
+            <script>show_chart()</script>
+          </canvas>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

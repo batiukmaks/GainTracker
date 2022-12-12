@@ -1,73 +1,44 @@
-<!DOCTYPE html>
-<html> 
-  <head>
-    <title>GainTracker</title>
-    <link rel = "stylesheet" href = "css/reset.css">
-    <link rel = "stylesheet" href = "css/style.css">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-  
-  </head>
-  <body> 
-    <header>
-      <nav>
-        <ul class = "navigation-links">
-          <li><a href = "#">Workouts</a></li>
-          <li><a href = "#">Sessions</a></li>
-          <li><a href = "#">User</a></li>
-        </ul>
-      </nav>
-    </header>
-    <div class=" user">
-      <div class="user-info">
+{% extends "progress/base.html" %}
 
-        <div class="icon">
-          <image src="img/icon.png" width="150" height="157"/></image>
-        </div>
+{% block content %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  {% autoescape false %}
+  const schema = {{ schema }}
+  {% endautoescape %}
 
-        <div class="about-user">
-          <p class="username">Maksym Batiuk</p>
-          <p>username: batiukmaks3000</p>
-          <p>birthday: 2022-10-27</p>
+  function show_chart(graph_itr) {
+    data = {
+      datasets: [{
+        data: schema.measurement_records[graph_itr].coordinates.map(row => ({ x: row.date, y: row.value })),
+        label: schema.measurement_records[graph_itr].graph_name,
+        tension: 0.5,
+      }]
+    }
+    config = {
+      type: 'line',
+      data: data,
+      options: {
+      }
+    }
+    new Chart(document.getElementById('myChart_' + graph_itr), config);
+  }
+</script>
+
+<div class="container-fluid mt-4">
+  <div class="row row-cols-4">
+    {% for chart in schema.measurement_records %}
+    <div class="col">
+      <div class="card">
+        <div class="card-body text-center">
+          <p class="measurement-name">{{ chart.graph_name|title }}</p>
+          <canvas id="myChart_{{loop.index - 1}}">
+            <script>show_chart({{ loop.index - 1 }})</script>
+          </canvas>
         </div>
       </div>
-
-        <div class="update-button">
-          <button class="update-measurements">Update measurements</button>
-        </div>
-
     </div>
-
-      <div class="progress">
-        <nav>
-          <ul class="progress-links">
-            <li><a href = "/templates/progress/measurements.html">Measuremens Progress</a></li>
-            <li><a href = "/templates/progress/exercises.html">Exercises Progress</a></li>
-            <li><a href = "/templates/progress/muscles.html">Muscles Progress</a></li>
-          </ul>
-        </nav>
-      </div>
-
-    <ul class="progress-container">
-      <div class="measurements-image-wrapper">
-        <image src="img/stats.png"></image>
-        <p class="measurement-name">Weight</p>
-      </div>
-      <div class="measurements-image-wrapper">
-        <image src="img/stats.png"></image>
-        <p class="measurement-name">Chest</p>
-      </div>
-      <div class="measurements-image-wrapper">
-        <image src="img/stats.png" ></image>
-        <p class="measurement-name">Waist</p>
-      </div>
-      <div class="measurements-image-wrapper">
-        <image src="img/stats.png"></image>
-        <p class="measurement-name">Hips</p>
-      </div>
-    </ul>
-    
-  </body>
-</html>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
