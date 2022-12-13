@@ -1,51 +1,59 @@
 {% extends "workouts/base.html" %}
 {% block content %}
-<form id="workoutCreation" action="add" method="post">
-  <div class="upper-buttons">
-    <ul class="excercise-filters">
-      <li><button class="list-button">All</button></li>
-      <li><button class="list-button">Arms</button></li>
-      <li><button class="list-button">Back</button></li>
-      <li><button class="list-button">Chest</button></li>
-      <li><button class="list-button">Core</button></li>
-      <li><button class="list-button">Glutes</button></li>
-      <li><button class="list-button">Legs</button></li>
-    </ul>
-    <button class="workout-creation-button" type="submit">Create workout</button>
-  </div>
+<div class="container">
+  <form id="workoutCreation" action="add" method="post">
+    <!-- <div class="upper-buttons">
+      <ul class="excercise-filters">
+        <li><button class="list-button">All</button></li>
+        <li><button class="list-button">Arms</button></li>
+        <li><button class="list-button">Back</button></li>
+        <li><button class="list-button">Chest</button></li>
+        <li><button class="list-button">Core</button></li>
+        <li><button class="list-button">Glutes</button></li>
+        <li><button class="list-button">Legs</button></li>
+      </ul>
+    </div> -->
+    
+    <div class="row row-cols-3 my-3">
+      <div class="col offset-md-4">
+        <input class="w-100 workout-name-input" type="text" name="name" placeholder="Set Workout Name Here" required />
+      </div>
+      <div class="col d-flex justify-content-end">
+        <button class="workout-creation-button" type="submit">Create workout</button>
+      </div>
+    </div>
 
-  <input type="text" name="name" placeholder="Set Workout Name Here" required />
-  <ul class="exersice-container">
-    {% for exercise in exercises %}
-    <li>
-      <div class="exercise-wrapper">
-        <div class="exercise-header">
-          <input type="checkbox" value="{{ exercise.id }}" name="exercises">
-          <p class="exercise-name">{{ exercise.name }}</p>
-          <div class="excercise-icon-wrapper"><img
-              src="{{url_for('static', filename='workouts/img/icons/no_equipment.png' if exercise.equipment == 'not required' else 'workouts/img/icons/equipment.png')}}">
+    <div class="row row-cols-3 gy-3 gx-3">
+      {% for exercise in exercises %}
+      <div class="col">
+        <div class="exercise-wrapper">
+          <div class="exercise-header">
+            <input type="checkbox" value="{{ exercise.id }}" name="exercises">
+            <p class="exercise-name">{{ exercise.name }}</p>
+            <div class="excercise-icon-wrapper"><img
+                src="{{url_for('static', filename='workouts/img/icons/no_equipment.png' if exercise.equipment == 'not required' else 'workouts/img/icons/equipment.png')}}">
+            </div>
+          </div>
+
+          <div class="exercise-description">
+            <p class="each-punkt"> Type: {{ exercise.type }} </p>
+            <p class="each-punkt"> Muscles:
+              {% set muscles = [] %}
+              {% for muscle in exercise.muscles %}
+              {{ muscles.append(muscle.name) or "" }}
+              {% endfor %}
+              {{ muscles|join(", ") }}
+            </p>
+            {% if exercise.description %}
+            <p class="each-punkt"> Description: {{ exercise.description }} </p>
+            {% endif %}
           </div>
         </div>
-
-        <div class="exercise-description">
-          <p class="each-punkt"> Type: {{ exercise.type }} </p>
-          <p class="each-punkt"> Muscles:
-            {% set muscles = [] %}
-            {% for muscle in exercise.muscles %}
-            {{ muscles.append(muscle.name) or "" }}
-            {% endfor %}
-            {{ muscles|join(", ") }}
-          </p>
-          {% if exercise.description %}
-          <p class="each-punkt"> Description: {{ exercise.description }} </p>
-          {% endif %}
-        </div>
       </div>
-    </li>
-    {% endfor %}
-  </ul>
-</form>
-
+      {% endfor %}
+    </div>
+  </form>
+</div>
 
 <!-- At least one exercise is chosen -->
 <script>

@@ -1,4 +1,6 @@
-li, a, button{
+li,
+a,
+button {
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
     font-size: 16px;
@@ -20,14 +22,14 @@ header {
     border-bottom: rgb(183, 183, 183) solid 1px;
 }
 
-.navigation-links{
+.navigation-links {
     list-style: none;
 }
 
 .navigation-links li {
     display: inline-block;
     padding: 0px 20px;
-}   
+}
 
 .navigation-links li a:hover {
 
@@ -38,9 +40,9 @@ header {
     height: 45px;
     border-radius: 5px;
     padding: 10%;
-}   
+}
 
- 
+
 
 /* button{
     padding: 10px;
@@ -68,7 +70,7 @@ button:hover{
     opacity: 0.5;
 } */
 
-.widgets{
+.widgets {
     display: block;
     width: 350px;
     height: 350px;
@@ -77,7 +79,7 @@ button:hover{
     border-radius: 5px;
 }
 
-.search-workout{
+.search-workout {
 
     margin-bottom: 10px;
     display: inline-block;
@@ -96,67 +98,67 @@ button:hover{
 
 .list-buttons {
     margin: 0px 100px;
-  }
+}
 
-.list-buttons > * {
+.list-buttons>* {
     display: inline-block;
 }
 
 .list-button {
     font-size: 14px;
     border-radius: 8px;
-    height: 30px; 
+    height: 30px;
     margin: 20px 3px;
 
     font-family: 'Montserrat', sans-serif;
     background-color: white;
     border: grey;
-    color:grey;
+    color: grey;
     border-style: solid;
     border-width: 1px;
 }
 
 .list-button:hover {
-    background-color:rgb(155, 155, 155);
-    color:white;
+    background-color: rgb(155, 155, 155);
+    color: white;
 }
 
 
 .workout-creation-button {
     font-size: 14px;
     border-radius: 8px;
-    height: 30px; 
+    height: 40px;
     font-family: 'Montserrat', sans-serif;
     background-color: white;
     border: #749471;
-    color:#749471;
+    color: #749471;
     border-style: solid;
     border-width: 1px;
-    
-    
+
+
 }
 
 .workout-creation-button:hover {
     font-size: 14px;
     border-radius: 8px;
     font-family: 'Montserrat', sans-serif;
-    background-color:#749471;
+    background-color: #749471;
     border: #749471;
-    color:white;
+    color: white;
     border-style: solid;
     border-width: 1px;
 }
 
-.create-button{
+.create-button {
     display: inline-block;
     border-radius: 8px;
-    height: 30px; 
+    height: 30px;
     margin-left: 110px;
     margin-top: 50px;
     font-family: 'Montserrat', sans-serif;
     background-color: white;
     border: #749471;
-    color:#749471;
+    color: #749471;
     border-style: solid;
     border-width: 1px;
 }
@@ -165,18 +167,18 @@ button:hover{
     font-size: 14px;
     border-radius: 8px;
     font-family: 'Montserrat', sans-serif;
-    background-color:#749471;
+    background-color: #749471;
     border: #749471;
-    color:white;
+    color: white;
     border-style: solid;
     border-width: 1px;
 }
 
-.creating-workout{
+.creating-workout {
     display: inline-block;
     font-family: 'Arial', sans-serif;
-    font-size:large;
-    color:black;
+    font-size: large;
+    color: black;
 
 
 
@@ -188,13 +190,13 @@ button:hover{
 
 .exersices-container {
     margin: 0px 100px;
-  }
+}
 
-.exersices-container > * {
+.exersices-container>* {
     display: inline-block;
     width: calc((100% - 68px) / 3);
     margin: 0px 10px 25px 10px;
-  }
+}
 
 .workout-image-wrapper {
     position: relative;
@@ -204,8 +206,8 @@ button:hover{
     height: 500px;
     margin: 0;
     overflow: hidden;
-  }
-  
+}
+
 .workout-image-wrapper img {
     filter: brightness(70%);
     width: 100%;
@@ -268,55 +270,54 @@ button:hover{
     margin: 0px 100px;
 }
 
-.excercise-filters > * {
+.excercise-filters>* {
     display: inline-block;
 }
 
 
-input{
-    margin-left: 36.5%;
+.workout-name-input {
+    /* margin-left: 36.5%; */
     font-size: 20px;
     border-radius: 11px;
     border: solid;
     border-color: #7F878C;
     color: #7F878C;
-    height: 30px;
-    width: 375px;
+    height: 40px;
+    /* width: 375px; */
     text-align: center;
     font-size: 16px;
     font-family: 'Montserrat', sans-serif;
-    
+
 }
 
 
-.exersice-container {
+/* .exersice-container {
     margin: 0px 100px;
-  }
+}
 
 
 
-.exersice-container > * {
+.exersice-container>* {
     display: inline-block;
     width: calc((100% - 88px) / 3);
     margin-right: 40px;
     margin-top: 40px;
-  }
+}
 
 .exersice-container :nth-child(3) {
     margin: 0px;
-}
+} */
 
 
 .exercise-wrapper {
     height: 240px;
     border-radius: 20px;
     border-width: 1px;
-    margin: 0;
-    overflow: hidden;    
-    border:#7F878C;
-    background-color:white;
+    /* margin: 0; */
+    /* overflow: hidden; */
+    border: #7F878C;
+    background-color: white;
     border-style: solid;
-
 }
 
 .exercise-header {
@@ -342,7 +343,6 @@ input{
 
 .excercise-icon-wrapper {
     width: 32px;
-   
 }
 
 .excercise-icon-wrapper img {
@@ -364,7 +364,7 @@ input{
 }
 
 /* Excersices static */
-.numbers{
+.numbers {
     color: rgb(93, 93, 93);
     font-size: 20px;
     top: 30px;
@@ -373,7 +373,7 @@ input{
     margin-left: 30px;
 }
 
-.workout-description-name{
+.workout-description-name {
     font-size: 21px;
     text-align: center;
     font-family: 'Montserrat', sans-serif;
@@ -381,15 +381,15 @@ input{
     margin: 0px 30px;
 }
 
-.workout-delete-button{
+.workout-delete-button {
     margin-top: 20px;
     font-size: 14px;
     border-radius: 8px;
-    height: 30px; 
+    height: 30px;
     font-family: 'Montserrat', sans-serif;
     background-color: white;
     border: rgb(121, 48, 48);
-    color:rgb(121, 48, 48);
+    color: rgb(121, 48, 48);
     border-style: solid;
     border-width: 1px;
 }
@@ -399,22 +399,22 @@ input{
     font-size: 14px;
     border-radius: 8px;
     font-family: 'Montserrat', sans-serif;
-    background-color:rgb(121, 48, 48);
+    background-color: rgb(121, 48, 48);
     border: rgb(121, 48, 48);
-    color:white;
+    color: white;
     border-style: solid;
     border-width: 1px;
 }
 
-.session-creation-button{
+.session-creation-button {
     margin-top: 20px;
     font-size: 14px;
     border-radius: 8px;
-    height: 30px; 
+    height: 30px;
     font-family: 'Montserrat', sans-serif;
     background-color: white;
     border: #749471;
-    color:#749471;
+    color: #749471;
     border-style: solid;
     border-width: 1px;
 }
@@ -424,9 +424,9 @@ input{
     font-size: 14px;
     border-radius: 8px;
     font-family: 'Montserrat', sans-serif;
-    background-color:#749471;
+    background-color: #749471;
     border: #749471;
-    color:white;
+    color: white;
     border-style: solid;
     border-width: 1px;
 }
