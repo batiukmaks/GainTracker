@@ -339,6 +339,8 @@ button:hover{
     font-size: 20px;
     top: 30px;
     left: 115px;
+    font-family: 'Montserrat', sans-serif;
+
 }
 
 .excercise-icon-wrapper {
@@ -374,18 +376,19 @@ button:hover{
 }
 
 .workout-description-name {
-    font-size: 21px;
+    font-size: 30px;
+    height: 40px;
     text-align: center;
     font-family: 'Montserrat', sans-serif;
     color: grey;
-    margin: 0px 30px;
+    /* margin: 0px 30px; */
 }
 
 .workout-delete-button {
-    margin-top: 20px;
+    /* margin-top: 20px; */
     font-size: 14px;
     border-radius: 8px;
-    height: 30px;
+    height: 40px;
     font-family: 'Montserrat', sans-serif;
     background-color: white;
     border: rgb(121, 48, 48);
@@ -407,10 +410,10 @@ button:hover{
 }
 
 .session-creation-button {
-    margin-top: 20px;
+    /* margin-top: 20px; */
     font-size: 14px;
     border-radius: 8px;
-    height: 30px;
+    height: 40px;
     font-family: 'Montserrat', sans-serif;
     background-color: white;
     border: #749471;

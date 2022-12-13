@@ -1,46 +1,53 @@
 {% extends "workouts/base.html" %}
 
 {% block content %}
+<div class="container">
+  <div class="row row-cols-3 my-3">
+    <div class="col d-flex justify-content-start">
+      <form action="/sessions/add" method="GET">
+        <input type="hidden" name="workout_id" value="{{workout.id}}" />
+        <button class="session-creation-button" type="submit">Create session</button>
+      </form>
+    </div>
+    <div class="col">
+      <h1 class="workout-description-name">{{ workout.name }}</h1>
+    </div>
+    <div class="col d-flex justify-content-end">
+      <form action="{{workout.id}}" method="post">
+        <input type="hidden" name="_method" value="DELETE" />
+        <button class="workout-delete-button" type="submit">Delete workout</button>
+      </form>
+    </div>
+  </div>
 
-<div class="upper-buttons">
-  <form action="/sessions/add" method="GET">
-    <input type="hidden" name="workout_id" value="{{workout.id}}" />
-    <button class="session-creation-button" type="submit">Create session</button>
-  </form>
-  <form action="{{workout.id}}" method="post">
-    <input type="hidden" name="_method" value="DELETE" />
-    <button class="workout-delete-button" type="submit">Delete workout</button>
-  </form>
-</div>
+  <div class="row row-cols-3 gy-3 gx-3">
+    {% for exercise in workout.exercises %}
+    <div class="col">
+      <div class="exercise-wrapper">
+        <div class="exercise-header">
+          <p class="numbers">{{loop.index}}</p>
+          <p class="exercise-name">{{ exercise.name }}</p>
+          <div class="excercise-icon-wrapper"><img
+              src="{{url_for('static', filename='workouts/img/icons/no_equipment.png' if exercise.equipment == 'not required' else 'workouts/img/icons/equipment.png')}}">
+          </div>
+        </div>
 
-<p class="workout-description-name">{{ workout.name }}</p>
-<ul class="exersice-container">
-  {% for exercise in workout.exercises %}
-  <li>
-    <div class="exercise-wrapper">
-      <div class="exercise-header">
-        <p class="numbers">1</p>
-        <p class="exercise-name">{{ exercise.name }}</p>
-        <div class="excercise-icon-wrapper"><img
-            src="{{url_for('static', filename='workouts/img/icons/no_equipment.png' if exercise.equipment == 'not required' else 'workouts/img/icons/equipment.png')}}">
+        <div class="exercise-description">
+          <p class="each-punkt"> Type: {{ exercise.type }} </p>
+          <p class="each-punkt"> Muscles:
+            {% set muscles = [] %}
+            {% for muscle in exercise.muscles %}
+            {{ muscles.append(muscle.name) or "" }}
+            {% endfor %}
+            {{ muscles|join(", ") }}
+          </p>
+          {% if exercise.description %}
+          <p class="each-punkt"> Description: {{ exercise.description }} </p>
+          {% endif %}
         </div>
       </div>
-
-      <div class="exercise-description">
-        <p class="each-punkt"> Type: {{ exercise.type }} </p>
-        <p class="each-punkt"> Muscles:
-          {% set muscles = [] %}
-          {% for muscle in exercise.muscles %}
-          {{ muscles.append(muscle.name) or "" }}
-          {% endfor %}
-          {{ muscles|join(", ") }}
-        </p>
-        {% if exercise.description %}
-        <p class="each-punkt"> Description: {{ exercise.description }} </p>
-        {% endif %}
-      </div>
     </div>
-  </li>
-  {% endfor %}
-</ul>
+    {% endfor %}
+  </div>
+</div>
 {% endblock %}
