@@ -12,47 +12,59 @@
 </a>
 {% endblock %}
 {% block content %}
-<div class="signup-container">
-  <p>
-    Hi there, <br />
-    create an account!
-  </p>
+<div class="container mt-5 w-50 border border-dark rounded rounded-5 text-center signup-container">
+  <div class="mt-5">
+    <h2>
+      Hi there,
+      <br />
+      create an account!
+    </h2>
+  </div>
 
-  <form method="post" action="signup">
-    <div class="signup-buttons">
-      <div class="signup-placeholder">
-        <input type="text" placeholder="username" name="username" required />
+  <div class="mt-4">
+    <form method="post" action="signup">
+      <div class="container row row-cols-2 signup-buttons text-center">
+        <div class="col">
+          <div class="mt-3 signup-placeholder">
+            <input class="ps-3 w-100 form-control form-control-sm rounded rounded-4 border border-dark" type="text" placeholder="first name"
+              name="first_name" required />
+          </div>
+          <div class="mt-3 signup-placeholder">
+            <input class="ps-3 w-100 form-control form-control-sm rounded rounded-4 border border-dark" type="text" placeholder="last name"
+              name="last_name" required />
+          </div>
+          <div class="mt-3 signup-placeholder">
+            <input class="ps-3 w-100 form-control form-control-sm rounded rounded-4 border border-dark" type="text" placeholder="username"
+              name="username" required />
+          </div>
+        </div>
+        <div class="col">
+          <div class="mt-3 signup-placeholder">
+            <input class="ps-3 w-100 form-control form-control-sm rounded rounded-4 border border-dark" type="text" placeholder="birthday date"
+              name="birthday" onfocus="(this.type='date')" onblur="(this.type='text')" required /><span
+              class="validity"></span>
+          </div>
+          <div class="mt-3 sex-custom-select">
+            <select name="sex" class="ps-3 w-100 form-select form-select-sm rounded rounded-4 border border-dark">
+              <option value="none" selected>sex</option>
+              <option value="male">male</option>
+              <option value="female">female</option>
+              <option value="other">other</option>
+            </select>
+          </div>
+          <div class="mt-3 signup-placeholder">
+            <input class="ps-3 w-100 form-control form-control-sm rounded rounded-4 border border-dark" type="password" placeholder="password"
+              name="password" required />
+          </div>
+        </div>
       </div>
-      <div class="signup-placeholder">
-        <input type="text" placeholder="birthday date" name="birthday" onfocus="(this.type='date')"
-          onblur="(this.type='text')" required /><span class="validity"></span>
+      <div class="container mt-4 w-100 text-center">
+        <button class="btn btn-outline-secondary px-5 rounded rounded-4 border border-dark signup_button" type="submit">Create</button>
       </div>
-      <div class="signup-placeholder">
-        <input type="text" placeholder="first name" name="first_name" required />
+      <div class="my-3 already_have_ac">
+        Already have account? <br /><a href="login" class="login_up_link">Log In</a>
       </div>
-      <div class="signup-placeholder">
-        <input type="text" placeholder="last name" name="last_name" required />
-      </div>
-      <div class="signup-placeholder">
-        <input type="password" placeholder="password" name="password" required />
-      </div>
-
-      <div class="sex-custom-select">
-        <select name="sex">
-          <option value="none" selected>sex</option>
-          <option value="male">male</option>
-          <option value="female">female</option>
-          <option value="other">other</option>
-        </select>
-      </div>
-    </div>
-
-    <div>
-      <button class="signup_button" type="submit">create</button>
-    </div>
-    <div class="dont_have_ac">
-      Already have account? <br /><a href="login" class="sign_up_linc">Log In</a>
-    </div>
-  </form>
+    </form>
+  </div>
 </div>
 {% endblock %}

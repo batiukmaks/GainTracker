@@ -31,6 +31,9 @@ def signup():
         'sex': request.form.get("sex"),
         'birthday': request.form.get("birthday")
     }
+    if new_user_schema['sex'] == 'none':
+        new_user_schema['sex'] = 'other'
+
     # temporary solution
     if new_user_schema["email"] is None:
         new_user_schema["email"] = f'{new_user_schema["username"]}@email.com'

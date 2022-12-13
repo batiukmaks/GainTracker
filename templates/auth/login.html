@@ -5,7 +5,7 @@
 
 
 {% block header_logo %}
-<a href="#">
+<a href="/about">
   <div class="header-title">
     <h1>GainTracker</h1>
   </div>
@@ -13,39 +13,35 @@
 {% endblock %}
 {% block content %}
 
-<div class="login-container">
-  <p>
-    Hi there,<br />
-    Log into account
-  </p>
+<div class="container mt-5 w-50 border border-dark rounded rounded-5 text-center login-container">
+  <div class="mt-5">
+    <h2>
+      Hi there,
+      <br />
+      Log into account
+    </h2>
+  </div>
 
-  <form method="post" action="login">
-    <div>
-      <div class="log-in-placeholder">
-        <input type="text" placeholder="username or email" name="username_or_email" required />
-      </div>
-      <div class="log-in-placeholder">
-        <input type="password" placeholder="password" name="password" required />
+  <div class="mt-4">
+    <form method="post" action="login">
+      <div class="container text-center">
+        <div>
+          <input class="mb-3 ps-3 rounded rounded-4 border border-dark log-in-placeholder" type="text" placeholder="username or email" name="username_or_email" required />
+        </div>
+        <div>
+          <input class="ps-3 rounded rounded-4 border border-dark log-in-placeholder" type="password" placeholder="password" name="password" required />
+        </div>
       </div>
 
-      <div class="check-box-container">
-        <!-- <div>
-              <label class="check-box">
-                <input type="checkbox" />
-                keep me signed in
-              </label>
-            </div> -->
-
-        <div style="text-align: left"><a href="#" class="forgot_psw">forgot ur password?</a></div>
+      <div class="container mt-4 w-100 text-center">
+        <button class="btn btn-outline-secondary px-5 rounded rounded-4 border border-dark login_button" type="submit">Create</button>
       </div>
-    </div>
-    <div>
-      <button class="login_button" type="submit">log in</button>
-    </div>
-    <div class="dont_have_ac">
-      Don't have account yet? <br /><a href="signup"
-        class="sign_up_linc">Sign up</a>
-    </div>
-  </form>
+      <div class="my-3 dont_have_ac">
+        Don't have account yet? 
+        <br />
+        <a href="signup" class="sign_up_link">Sign up</a>
+      </div>
+    </form>
+  </div>
 </div>
 {% endblock %}
