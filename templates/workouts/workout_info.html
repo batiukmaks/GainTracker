@@ -33,7 +33,7 @@
         </div>
 
         <div class="exercise-description">
-          <p class="each-punkt"> Type: {{ exercise.type }} </p>
+          <p class="each-punkt"> Type: {{ exercise.types|join(", ") }} </p>
           <p class="each-punkt"> Muscles:
             {% set muscles = [] %}
             {% for muscle in exercise.muscles %}

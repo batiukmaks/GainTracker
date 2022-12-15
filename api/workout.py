@@ -82,8 +82,8 @@ def get_workout_info_schema(id):
 def get_exercise_info_schema(id):
     exercise = db.query(Exercise).filter(Exercise.id == id).first()
     exercise_schema = ExerciseInfoSchema().dump(exercise)
-    exercise_schema["type"] = (
-        db.query(ExerciseType).filter(ExerciseType.id == exercise.type_id).first().name
+    exercise_schema["types"] = (et.exercise_type for et in
+        db.query(ExerciseType).filter(ExerciseType.exercise_id == exercise.id).all()
     )
     muscles_worked = db.query(MuscleWorked).filter(MuscleWorked.exercise_id == id)
     exercise_schema["muscles"] = []
