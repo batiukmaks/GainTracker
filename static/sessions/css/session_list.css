@@ -8,6 +8,10 @@ button {
     text-decoration: none;
 }
 
+body {
+	margin-bottom: 50px;
+}
+
 header {
     box-sizing: border-box;
     /* margin: 50px 100px; */
@@ -118,4 +122,12 @@ header {
 
 .Session-underline {
     border-bottom: 1px solid #1e2f45;
+}
+
+.header-empty-list{
+    display: flex;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    margin: 100px 0px 20px 0px;
 }
