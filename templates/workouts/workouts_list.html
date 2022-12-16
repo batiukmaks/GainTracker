@@ -11,15 +11,22 @@
   <a href="add"><button class="workout-creation-button">Create workout</button></a>
 </div>
 
+  {% if workouts == [] %}
+    <h3 class="header-empty-list">You do not have any workouts yet. Create them!</h3>
+  {% endif %}
+
 <ul class="exersices-container">
   {% for workout in workouts %}
   <li>
     <a href="{{workout.id}}">
       <div class="workout-image-wrapper">
-        <img src="{{url_for('static', filename='workouts/img/photo1.jpg')}}">
+        {% set images = ['photo1.jpg', 'photo2.jpg', 'photo3.jpg', 'photo4.jpg', 'photo5.jpg', 'photo6.jpg'] %}
+        {% set selected_image = images|random %}
+        <img src="{{url_for('static', filename='workouts/img/'+selected_image)}}">
         <p class="workout-name">{{ workout.name }}</p>
       </div>
     </a>
   </li>
   {% endfor %}
-  {% endblock %}
+</ul>
+{% endblock %}

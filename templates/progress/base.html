@@ -25,8 +25,11 @@
   <div class="user">
     <div class="user-info">
       <div class="icon">
-        <image src="{{url_for('static', filename='progress/img/icon.png')}}" width="150" height="157" />
-        </image>
+        {% if schema.sex == 'male' %}
+          <image src="{{url_for('static', filename='progress/img/male_avatar_icon.png')}}" width="150" height="157" /></image>
+        {% else %}
+          <image src="{{url_for('static', filename='progress/img/female_avatar_icon.png')}}" width="150" height="157" /></image>
+        {% endif %}
       </div>
 
       <div class="about-user">
