@@ -34,7 +34,7 @@
         <div class="exercise-wrapper h-100">
           <div class="exercise-header">
             <input type="checkbox" value="{{ exercise.id }}" name="exercises">
-            <p class="exercise-name">{{ exercise.name }}</p>
+            <p class="exercise-name">{{ exercise.name|title }}</p>
             <div class="excercise-icon-wrapper"><img
                 src="{{url_for('static', filename='workouts/img/icons/no_equipment.png' if exercise.equipment == 'not required' else 'workouts/img/icons/equipment.png')}}">
             </div>

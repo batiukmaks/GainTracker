@@ -19,7 +19,7 @@
         <div class="p-3 border border-dark rounded-4">
           <div>
             <h3 style="text-align:left; width: 15%; display: inline-block; vertical-align: top;">{{loop.index}}</h3>
-            <h3 style="text-align:center; width: 70%; display: inline-block">{{exercise.name}}</h3>
+            <h3 style="text-align:center; width: 70%; display: inline-block">{{exercise.name|title}}</h3>
             <div style="text-align:right; width: 12%; display: inline-block; vertical-align: top;">
               <button type="button" class="btn btn-outline-dark rounded-circle" onclick="add_new_set({{exercise.id}})">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus"
