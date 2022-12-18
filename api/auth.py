@@ -61,14 +61,17 @@ def login():
     username = request.form.get("username_or_email")
     password = request.form.get("password")
     if username is None:
+        return redirect('login')
         return {"Error": "Invalid input"}, 400
     user = (
         db.query(User).filter(User.username == username).first()
         or db.query(User).filter(User.email == username).first()
     )
     if user is None:
+        return redirect('login')
         return jsonify({"msg": "Bad username"}), 404
     if not check_password_hash(user.password, password):
+        return redirect('login')
         return jsonify({"msg": "Bad password"}), 401
 
     response = redirect('/user/progress/measurements')

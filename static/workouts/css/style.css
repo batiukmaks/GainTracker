@@ -271,6 +271,11 @@ button:hover{
     margin: 0px 100px;
 }
 
+.excercise-filters>* {
+    display: inline-block;
+}
+
+
 .workout-name-input {
     /* margin-left: 36.5%; */
     font-size: 20px;
@@ -306,7 +311,7 @@ button:hover{
 
 
 .exercise-wrapper {
-    height: 315px;
+    height: 280px;
     border-radius: 20px;
     border-width: 1px;
     /* margin: 0; */
