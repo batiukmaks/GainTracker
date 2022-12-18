@@ -232,3 +232,11 @@ header {
     color: gray;
     font-size: 24px;
 }
+
+.form-control:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: black;
+    outline: 0;
+    box-shadow: none;
+}
