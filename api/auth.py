@@ -55,6 +55,7 @@ def signup():
 
 @auth.route("/login", methods=["GET", "POST"])
 def login():
+    db.rollback()
     if request.method == "GET":
         return render_template("auth/login.html")
 
@@ -62,17 +63,14 @@ def login():
     password = request.form.get("password")
     if username is None:
         return redirect('login')
-        return {"Error": "Invalid input"}, 400
     user = (
         db.query(User).filter(User.username == username).first()
         or db.query(User).filter(User.email == username).first()
     )
     if user is None:
         return redirect('login')
-        return jsonify({"msg": "Bad username"}), 404
     if not check_password_hash(user.password, password):
         return redirect('login')
-        return jsonify({"msg": "Bad password"}), 401
 
     response = redirect('/user/progress/measurements')
     access_token = create_access_token(identity=user)
