@@ -9,7 +9,7 @@ def db_init():
     engine = create_engine(connection_string, echo=True)
     Session = sessionmaker(bind=engine)
     db = Session()
-    db.execute('set max_allowed_packet=67108864')
+    db.execute('set global max_allowed_packet=67108864')
 
 def get_db():
     return db
