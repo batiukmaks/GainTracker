@@ -23,18 +23,18 @@
   <div class="row row-cols-3 gy-3 gx-3">
     {% for exercise in workout.exercises %}
     <div class="col">
-      <div class="exercise-wrapper">
-        <div class="exercise-header">
+      <div class="exercise-wrapper h-100 px-4 pb-4">
+        <div class="exercise-header d-flex justify-content-between">
           <p class="numbers">{{loop.index}}</p>
-          <p class="exercise-name">{{ exercise.name }}</p>
+          <p class="exercise-name">{{ exercise.name|title }}</p>
           <div class="excercise-icon-wrapper"><img
               src="{{url_for('static', filename='workouts/img/icons/no_equipment.png' if exercise.equipment == 'not required' else 'workouts/img/icons/equipment.png')}}">
           </div>
         </div>
 
-        <div class="exercise-description">
-          <p class="each-punkt"> Type: {{ exercise.types|join(", ") }} </p>
-          <p class="each-punkt"> Muscles:
+        <div class="exercise-description mt-1">
+          <p class="each-punkt my-2"> Type: {{ exercise.types|join(", ") }} </p>
+          <p class="each-punkt my-2"> Muscles:
             {% set muscles = [] %}
             {% for muscle in exercise.muscles %}
             {{ muscles.append(muscle.name) or "" }}
@@ -42,7 +42,7 @@
             {{ muscles|join(", ") }}
           </p>
           {% if exercise.description %}
-          <p class="each-punkt"> Description: {{ exercise.description }} </p>
+          <p class="each-punkt my-2"> Description: {{ exercise.description }} </p>
           {% endif %}
         </div>
       </div>

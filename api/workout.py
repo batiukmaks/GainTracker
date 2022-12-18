@@ -21,11 +21,20 @@ def get_workouts():
 @jwt_required()
 def add_workout():
     if request.method == "GET":
-        exercises = db.query(Exercise).all()
-        exercises_info = [
-            get_exercise_info_schema(exercise.id) for exercise in exercises
-        ]
-        return render_template("workouts/workout_create.html", exercises=exercises_info)
+        muscles = [int(muscle_id) for muscle_id in request.args.getlist("muscles")]
+        exercises = db.query(Exercise)
+        if -1 in muscles or len(muscles) == 0:
+            exercises = exercises.all()
+            muscles = [-1]
+        else:
+            exercise_ids = [mv.exercise_id for mv in db.query(MuscleWorked).filter(MuscleWorked.muscle_id.in_(muscles)).all()]
+            exercises = exercises.filter(Exercise.id.in_(exercise_ids)).all()
+        schema = {
+            "exercises": [get_exercise_info_schema(exercise.id) for exercise in exercises],
+            "muscles": [Muscle(id=-1, name='all')] + db.query(Muscle).all(),
+            "chosen_filters": muscles,
+        }
+        return render_template("workouts/workout_create.html", schema=schema)
     elif request.method == "POST":
         new_workout = {
             "name": request.form.get("name"),
