@@ -160,7 +160,7 @@ header {
 
 
 
-
+/*
 .exersices-container {
     margin: 0px 100px;
 }
@@ -169,15 +169,13 @@ header {
     display: inline-block;
     width: calc((100% - 68px) / 3);
     margin: 0px 10px 25px 10px;
-}
+}*/
 
 .workout-image-wrapper {
     position: relative;
-    display: inline-block;
     border-radius: 4%;
     width: 100%;
     height: 500px;
-    margin: 0;
     overflow: hidden;
 }
 
@@ -235,14 +233,6 @@ header {
 
 
 /* Excerises */
-
-.upper-buttons {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 0px 100px;
-}
-
 .excercise-filters>* {
     display: inline-block;
 }
