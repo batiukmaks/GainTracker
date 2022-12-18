@@ -13,7 +13,10 @@
   <li>
     <a href="{{workout.id}}">
       <div class="workout-image-wrapper">
-        {% set images = ['photo1.jpg', 'photo2.jpg', 'photo3.jpg', 'photo4.jpg', 'photo5.jpg', 'photo6.jpg'] %}
+        {% set images = ['woman_workout_1.jpg', 'woman_workout_2.jpg', 'woman_workout_3.jpg', 'woman_workout_4.jpg',
+        'woman_workout_5.jpg', 'woman_workout_6.jpg', 'woman_workout_7.jpg', 'woman_workout_8.jpg',
+        'woman_workout_9.jpg', 'woman_workout_10.jpg', 'woman_workout_11.jpg', 'woman_workout_12.jpg',
+        'woman_workout_13.jpg', 'woman_workout_14.jpg', 'woman_workout_15.jpg', 'woman_workout_16.jpg'] %}
         {% set selected_image = images|random %}
         <img src="{{url_for('static', filename='workouts/img/'+selected_image)}}">
         <p class="workout-name">{{ workout.name }}</p>
