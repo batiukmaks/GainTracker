@@ -15,7 +15,6 @@ header {
     background-color: white;
     display: flex;
     justify-content: center;
-
     align-items: center;
     padding: 30px 10%;
     padding: 0;
@@ -32,7 +31,6 @@ header {
 }
 
 .navigation-links li a:hover {
-
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
     text-decoration: underline;
@@ -41,34 +39,6 @@ header {
     border-radius: 5px;
     padding: 10%;
 }
-
-
-
-/* button{
-    padding: 10px;
-    display: block;
-    margin-left: 10px;
-    font-family: 'Montserrat', sans-serif;
-    background-color: white;
-    border: rgb(16, 110, 16);
-    color:rgb(16, 110, 16);
-    border-style: solid;
-c
-    width: 150px;
-    height: 45px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 1s;
-    margin-right: 20px;
-    margin-top: 20px;
-  }
-
-button:hover{
-    background-color:rgb(16, 110, 16);
-    color:white;
-    border: none;
-    opacity: 0.5;
-} */
 
 .widgets {
     display: block;
@@ -80,7 +50,6 @@ button:hover{
 }
 
 .search-workout {
-
     margin-bottom: 10px;
     display: inline-block;
     border: black;
@@ -96,33 +65,28 @@ button:hover{
 
 /* Workout Section */
 
-.list-buttons {
-    margin: 0px 100px;
-}
-
-.list-buttons>* {
-    display: inline-block;
-}
-
 .list-button {
     font-size: 14px;
     border-radius: 8px;
     height: 30px;
-    margin: 20px 3px;
-
     font-family: 'Montserrat', sans-serif;
     background-color: white;
     border: grey;
     color: grey;
     border-style: solid;
     border-width: 1px;
+    cursor: pointer;
 }
 
-.list-button:hover {
+.btn-check:checked+.list-button,
+.list-button:hover,
+.list-button.active,
+.list-button.show,
+.list-button:first-child:active,
+:not(.btn-check)+.list-button:active {
     background-color: rgb(155, 155, 155);
     color: white;
 }
-
 
 .workout-creation-button {
     font-size: 14px;
@@ -130,13 +94,16 @@ button:hover{
     height: 40px;
     font-family: 'Montserrat', sans-serif;
     background-color: white;
-    border: #749471;
     color: #749471;
+    border-color: #749471;
     border-style: solid;
     border-width: 1px;
-    margin: 30px 10px;
+}
 
-
+.apply-filters-button {
+    border-color: grey;
+    color: grey;
+    height: 30px;
 }
 
 .workout-creation-button:hover {
@@ -148,6 +115,11 @@ button:hover{
     color: white;
     border-style: solid;
     border-width: 1px;
+}
+
+.apply-filters-button:hover {
+    background-color: grey;
+    border-color: grey;
 }
 
 .create-button {
@@ -188,7 +160,7 @@ button:hover{
 
 
 
-
+/*
 .exersices-container {
     margin: 0px 100px;
 }
@@ -197,15 +169,13 @@ button:hover{
     display: inline-block;
     width: calc((100% - 68px) / 3);
     margin: 0px 10px 25px 10px;
-}
+}*/
 
 .workout-image-wrapper {
     position: relative;
-    display: inline-block;
     border-radius: 4%;
     width: 100%;
     height: 500px;
-    margin: 0;
     overflow: hidden;
 }
 
@@ -263,14 +233,6 @@ button:hover{
 
 
 /* Excerises */
-
-.upper-buttons {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 0px 100px;
-}
-
 .excercise-filters>* {
     display: inline-block;
 }
@@ -330,8 +292,6 @@ button:hover{
 .exercise-header input {
     height: 15px;
     width: 15px;
-    margin-right: 15px;
-    margin-left: 30px;
 }
 
 
@@ -358,12 +318,9 @@ button:hover{
     font-size: 16px;
     font-family: 'Montserrat', sans-serif;
     color: grey;
-    margin: 0px 30px 30px 30px;
 }
 
 .each-punkt {
-    margin-bottom: 10px;
-    margin-top: 10px;
     line-height: normal;
 }
 
@@ -372,10 +329,10 @@ button:hover{
     color: rgb(93, 93, 93);
     font-size: 20px;
     font-family: 'Montserrat', sans-serif;
-    top: 30px;
+    /* top: 30px; */
     width: 15px;
-    margin-right: 15px;
-    margin-left: 30px;
+    /* margin-right: 15px; */
+    /* margin-left: 30px; */
 }
 
 .workout-description-name {
@@ -437,7 +394,7 @@ button:hover{
     border-width: 1px;
 }
 
-.header-empty-list{
+.header-empty-list {
     display: flex;
     justify-content: center;
     font-family: 'Montserrat', sans-serif;

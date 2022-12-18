@@ -3,9 +3,7 @@
 <div class="container">
   <form action="add" method="get">
     <div class="d-flex justify-content-between mt-3">
-      <div class="d-flex justify-content-start">
-        <button class="workout-creation-button apply-filters-button" type="submit">Apply filters</button>
-      </div>
+
       <div class="d-flex flex-row ">
         {% for muscle in schema.muscles %}
         <div class="flex-column ms-2">
@@ -15,6 +13,9 @@
         </div>
         {% endfor %}
       </div>
+      <div class="d-flex justify-content-end">
+        <button class="workout-creation-button apply-filters-button" type="submit">Apply filters</button>
+      </div>
     </div>
   </form>
   <form action="add" method="post">
@@ -22,7 +23,7 @@
       <div class="col offset-md-4">
         <input class="my-4 w-100 workout-name-input" type="text" name="name" placeholder="Set Workout Name Here" autocomplete="off" required />
       </div>
-      <div class="col d-flex justify-content-end">
+      <div class="col d-flex justify-content-end my-4">
         <button class="workout-creation-button" type="submit">Create workout</button>
       </div>
     </div>

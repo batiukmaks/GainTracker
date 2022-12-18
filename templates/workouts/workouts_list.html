@@ -1,25 +1,29 @@
 {% extends "workouts/base.html" %}
 {% block content %}
-<div class="upper-buttons">
-    <a href="add"><button class="workout-creation-button">Create workout</button></a>
-</div>
+<div class="container">
+  <div class="my-4 d-flex justify-content-end">
+    <a href="add">
+      <button class="workout-creation-button">Create workout</button>
+    </a>
+  </div>
 
   {% if workouts == [] %}
-    <h3 class="header-empty-list">You do not have any workouts yet. Create them!</h3>
+  <h3 class="header-empty-list">You do not have any workouts yet. Create them!</h3>
   {% endif %}
 
-<ul class="exersices-container">
-  {% for workout in workouts %}
-  <li>
-    <a href="{{workout.id}}">
-      <div class="workout-image-wrapper">
-        {% set images = ['photo1.jpg', 'photo2.jpg', 'photo3.jpg', 'photo4.jpg', 'photo5.jpg', 'photo6.jpg'] %}
-        {% set selected_image = images|random %}
-        <img src="{{url_for('static', filename='workouts/img/'+selected_image)}}">
-        <p class="workout-name">{{ workout.name }}</p>
-      </div>
-    </a>
-  </li>
-  {% endfor %}
-</ul>
+  <div class="row row-cols-3 gy-4">
+    {% for workout in workouts %}
+    <div class="col">
+      <a href="{{workout.id}}">
+        <div class="workout-image-wrapper">
+          {% set images = ['photo1.jpg', 'photo2.jpg', 'photo3.jpg', 'photo4.jpg', 'photo5.jpg', 'photo6.jpg'] %}
+          {% set selected_image = images|random %}
+          <img src="{{url_for('static', filename='workouts/img/'+selected_image)}}">
+          <p class="workout-name">{{ workout.name }}</p>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
 {% endblock %}
