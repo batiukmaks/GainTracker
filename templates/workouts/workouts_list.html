@@ -1,14 +1,7 @@
 {% extends "workouts/base.html" %}
 {% block content %}
 <div class="upper-buttons">
-  <ul class="excercise-filters">
-    <li><button class="list-button">All</button></li>
-    <li><button class="list-button">Chest</button></li>
-    <li><button class="list-button">Core</button></li>
-    <li><button class="list-button">Booty</button></li>
-    <li><button class="list-button">Full Body</button></li>
-  </ul>
-  <a href="add"><button class="workout-creation-button">Create workout</button></a>
+    <a href="add"><button class="workout-creation-button">Create workout</button></a>
 </div>
 
   {% if workouts == [] %}

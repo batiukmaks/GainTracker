@@ -134,6 +134,7 @@ button:hover{
     color: #749471;
     border-style: solid;
     border-width: 1px;
+    margin: 30px 10px;
 
 
 }
@@ -270,11 +271,6 @@ button:hover{
     margin: 0px 100px;
 }
 
-.excercise-filters>* {
-    display: inline-block;
-}
-
-
 .workout-name-input {
     /* margin-left: 36.5%; */
     font-size: 20px;
@@ -310,7 +306,7 @@ button:hover{
 
 
 .exercise-wrapper {
-    height: 280px;
+    height: 315px;
     border-radius: 20px;
     border-width: 1px;
     /* margin: 0; */
