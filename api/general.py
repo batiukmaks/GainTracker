@@ -8,4 +8,4 @@ def home():
 
 @general.route("about", methods=["GET"])
 def about():
-    return render_template('auth/about.html')
+    return render_template('general/about.html')

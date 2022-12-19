@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>About</title>
+    <!--- <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="style.css" />
+
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='general/css/about.css')}}" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+              <h1 class="text-center">GainTracker</h1>
+            </div>
+            <div class="col-sm-4 text-right">
+              <div class="">
+                <button type="button" class="header-about-button">
+                  Sign up
+                </button>
+                <button type="button" class="header-about-button">
+                  Log in
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      
+    </header>
+    <div class="about-gaintracker-text">
+      <h3 class="text-center">Nice to meet you! </h3>
+      <p class="fs-0 text-center">
+        <!-- <br /> -->
+        We are students of National University "Lviv Polytechnic". <br />
+        2 years ago we chose the chair of Arteficial Intelligence, so <br />
+        we know how important sport is in our live. <br />
+        During trainings, we faced the problem, <br />that we don't have service
+        for tracking progress. <br /><br />So, we decided to create it
+        independetly :)
+      </p>
+    </div>
+
+    <div class="container">
+      <h3 style="text-align: center">Our features:</h3>
+      <div class="row">
+        <div class="col-sm-4 text-center">
+          <div class="collumns">
+            <img
+              src="{{ url_for('static', filename='general/img/free-icon-fitness-6479559.png') }}"
+              style="width: 75%; background-color: rgb(250, 250, 250)"
+            />
+            <div class="container-fluid">
+              <p>You can track training progress easily</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 text-center">
+          <div class="collumns">
+            <img
+              src="{{ url_for('static', filename='general/img/free-icon-exercise-5637059.png') }}"
+              style="width: 75%; background-color: rgb(250, 250, 250)"
+            />
+            <div class="container-fluid">
+              <p>You can make your own workouts</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 text-center">
+          <div class="collumns">
+            <img
+              src="{{ url_for('static', filename='general/img/results.png') }}"
+              style="width: 75%; background-color: rgb(250, 250, 250)"
+            />
+            <div class="container-fluid">
+              <p>You can get structured improvement review</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h3 style="text-align: center">Our Team</h3>
+      <div class="card-container">
+        <div class="collumn text-center card">
+          <img src="{{ url_for('static', filename='general/img/olena.jpg') }}" style="width: 100%" />
+          <div class="container-fluid card-title">
+            <p>Olena Morozevych</p>
+          </div>
+        </div>
+
+        <div class="collumn text-center card">
+          <img src="{{ url_for('static', filename='general/img/hry.jpg') }}" style="width: 100%" />
+          <div class="container-fluid card-title">
+            <p>Khrystyna Levonova</p>
+          </div>
+        </div>
+
+        <div class="collumn text-center card">
+          <img src="{{ url_for('static', filename='general/img/nastya.jpg') }}" style="width: 100%" />
+          <div class="container-fluid card-title">
+            <p>Anastasia Viaznikova</p>
+          </div>
+        </div>
+
+        <div class="collumn text-center card">
+          <img src="{{ url_for('static', filename='general/img/vitalik.jpg') }}" style="width: 100%" />
+          <div class="container-fluid card-title">
+            <p>Vitaly Mill</p>
+          </div>
+        </div>
+        <div class="collumn text-center card">
+          <img src="{{ url_for('static', filename='general/img/yulia.jpg') }}" style="width: 100%" />
+          <div class="container-fluid card-title">
+            <p>Yulia Kryveiko</p>
+          </div>
+        </div>
+        <div class="collumn text-center card">
+          <img src="{{ url_for('static', filename='general/img/maks.jpg') }}" style="width: 100%" />
+          <div class="container-fluid card-title">
+            <p>Maks Batiuk</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid bg-grey">
+      <h2 class="text-center">Get in touch</h2>
+      <div class="row">
+        <div class="col">
+          <p class="text-center">Contact us and we'll get back to you within 24 hours.</p>
+          <p class="text-center"><span class="glyphicon glyphicon-map-marker"></span> Lviv,Ukraine</p>
+          <p class="text-center"><span class="glyphicon glyphicon-phone"></span> +380931874526</p>
+          <p class="text-center"><span class="glyphicon glyphicon-envelope"></span> gaintracker@gmail.com</p>
+        </div>
+        
+    </div>
+
+    <div class="about-section"></div>
+  </body>
+  <footer class="bg-light pt-5">
+    <div class="container text-center">
+      <p class="text-muted mb-0">
+        &copy; GainTracker 2022
+      </p>
+    </div>
+  </footer>
+</html>
