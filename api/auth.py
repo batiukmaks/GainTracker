@@ -5,6 +5,7 @@ from flask_jwt_extended import (
     current_user,
     set_access_cookies,
     unset_jwt_cookies,
+    get_jwt_identity,
 )
 from werkzeug.security import generate_password_hash, check_password_hash
 from marshmallow import ValidationError
@@ -18,7 +19,11 @@ db = get_db()
 
 
 @auth.route("/signup", methods=["GET", "POST"])
+@jwt_required(optional=True)
 def signup():
+    current_identity = get_jwt_identity()
+    if not current_identity is None:
+        return redirect('/user/progress/measurements')
     if request.method == "GET":
         return render_template("auth/signup.html")
     
@@ -54,10 +59,16 @@ def signup():
 
 
 @auth.route("/login", methods=["GET", "POST"])
+@jwt_required(optional=True)
 def login():
     db.rollback()
+    current_identity = get_jwt_identity()
+    if not current_identity is None:
+        return redirect('/user/progress/measurements')
+
     if request.method == "GET":
         return render_template("auth/login.html")
+
 
     username = request.form.get("username_or_email")
     password = request.form.get("password")
