@@ -8,14 +8,14 @@
 </style>
 
 <div class="container text-center mt-4">
-  <h1 style="text-align:left; width: 49%; display: inline-block">{{session.workout_name}}</h1>
-  <h1 style="text-align:right; width: 50%; display: inline-block">{{session.date}}</h1>
+  <h1 style="text-align:left; width: 49%; display: inline-block; font-size:30px; color: rgb(93, 93, 93);">{{session.workout_name}}</h1>
+  <h1 style="text-align:right; width: 50%; display: inline-block;  font-size:30px; color: rgb(93, 93, 93);">{{session.date}}</h1>
 </div>
-<div class="container mt-4">
-  <div class="row row-cols-3 gx-5 gy-4">
+<div class="container mt-4" >
+  <div class="row row-cols-3 gx-5 gy-4" >
     {% for exercise in session.records %}
-    <div class="col">
-      <div class="p-3 border border-dark rounded-4">
+    <div class="col" >
+      <div class="p-3 border border-dark rounded-4"  style="color:rgb(93, 93, 93); font-size:13px;">
         <!-- <h3 class="text-center card-title">{{exercise.exercise_name}}</h3> -->
         <h3 style="text-align:left; width: 10%; display: inline-block">{{loop.index}}</h3>
         <h3 style="text-align:center; width: 80%; display: inline-block">{{exercise.exercise_name|title}}</h3>
