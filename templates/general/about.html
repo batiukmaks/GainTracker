@@ -23,12 +23,12 @@
   </head>
   <body>
     <header>
-      <nav class="navbar navbar-default navbar-fixed-top">
+      <nav class="navbar navbar-default navbar-fixed-top " style="height:100px; background-color:white">
         <div class="container-fluid">
           <div class="row">
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
-              <h1 class="text-center">GainTracker</h1>
+              <h1 class="text-center" style="margin-top:36px;">GainTracker</h1>
             </div>
             <div class="col-sm-4 text-right">
               <div class="">
@@ -50,20 +50,19 @@
       
     </header>
     <div class="about-gaintracker-text">
-      <h3 class="text-center">Nice to meet you! </h3>
-      <p class="fs-0 text-center">
+      <h3 class="text-center" style="margin-top:150px;">Nice to meet you! </h3>
+      <p class="fs-0 text-center" style="margin-top:30px;">
         <!-- <br /> -->
-        We are students of National University "Lviv Polytechnic". <br />
-        2 years ago we chose the chair of Arteficial Intelligence, so <br />
-        we know how important sport is in our live. <br />
-        During trainings, we faced the problem, <br />that we don't have service
-        for tracking progress. <br /><br />So, we decided to create it
+        We are students of National University "Lviv Polytechnic". 2 years ago<br />
+        we have chosen the chair of Artificial Intelligence, so now know how important sport<br />
+        is in our live. During trainings, we faced the problem, that we don't have<br />
+        service for tracking progress. <br /><br />So, we decided to create it
         independetly :)
       </p>
     </div>
 
     <div class="container">
-      <h3 style="text-align: center">Our features:</h3>
+      <h3 style="text-align: center">Our main features:</h3>
       <div class="row">
         <div class="col-sm-4 text-center">
           <div class="collumns">
@@ -71,7 +70,7 @@
               src="{{ url_for('static', filename='general/img/free-icon-fitness-6479559.png') }}"
               style="width: 75%; background-color: rgb(250, 250, 250)"
             />
-            <div class="container-fluid">
+            <div class="container-fluid" style="margin-top:20px;">
               <p>You can track training progress easily</p>
             </div>
           </div>
@@ -82,7 +81,7 @@
               src="{{ url_for('static', filename='general/img/free-icon-exercise-5637059.png') }}"
               style="width: 75%; background-color: rgb(250, 250, 250)"
             />
-            <div class="container-fluid">
+            <div class="container-fluid" style="margin-top:20px;">
               <p>You can make your own workouts</p>
             </div>
           </div>
@@ -93,7 +92,7 @@
               src="{{ url_for('static', filename='general/img/results.png') }}"
               style="width: 75%; background-color: rgb(250, 250, 250)"
             />
-            <div class="container-fluid">
+            <div class="container-fluid" style="margin-top:20px;">
               <p>You can get structured improvement review</p>
             </div>
           </div>
@@ -128,7 +127,7 @@
         <div class="collumn text-center card">
           <img src="{{ url_for('static', filename='general/img/vitalik.jpg') }}" style="width: 100%" />
           <div class="container-fluid card-title">
-            <p>Vitaly Mill</p>
+            <p>Vitalii Mill</p>
           </div>
         </div>
         <div class="collumn text-center card">
@@ -146,25 +145,27 @@
       </div>
     </div>
 
-    <div class="container-fluid bg-grey">
-      <h2 class="text-center">Get in touch</h2>
-      <div class="row">
-        <div class="col">
-          <p class="text-center">Contact us and we'll get back to you within 24 hours.</p>
-          <p class="text-center"><span class="glyphicon glyphicon-map-marker"></span> Lviv,Ukraine</p>
-          <p class="text-center"><span class="glyphicon glyphicon-phone"></span> +380931874526</p>
-          <p class="text-center"><span class="glyphicon glyphicon-envelope"></span> gaintracker@gmail.com</p>
-        </div>
-        
-    </div>
+  <div class="footer-creation" style="background-color:rgb(244, 244, 244); border-color:black;">
+      <div class="container-fluid bg-grey">
+        <h2 class="text-center">Get in touch</h2>
+        <div class="row">
+          <div class="col">
+            <p class="text-center">Contact us and we'll get back to you within 24 hours.</p>
+            <p class="text-center"><span class="glyphicon glyphicon-map-marker"></span> Lviv,Ukraine</p>
+            <p class="text-center"><span class="glyphicon glyphicon-phone"></span> +380931874526</p>
+            <p class="text-center"><span class="glyphicon glyphicon-envelope"></span> gaintracker@gmail.com</p>
+          </div>
 
-    <div class="about-section"></div>
-  </body>
-  <footer class="bg-light pt-5">
-    <div class="container text-center">
-      <p class="text-muted mb-0">
-        &copy; GainTracker 2022
-      </p>
-    </div>
-  </footer>
+      </div>
+
+      <div class="about-section"></div>
+    </body>
+    <footer class="bg-light pt-5">
+      <div class="container text-center">
+        <p class="text-muted mb-0">
+          &copy; GainTracker 2022
+        </p>
+      </div>
+    </footer>
+  </div>
 </html>

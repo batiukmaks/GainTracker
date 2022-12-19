@@ -24,6 +24,7 @@ header {
 
 .navigation-links {
     list-style: none;
+    margin: 0px;
 }
 
 .navigation-links li {
