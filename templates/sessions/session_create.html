@@ -7,9 +7,9 @@
   <input type="hidden" name="workout_id" value="{{workout.id}}" />
   <div class="container mt-4">
     <div style="text-align:left; width: 20%; display: inline-block">
-      <button class='btn btn-outline-success' style="--bs-btn-color: #749471;--bs-btn-border-color: #749471;--bs-btn-hover-color: #fff;--bs-btn-hover-bg: #749471;">Create session</button>
+      <button class='btn btn-outline-success my-4' style="--bs-btn-color: #749471;--bs-btn-border-color: #749471;--bs-btn-hover-color: #fff;--bs-btn-hover-bg: #749471;">Create session</button>
     </div>
-    <h1 style="color:rgb(93, 93, 93); text-align:center; width: 60%; display: inline-block; font-size:33px">{{workout.name}}</h1>
+    <h1 style="color:rgb(93, 93, 93); text-align:center; width: 60%; display: inline-block; font-size:30px">{{workout.name}}</h1>
   </div>
 
   <div class="container mt-4">
@@ -19,7 +19,7 @@
         <div class="p-3 border border-dark rounded-4" style="color:rgb(93, 93, 93); font-size:13px;">
           <div>
             <h3 style="text-align:left; width: 15%; display: inline-block; vertical-align: top;">{{loop.index}}</h3>
-            <h3 style="text-align:center; width: 70%; display: inline-block; color:rgb(93, 93, 93);; font-size:24px;">{{exercise.name|title}}</h3>
+            <h3 style="text-align:center; width: 70%; display: inline-block; color:rgb(93, 93, 93);; font-size:20px;">{{exercise.name|title}}</h3>
             <div style="text-align:right; width: 12%; display: inline-block; vertical-align: top;">
               <button type="button" class="btn btn-outline-dark rounded-circle" onclick="add_new_set({{exercise.id}})">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus"

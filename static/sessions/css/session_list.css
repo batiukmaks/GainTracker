@@ -30,11 +30,11 @@ header {
 
 .navigation-links {
     list-style: none;
+    margin: 0px;
 }
 
 .navigation-links li {
     display: inline-block;
-    padding: 0px 20px;
 }
 
 .navigation-links li a {
