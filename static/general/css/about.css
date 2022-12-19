@@ -49,19 +49,19 @@ html {
   display: inline-block;
   background-color: white;
   border: 1px solid #7f878c;
-  border-radius: 12px;
+  border-radius: 9px;
   color: #797979;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 20px;
   cursor: pointer;
-  margin-top: 5.33%;
+  margin-top: 7%;
   margin-right: 1.5%;
 }
 
 .header-about-button:hover {
-  background-color: #797979;
+  background-color: #749471;
   color: white;
 }
 
