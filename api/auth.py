@@ -14,6 +14,7 @@ from models import *
 from .authentication import *
 from db import get_db
 
+
 auth = Blueprint("auth", __name__, url_prefix="/user")
 db = get_db()
 
@@ -23,21 +24,21 @@ db = get_db()
 def signup():
     current_identity = get_jwt_identity()
     if not current_identity is None:
-        return redirect('/user/progress/measurements')
+        return redirect("/user/progress/measurements")
     if request.method == "GET":
         return render_template("auth/signup.html")
-    
+
     new_user_schema = {
-        'username': request.form.get("username"),
-        'email': request.form.get("email"),
-        'password': generate_password_hash(request.form.get("password")),
-        'first_name': request.form.get("first_name"),
-        'last_name': request.form.get("last_name"),
-        'sex': request.form.get("sex"),
-        'birthday': request.form.get("birthday")
+        "username": request.form.get("username"),
+        "email": request.form.get("email"),
+        "password": generate_password_hash(request.form.get("password")),
+        "first_name": request.form.get("first_name"),
+        "last_name": request.form.get("last_name"),
+        "sex": request.form.get("sex"),
+        "birthday": request.form.get("birthday"),
     }
-    if new_user_schema['sex'] == 'none':
-        new_user_schema['sex'] = 'other'
+    if new_user_schema["sex"] == "none":
+        new_user_schema["sex"] = "other"
 
     # temporary solution
     if new_user_schema["email"] is None:
@@ -55,7 +56,7 @@ def signup():
 
     db.add(new_user)
     db.commit()
-    return redirect('login')
+    return redirect("login")
 
 
 @auth.route("/login", methods=["GET", "POST"])
@@ -64,26 +65,25 @@ def login():
     db.rollback()
     current_identity = get_jwt_identity()
     if not current_identity is None:
-        return redirect('/user/progress/measurements')
+        return redirect("/user/progress/measurements")
 
     if request.method == "GET":
         return render_template("auth/login.html")
 
-
     username = request.form.get("username_or_email")
     password = request.form.get("password")
     if username is None:
-        return redirect('login')
+        return redirect("login")
     user = (
         db.query(User).filter(User.username == username).first()
         or db.query(User).filter(User.email == username).first()
     )
     if user is None:
-        return redirect('login')
+        return redirect("login")
     if not check_password_hash(user.password, password):
-        return redirect('login')
+        return redirect("login")
 
-    response = redirect('/user/progress/measurements')
+    response = redirect("/user/progress/measurements")
     access_token = create_access_token(identity=user)
     set_access_cookies(response, access_token)
     return response
@@ -92,6 +92,6 @@ def login():
 @auth.route("/logout", methods=["GET"])
 @jwt_required()
 def logout():
-    response = redirect('login')
+    response = redirect("login")
     unset_jwt_cookies(response)
     return response
