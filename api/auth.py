@@ -24,7 +24,10 @@ db = get_db()
 def signup():
     current_identity = get_jwt_identity()
     if not current_identity is None:
-        return redirect("/user/progress/measurements")
+        response = redirect('signup')
+        unset_jwt_cookies(response)
+        return response
+
     if request.method == "GET":
         return render_template("auth/signup.html")
 
@@ -65,11 +68,13 @@ def login():
     db.rollback()
     current_identity = get_jwt_identity()
     if not current_identity is None:
-        return redirect("/user/progress/measurements")
+        response = redirect('login')
+        unset_jwt_cookies(response)
+        return response
 
     if request.method == "GET":
         return render_template("auth/login.html")
-
+        
     username = request.form.get("username_or_email")
     password = request.form.get("password")
     if username is None:
