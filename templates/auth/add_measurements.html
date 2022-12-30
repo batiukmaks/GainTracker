@@ -5,13 +5,7 @@
 
 
 {% block header_measurements %}
-<nav>
-  <ul class="navigation-links">
-    <li><a href="/workouts">Workouts</a></li>
-    <li><a href="/sessions">Sessions</a></li>
-    <li><a href="/user/progress/measurements">User</a></li>
-  </ul>
-</nav>
+  {% include 'base_templates/navbar.html' %}
 {% endblock %}
 
 {% block content %}

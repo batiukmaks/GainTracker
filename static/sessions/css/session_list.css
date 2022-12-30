@@ -1,4 +1,4 @@
-li,
+/* li,
 a,
 button {
     font-family: 'Montserrat', sans-serif;
@@ -15,7 +15,6 @@ body {
 
 header {
     box-sizing: border-box;
-    /* margin: 50px 100px; */
     height: 80px;
     padding: 0;
     background-color: white;
@@ -40,9 +39,8 @@ header {
 .navigation-links li a {
     width: 15px;
     height: 45px;
-    /* border-bottom: 0px solid #1e2f45; */
     padding: 1%;
-}
+} */
 
 .page-title {
     font-size: 21px;

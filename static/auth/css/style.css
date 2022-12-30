@@ -7,6 +7,7 @@
 
 
 } */
+/* 
 
 li,
 a,
@@ -14,13 +15,11 @@ button {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 16px;
-  color: black;
   text-decoration: none;
-}
+} */
 
-header {
+/* header {
   box-sizing: border-box;
-  /* margin: 50px 100px; */
   height: 100px;
   padding: 0;
   background-color: white;
@@ -31,8 +30,8 @@ header {
   padding: 30px 10%;
   padding: 0;
   border-bottom: rgb(183, 183, 183) solid 1px;
-}
-
+} */
+/* 
 .navigation-links {
   list-style: none;
 }
@@ -43,39 +42,13 @@ header {
 }
 
 .navigation-links li a:hover {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 500;
-    text-decoration: underline;
-    width: 150px;
-    height: 45px;
-    border-radius: 5px;
-}  
-
-/* button{
-    padding: 10px;
-    display: block;
-    margin-left: 10px;
-    font-family: 'Montserrat', sans-serif;
-    background-color: white;
-    border: rgb(16, 110, 16);
-    color:rgb(16, 110, 16);
-    border-style: solid;
-    border-width: 2px;
-    width: 150px;
-    height: 45px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 1s;
-    margin-right: 20px;
-    margin-top: 20px;
-  }
-
-button:hover{
-    background-color:rgb(16, 110, 16);
-    color:white;
-    border: none;
-    opacity: 0.5;
-} */
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  text-decoration: underline;
+  width: 150px;
+  height: 45px;
+  border-radius: 5px;
+}
 
 .widgets {
   display: block;
@@ -100,13 +73,12 @@ button:hover{
   border-width: 1.5px;
 }
 
-/* Workout Section */
 
 .list-buttons {
   margin: 0px 100px;
 }
 
-.list-buttons > * {
+.list-buttons>* {
   display: inline-block;
 }
 
@@ -128,7 +100,7 @@ button:hover{
   margin: 0px 100px;
 }
 
-.exersices-container > * {
+.exersices-container>* {
   display: inline-block;
   width: calc((100% - 68px) / 3);
   margin: 0px 10px 25px 10px;
@@ -191,35 +163,14 @@ button:hover{
   font-size: 13px;
   width: 50px;
   height: 30px;
-}
-
-/* End Workout Session */
-/* 
-.workout-programs{
-
-    vertical-align: top;
-    width: 100%;
-
-}
-
-
-.workout-title{
-    
-    font-family: 'Montserrat', sans-serif;
-
-}
-
-.workout-exercises{
-
-    font-family: 'Montserrat', sans-serif;
-
 } */
 
-.header-title {
-  font-family: "Montserrat", sans-serif;
+.header-title h2 {
+  /* font-family: "Montserrat", sans-serif;
   font-weight: 400;
   font-size: 35px;
-  color: black;
   text-decoration: none;
-  font-style: normal;
+  font-style: normal; */
+  color: black;
+  font-size: 36px;
 }
