@@ -5,32 +5,33 @@
 
 
 {% block header_measurements %}
-  {% include 'base_templates/navbar.html' %}
+{% include 'base_templates/navbar.html' %}
 {% endblock %}
 
 {% block content %}
-<div class="measurements-add-container">
-  <p>
-    Add measurements to<br />
-    track the progress!
-  </p>
+<div class="container mt-5 p-5 border border-dark text-center measurements-add-container">
+  <div class="container row">
+    <div class="col">
+      <p class="lh-sm fs-2">
+        Add measurements to<br />
+        track the progress!
+      </p>
+    </div>
+  </div>
 
   <form method="post">
-    <div class="measurements-placeholder">
-      <input type="number" step="0.01" placeholder="weight" name="weight" />
-    </div>
-    <div class="measurements-placeholder">
-      <input type="number" step="0.01" placeholder="chest" name="chest" />
-    </div>
-    <div class="measurements-placeholder">
-      <input type="number" step="0.01" placeholder="waist" name="waist" />
-    </div>
-    <div class="measurements-placeholder">
-      <input type="number" step="0.01" placeholder="hips" name="hips" />
+    <div class="container row row-cols-1 gy-3">
+      {% for measurement in schema.measurements %}
+      <div class="col measurement">
+        <input type="number" step="0.01" placeholder="{{measurement}}" name="{{measurement}}" class="w-50 ps-3 border border-dark lh-sm fs-4" />
+      </div>
+      {% endfor %}
     </div>
 
-    <div>
-      <button class="add-meas-button" type="submit">add</button>
+    <div class="container row mt-5">
+      <div class="col">
+        <button class="w-50 p-1 border border-dark fs-3 add-meas-button" type="submit">add</button>
+      </div>
     </div>
   </form>
 </div>

@@ -1,77 +1,21 @@
+body {
+  font-family: "Montserrat", sans-serif;
+  color: #7f878c;
+}
+
 .measurements-add-container {
-  box-sizing: border-box;
-  position: absolute;
-  display: inline-block;
-  /*transform: translate(-50%, -50%);*/
-  text-align: center;
-  top: 138px;
-  /*bottom: 148;*/
-  height: 70%;
-  left: 420px;
-  right: 420px;
-
-  /*width: 60%;*/
-  /*width: 50%;*/
-  border: 1px solid #000000;
   border-radius: 24px;
-  /* float: center;*/
 }
 
-.measurements-add-container p {
-  font-family: "Montserrat", sans-serif;
-  font-weight: 400;
-  font-size: 30px;
-  color: #7f878c;
-  text-decoration: none;
-  font-style: normal;
-  text-align: center;
-  line-height: 39px;
-  width: auto;
-  padding-top: 20px;
-  padding-bottom: 10px;
-  margin: 50px;
-}
-
-.measurements-placeholder input {
-  font-family: "Montserrat", sans-serif;
-  line-height: 30px;
-  margin: auto;
-  margin-top: 12px;
+.measurement input {
   border-radius: 10px;
-  outline: none;
-  display: block;
-  width: 45%;
-  font-size: 22px;
-  padding-left: 20px;
-  border: 1px solid #000000;
-}
-
-.measurements-placeholder input::placeholder {
-  font-family: "Montserrat", sans-serif;
-  font-weight: 400;
-  color: #7f878c;
-}
-
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
 }
 
 .add-meas-button {
-  background-color: white;
-  border: 1px solid #7f878c;
   border-radius: 12px;
+  background-color: white;
   color: #797979;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 24px;
   cursor: pointer;
-  width: 45%;
-  margin-top: 60px;
-  padding: 5px;
-  border: 1px solid #000000;
 }
 
 .add-meas-button:hover {
