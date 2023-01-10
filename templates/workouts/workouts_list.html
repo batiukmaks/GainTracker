@@ -1,21 +1,23 @@
 {% extends "workouts/base.html" %}
 {% block content %}
-<div class="container">
+<div class="container mb-5">
   <div class="my-4 d-flex justify-content-end">
     <a href="add">
-      <button class="workout-creation-button">Create workout</button>
+      <button class="btn rounded rounded-3 create-button">Create workout</button>
     </a>
   </div>
 
   {% if workouts == [] %}
-  <h3 class="header-empty-list">You do not have any workouts yet. Create them!</h3>
+  <div class="container text-center no-records">
+    <h3 class="fs-2">You do not have any workouts yet. Create them!</h3>
+  </div>
   {% endif %}
 
   <div class="row row-cols-3 gy-4">
     {% for workout in workouts %}
     <div class="col">
       <a href="{{workout.id}}">
-        <div class="workout-image-wrapper">
+        <div class="rounded rounded-4 workout-image-wrapper">
           {% set images = ['woman_workout_1.jpg', 'woman_workout_2.jpg', 'woman_workout_3.jpg', 'woman_workout_4.jpg',
           'woman_workout_5.jpg', 'woman_workout_7.jpg', 'woman_workout_8.jpg',
           'woman_workout_9.jpg', 'woman_workout_10.jpg', 'woman_workout_11.jpg', 'woman_workout_12.jpg',
@@ -24,7 +26,7 @@
           'man_workout_5.jpg', 'man_workout_6.jpg'] %}
           {% set selected_image = images|random %}
           <img src="{{url_for('static', filename='workouts/img/'+selected_image)}}">
-          <p class="workout-name">{{ workout.name }}</p>
+          <p class="text-light fs-3 workout-list-name">{{ workout.name }}</p>
         </div>
       </a>
     </div>
