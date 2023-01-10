@@ -1,22 +1,27 @@
 {% extends "sessions/base.html" %}
-{% block styles_link %}{{ url_for('static', filename='sessions/css/session_list.css')}}{% endblock %}
 {% block content %}
-<p class="page-title"  style="color:rgb(93, 93, 93); font-size:30px;">List of sessions</p>
+<div class="container my-5 text-center">
+  <p class="session-page-title fs-2">List of sessions</p>
+</div>
 
-{% if sessions == [] %}
-  <h3 class="header-empty-list">You do not have any sessions yet. Create them by going to workouts!</h3>
+{% if sessions == [] %}  
+<div class="container text-center no-records">
+  <h3 class="fs-2">You do not have any sessions yet. Create them by going to workouts!</h3>
+</div>
 {% endif %}
 
-<div class="parent">
-  {% for session in sessions %}
-  <a href="{{session.id}}">
-    <div class="flexbox-next" >
-      <div class=flexbox1 >
-        <p class="text-of-box" style="color:rgb(93, 93, 93); font-size:17px;">{{session.workout_name}}</p>
-        <p class="text-of-box" style="color:rgb(93, 93, 93); font-size:17px;">{{session.date}}</p>
-      </div>
+<div class="container text-center">
+  <div class="row row-cols-1 gy-3">
+    {% for session in sessions %}
+    <div class="col">
+      <a href="{{session.id}}">
+        <div class="d-flex justify-content-between session-wrapper border border-dark px-3 py-2">
+          <p class="m-0">{{session.workout_name}}</p>
+          <p class="m-0">{{session.date}}</p>
+        </div>
+      </a>
     </div>
-  </a>
-  {% endfor %}
+    {% endfor %}
+  </div>
 </div>
 {% endblock %}

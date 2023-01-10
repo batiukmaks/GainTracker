@@ -1,0 +1,14 @@
+.session-page-title {
+    color:rgb(93, 93, 93);
+}
+
+.session-wrapper {
+    color:rgb(93, 93, 93); 
+    align-items: center;
+    border-radius: 15px;
+}
+
+.no-records {
+    margin-top: 100px;
+    color: gray;
+}
