@@ -43,3 +43,16 @@ header {
     height: 45px;
     border-radius: 5px;
 }
+
+.form-control:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: black;
+    outline: 0;
+    box-shadow: none;
+}
+
+.form-select {
+    height: 40px;
+    align-items:center;
+}

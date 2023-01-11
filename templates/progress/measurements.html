@@ -31,7 +31,7 @@
     <div class="col">
       <div class="card">
         <div class="card-body text-center">
-          <p class="measurement-name">{{ chart.graph_name|title }}</p>
+          <p class="fs-4">{{ chart.graph_name|title }}</p>
           <canvas id="myChart_{{loop.index - 1}}">
             <script>show_chart({{ loop.index - 1 }})</script>
           </canvas>

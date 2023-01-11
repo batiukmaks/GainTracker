@@ -18,9 +18,9 @@
   <header>
     {% include 'base_templates/navbar.html' %}
   </header>
-  <div class="user">
-    <div class="user-info">
-      <div class="icon">
+  <div class="container-fluid d-flex justify-content-between px-5 user">
+    <div class="my-4 mx-5 d-flex">
+      <div class="rounded rounded-3 icon">
         {% if schema.sex == 'male' %}
         <image src="{{url_for('static', filename='progress/img/male_avatar_icon.png')}}" width="150" height="157" />
         </image>
@@ -30,24 +30,23 @@
         {% endif %}
       </div>
 
-      <div class="about-user">
-        <p class="username">{{schema.first_name}} {{schema.last_name}}</p>
+      <div class="ms-5 align-self-end fs-5">
+        <p class="fs-4 fw-bold text-dark">{{schema.first_name}} {{schema.last_name}}</p>
         <p>username: {{schema.username}}</p>
-        <p>birthday: {{schema.birthday}}</p>
+        <p class="mb-0">birthday: {{schema.birthday}}</p>
       </div>
     </div>
 
-    <div class="update-button">
+    <div class="align-self-center me-5">
       <a href="/user/progress/measurements/add">
-        <button class="update-measurements">Update measurements</button>
+        <button class="btn rounded rounded-3 update-measurements">Update measurements</button>
       </a>
     </div>
-
   </div>
 
-  <div class="progress my-4">
+  <div class="container-fluid py-5 d-flex justify-content-center align-items-center progress-navbar">
     <nav>
-      <ul class="progress-links">
+      <ul class="m-0">
         <li><a href="measurements">Measuremens Progress</a></li>
         <li><a href="exercises">Exercises Progress</a></li>
         <li><a href="muscles">Muscles Progress</a></li>

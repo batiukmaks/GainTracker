@@ -20,10 +20,14 @@ body {
 
 .already_have_ac {
   font-size: 24px;
+  color:rgb(93, 93, 93);
 }
 
 .login_up_link {
   font-size: 20px;
   text-decoration: underline;
   color: #7f878c;
+}
+.login_up_link a:link, a:visited {
+  color:rgb(93, 93, 93);
 }
