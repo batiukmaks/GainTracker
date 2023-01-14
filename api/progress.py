@@ -15,12 +15,16 @@ db = get_db()
 @jwt_required()
 def add_measurements():
     if request.method == "GET":
-        return render_template("auth/add_measurements.html")
+        schema = {
+            "measurements": [
+                bmc.name for bmc in db.query(BodyMeasurementCriteria).all()
+            ]
+        }
+        return render_template("auth/add_measurements.html", schema=schema)
 
     records = []
     for key, val in request.form.items():
         if val:
-            print("\n\n\n\n\nval:", val)
             records.append({"name": key, "record": float(val)})
 
     new_records = []

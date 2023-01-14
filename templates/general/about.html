@@ -1,171 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>About</title>
-    <!--- <link rel="stylesheet" href="reset.css" />
-    <link rel="stylesheet" href="style.css" />
 
-    -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<head>
+  <title>About</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='about/css/style.css')}}" />
+</head>
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-    />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='general/css/about.css')}}" />
-  </head>
-  <body>
-    <header>
-      <nav class="navbar navbar-default navbar-fixed-top " style="height:100px; background-color:white">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4">
-              <h1 class="text-center" style="margin-top:36px;">GainTracker</h1>
-            </div>
-            <div class="col-sm-4 text-right">
-              <div class="">
-                <a href="/user/signup">
-                  <button type="button" class="header-about-button">
-                    Sign up
-                  </button>
-                </a>
-                <a href="/user/login">
-                  <button type="button" class="header-about-button">
-                    Log in
-                  </button>
-                </a>
-              </div>
-            </div>
+<body>
+  <header>
+    <nav class="navbar navbar-default navbar-fixed-top " style="height:100px; background-color:white">
+      <div class="container d-flex justify-content-between mt-5">
+        <div class="">
+          <h1 class="text-center">GainTracker</h1>
+        </div>
+        <div class="d-flex justify-content-between">
+          <a class="me-4" href="/user/signup">
+            <button type="button" class="header-about-button">
+              Sign up
+            </button>
+          </a>
+          <a href="/user/login">
+            <button type="button" class="header-about-button">
+              Log in
+            </button>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+  </header>
+  <div class="about-gaintracker-text">
+    <h3 class="text-center" style="margin-top:150px;">Nice to meet you! </h3>
+    <p class="fs-0 text-center" style="margin-top:30px;">
+      <!-- <br /> -->
+      We are students of National University "Lviv Polytechnic". 2 years ago<br />
+      we have chosen the chair of Artificial Intelligence, so now know how important sport<br />
+      is in our live. During trainings, we faced the problem, that we don't have<br />
+      service for tracking progress. <br /><br />So, we decided to create it
+      independetly :)
+    </p>
+  </div>
+
+  <div class="container">
+    <h3 style="text-align: center">Our main features:</h3>
+    <div class="row">
+      <div class="col-sm-4 text-center">
+        <div class="collumns">
+          <img src="{{ url_for('static', filename='about/img/free-icon-fitness-6479559.png') }}"
+            style="width: 75%; background-color: rgb(250, 250, 250)" />
+          <div class="container-fluid" style="margin-top:20px;">
+            <p>You can track training progress easily</p>
           </div>
         </div>
-      </nav>
-      
-    </header>
-    <div class="about-gaintracker-text">
-      <h3 class="text-center" style="margin-top:150px;">Nice to meet you! </h3>
-      <p class="fs-0 text-center" style="margin-top:30px;">
-        <!-- <br /> -->
-        We are students of National University "Lviv Polytechnic". 2 years ago<br />
-        we have chosen the chair of Artificial Intelligence, so now know how important sport<br />
-        is in our live. During trainings, we faced the problem, that we don't have<br />
-        service for tracking progress. <br /><br />So, we decided to create it
-        independetly :)
-      </p>
-    </div>
-
-    <div class="container">
-      <h3 style="text-align: center">Our main features:</h3>
-      <div class="row">
-        <div class="col-sm-4 text-center">
-          <div class="collumns">
-            <img
-              src="{{ url_for('static', filename='general/img/free-icon-fitness-6479559.png') }}"
-              style="width: 75%; background-color: rgb(250, 250, 250)"
-            />
-            <div class="container-fluid" style="margin-top:20px;">
-              <p>You can track training progress easily</p>
-            </div>
+      </div>
+      <div class="col-sm-4 text-center">
+        <div class="collumns">
+          <img src="{{ url_for('static', filename='about/img/free-icon-exercise-5637059.png') }}"
+            style="width: 75%; background-color: rgb(250, 250, 250)" />
+          <div class="container-fluid" style="margin-top:20px;">
+            <p>You can make your own workouts</p>
           </div>
         </div>
-        <div class="col-sm-4 text-center">
-          <div class="collumns">
-            <img
-              src="{{ url_for('static', filename='general/img/free-icon-exercise-5637059.png') }}"
-              style="width: 75%; background-color: rgb(250, 250, 250)"
-            />
-            <div class="container-fluid" style="margin-top:20px;">
-              <p>You can make your own workouts</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-4 text-center">
-          <div class="collumns">
-            <img
-              src="{{ url_for('static', filename='general/img/results.png') }}"
-              style="width: 75%; background-color: rgb(250, 250, 250)"
-            />
-            <div class="container-fluid" style="margin-top:20px;">
-              <p>You can get structured improvement review</p>
-            </div>
+      </div>
+      <div class="col-sm-4 text-center">
+        <div class="collumns">
+          <img src="{{ url_for('static', filename='about/img/results.png') }}"
+            style="width: 75%; background-color: rgb(250, 250, 250)" />
+          <div class="container-fluid" style="margin-top:20px;">
+            <p>You can get structured improvement review</p>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="container">
-      <h3 style="text-align: center">Our Team</h3>
-      <div class="card-container">
-        <div class="collumn text-center card">
-          <img src="{{ url_for('static', filename='general/img/olena.jpg') }}" style="width: 100%" />
-          <div class="container-fluid card-title">
-            <p>Olena Morozevych</p>
-          </div>
+  <div class="container">
+    <h3 style="text-align: center">Our Team</h3>
+    <div class="card-container">
+      <div class="collumn text-center card">
+        <img src="{{ url_for('static', filename='about/img/olena.jpg') }}" style="width: 100%" />
+        <div class="container-fluid card-title">
+          <p>Olena Morozevych</p>
         </div>
+      </div>
 
-        <div class="collumn text-center card">
-          <img src="{{ url_for('static', filename='general/img/hry.jpg') }}" style="width: 100%" />
-          <div class="container-fluid card-title">
-            <p>Khrystyna Levonova</p>
-          </div>
+      <div class="collumn text-center card">
+        <img src="{{ url_for('static', filename='about/img/hry.jpg') }}" style="width: 100%" />
+        <div class="container-fluid card-title">
+          <p>Khrystyna Levonova</p>
         </div>
+      </div>
 
-        <div class="collumn text-center card">
-          <img src="{{ url_for('static', filename='general/img/nastya.jpg') }}" style="width: 100%" />
-          <div class="container-fluid card-title">
-            <p>Anastasia Viaznikova</p>
-          </div>
+      <div class="collumn text-center card">
+        <img src="{{ url_for('static', filename='about/img/nastya.jpg') }}" style="width: 100%" />
+        <div class="container-fluid card-title">
+          <p>Anastasia Viaznikova</p>
         </div>
+      </div>
 
-        <div class="collumn text-center card">
-          <img src="{{ url_for('static', filename='general/img/vitalik.jpg') }}" style="width: 100%" />
-          <div class="container-fluid card-title">
-            <p>Vitalii Mill</p>
-          </div>
+      <div class="collumn text-center card">
+        <img src="{{ url_for('static', filename='about/img/vitalik.jpg') }}" style="width: 100%" />
+        <div class="container-fluid card-title">
+          <p>Vitalii Mill</p>
         </div>
-        <div class="collumn text-center card">
-          <img src="{{ url_for('static', filename='general/img/yulia.jpg') }}" style="width: 100%" />
-          <div class="container-fluid card-title">
-            <p>Yulia Kryveiko</p>
-          </div>
+      </div>
+      <div class="collumn text-center card">
+        <img src="{{ url_for('static', filename='about/img/yulia.jpg') }}" style="width: 100%" />
+        <div class="container-fluid card-title">
+          <p>Yulia Kryveiko</p>
         </div>
-        <div class="collumn text-center card">
-          <img src="{{ url_for('static', filename='general/img/maks.jpg') }}" style="width: 100%" />
-          <div class="container-fluid card-title">
-            <p>Maks Batiuk</p>
-          </div>
+      </div>
+      <div class="collumn text-center card">
+        <img src="{{ url_for('static', filename='about/img/maks.jpg') }}" style="width: 100%" />
+        <div class="container-fluid card-title">
+          <p>Maks Batiuk</p>
         </div>
       </div>
     </div>
+  </div>
 
   <div class="footer-creation" style="background-color:rgb(244, 244, 244); border-color:black;">
-      <div class="container-fluid bg-grey">
-        <h2 class="text-center">Get in touch</h2>
-        <div class="row">
-          <div class="col">
-            <p class="text-center">Contact us and we'll get back to you within 24 hours.</p>
-            <p class="text-center"><span class="glyphicon glyphicon-map-marker"></span> Lviv,Ukraine</p>
-            <p class="text-center"><span class="glyphicon glyphicon-phone"></span> +380931874526</p>
-            <p class="text-center"><span class="glyphicon glyphicon-envelope"></span> gaintracker@gmail.com</p>
-          </div>
+    <div class="container-fluid bg-grey">
+      <h2 class="text-center">Get in touch</h2>
+      <div class="row">
+        <div class="col">
+          <p class="text-center">Contact us and we'll get back to you within 24 hours.</p>
+          <p class="text-center"><span class="glyphicon glyphicon-map-marker"></span> Lviv,Ukraine</p>
+          <p class="text-center"><span class="glyphicon glyphicon-phone"></span> +380931874526</p>
+          <p class="text-center"><span class="glyphicon glyphicon-envelope"></span> gaintracker@gmail.com</p>
+        </div>
 
       </div>
 
       <div class="about-section"></div>
-    </body>
-    <footer class="bg-light pt-5">
-      <div class="container text-center">
-        <p class="text-muted mb-0">
-          &copy; GainTracker 2022
-        </p>
-      </div>
-    </footer>
+</body>
+<footer class="bg-light pt-5">
+  <div class="container text-center">
+    <p class="text-muted mb-0">
+      &copy; GainTracker 2022
+    </p>
   </div>
+</footer>
+</div>
+
 </html>

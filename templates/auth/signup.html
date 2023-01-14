@@ -1,20 +1,9 @@
 {% extends "auth/base.html" %}
-{% block styles_css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='auth/css/signup.css')}}" />
-{% endblock %}
 
-
-{% block header_logo %}
-<a href="#">
-  <div class="header-title">
-    <h1 style="font-size:36px">GainTracker</h1>
-  </div>
-</a>
-{% endblock %}
 {% block content %}
 <div class="container mt-5 w-50 border border-dark rounded rounded-5 text-center signup-container">
   <div class="mt-5">
-    <h2 style="color:rgb(93, 93, 93);">
+    <h2>
       Hi there,
       <br />
       create an account!
@@ -26,26 +15,26 @@
       <div class="container row row-cols-2 signup-buttons text-center">
         <div class="col">
           <div class="mt-3 signup-placeholder">
-            <input class="ps-3 w-100 form-control form-control-sm rounded rounded-4 border border-dark" type="text" placeholder="first name"
-              name="first_name" autocomplete="off" required/>
+            <input class="ps-3 w-100 fs-4 rounded rounded-4 border border-dark" type="text" placeholder="first name"
+              name="first_name" autocomplete="off" required />
           </div>
           <div class="mt-3 signup-placeholder">
-            <input class="ps-3 w-100 form-control form-control-sm rounded rounded-4 border border-dark" type="text" placeholder="last name"
-              name="last_name" autocomplete="off" required/>
+            <input class="ps-3 w-100 fs-4 rounded rounded-4 border border-dark" type="text" placeholder="last name"
+              name="last_name" autocomplete="off" required />
           </div>
           <div class="mt-3 signup-placeholder">
-            <input class="ps-3 w-100 form-control form-control-sm rounded rounded-4 border border-dark" type="text" placeholder="username"
-              name="username" autocomplete="off" required/>
+            <input class="ps-3 w-100 fs-4 rounded rounded-4 border border-dark" type="text" placeholder="username"
+              name="username" autocomplete="off" required />
           </div>
         </div>
         <div class="col">
           <div class="mt-3 signup-placeholder">
-            <input class="ps-3 w-100 form-control form-control-sm rounded rounded-4 border border-dark" type="text" placeholder="birthday date"
+            <input class="ps-3 w-100 fs-4 rounded rounded-4 border border-dark" type="text" placeholder="birthday date"
               name="birthday" onfocus="(this.type='date')" onblur="(this.type='text')" required /><span
               class="validity"></span>
           </div>
-          <div class="mt-3 sex-custom-select">
-            <select name="sex" class="ps-3 w-100 form-select form-select-sm rounded rounded-4 border border-dark">
+          <div class="mt-3">
+            <select name="sex" class="form-select form-select-sm sex-select ps-3 w-100 py-0 fs-4 rounded rounded-4 border border-dark">
               <option value="none" selected>sex</option>
               <option value="male">male</option>
               <option value="female">female</option>
@@ -53,16 +42,18 @@
             </select>
           </div>
           <div class="mt-3 signup-placeholder">
-            <input class="ps-3 w-100 form-control form-control-sm rounded rounded-4 border border-dark" type="password" placeholder="password"
+            <input class="ps-3 w-100 fs-4 rounded rounded-4 border border-dark" type="password" placeholder="password"
               name="password" required />
           </div>
         </div>
       </div>
       <div class="container mt-4 w-100 text-center">
-        <button class="btn btn-outline-secondary px-5 rounded rounded-4 border border-dark signup_button" type="submit" style="color:rgb(93, 93, 93);">Create</button>
+        <button class="btn btn-outline-secondary px-5 fs-4 rounded rounded-4 border border-dark"
+          type="submit">Create</button>
       </div>
-      <div class="my-3 already_have_ac" style="color:rgb(93, 93, 93);">
-        Already have account? <br /><a href="login" class="login_up_link" style="color:rgb(93, 93, 93);">Log In</a>
+      <div class="my-3 fs-4">
+        Already have account? <br />
+        <a href="login" class="goto_login_or_signup">Log In</a>
       </div>
     </form>
   </div>
