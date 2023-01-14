@@ -69,3 +69,23 @@ header {
     color: rgb(93, 93, 93);
 }
 
+/* Progress */
+.user {
+    background-color: rgb(244, 244, 244);
+}
+
+.update-measurements-button {
+    border: 1px solid rgb(201, 158, 75);
+    background-color: white;
+    color: rgb(201, 158, 75);
+
+}
+
+.update-measurements-button:hover {
+    background-color: rgb(201, 158, 75);
+    color: white;
+}
+
+.progress-navbar {
+    border-bottom: rgb(183, 183, 183) solid 1px;
+}
