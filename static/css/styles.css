@@ -1,0 +1,155 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #7f878c;
+}
+
+
+/* Navbar */
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    border-bottom: rgb(183, 183, 183) solid 1px;
+}
+
+li,
+a {
+    color: black;
+    text-decoration: none;
+}
+
+
+/* Auth */
+
+.sex-select {
+    color: #7f878c;
+    height: 40px;
+    align-items: center;
+}
+
+.goto_login_or_signup {
+    font-size: 20px;
+    text-decoration: underline;
+    color: rgb(93, 93, 93);
+}
+
+
+/* Progress */
+.user {
+    background-color: rgb(244, 244, 244);
+}
+
+.update-measurements-button {
+    border: 1px solid rgb(201, 158, 75);
+    background-color: white;
+    color: rgb(201, 158, 75);
+
+}
+
+.update-measurements-button:hover {
+    background-color: rgb(201, 158, 75);
+    color: white;
+}
+
+.progress-navbar {
+    border-bottom: rgb(183, 183, 183) solid 1px;
+}
+
+.form-control:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: black;
+    outline: 0;
+    box-shadow: none;
+}
+
+
+/* Sessions */
+.no-records {
+    margin-top: 100px;
+}
+
+.create-button {
+    border: 1px solid #749471;
+    background-color: white;
+    color: #749471;
+}
+
+.create-button:hover {
+    border: 1px solid #749471;
+    background-color: #749471;
+    color: white;
+}
+
+
+/* Workouts */
+.workout-list-name {
+    position: absolute;
+    top: 30px;
+    left: 25px;
+}
+
+.workout-image-wrapper {
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+}
+
+.workout-image-wrapper img {
+    filter: brightness(70%);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.delete-button {
+    border: 1px solid rgb(121, 48, 48);
+    background-color: white;
+    color: rgb(121, 48, 48);
+}
+
+.delete-button:hover {
+    border: 1px solid rgb(121, 48, 48);
+    background-color: rgb(121, 48, 48);
+    color: white;
+}
+
+.exercise-header {
+    color: rgb(93, 93, 93);
+    align-items: center;
+}
+
+.excercise-icon-wrapper {
+    width: 32px;
+}
+
+.excercise-icon-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.exercise-filter {
+    background-color: white;
+    border: 1px solid grey;
+    cursor: pointer;
+}
+
+.btn-check:checked+.exercise-filter,
+.exercise-filter:hover {
+    background-color: rgb(155, 155, 155);
+    color: white;
+}
+
+.apply-filters-button {
+    height: 30px;
+}
+
+.apply-filters-button:hover {
+    background-color: grey;
+}
+
+.create-workout-name {
+    height: 40px;
+}
