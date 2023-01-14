@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, render_template, redirect, make_response
+from flask import Blueprint, request, jsonify, render_template, redirect, url_for
 from flask_jwt_extended import (
     create_access_token,
     jwt_required,
@@ -52,10 +52,10 @@ def signup():
     except ValidationError:
         return jsonify({"Error": "Invalid input"}), 400
 
-    if db.query(User).filter(User.email == new_user.email).first():
-        return jsonify({"Error": "The user with such email already exists."}), 400
     if db.query(User).filter(User.username == new_user.username).first():
-        return jsonify({"Error": "The user with such username already exists."}), 400
+        return render_template("auth/signup.html", error={'message': 'The user with such username already exists.'})
+    if db.query(User).filter(User.email == new_user.email).first():
+        return render_template("auth/signup.html", error={'message': 'The user with such email already exists.'})
 
     db.add(new_user)
     db.commit()
@@ -77,16 +77,14 @@ def login():
         
     username = request.form.get("username_or_email")
     password = request.form.get("password")
-    if username is None:
-        return redirect("login")
     user = (
         db.query(User).filter(User.username == username).first()
         or db.query(User).filter(User.email == username).first()
     )
     if user is None:
-        return redirect("login")
+        return render_template("auth/login.html", error={'message': 'Cannot find the user. Check your login or create an account.'})
     if not check_password_hash(user.password, password):
-        return redirect("login")
+        return render_template("auth/login.html", error={'message': 'Invalid password. Try again.'})
 
     response = redirect("/user/progress/measurements")
     access_token = create_access_token(identity=user)
