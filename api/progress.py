@@ -185,14 +185,16 @@ def get_records_for_exercises(exercises):
         .order_by(models.Session.date)
     ]
 
-    records = (
+    records = list(
         db.query(ExerciseRecord)
         .filter(
             ExerciseRecord.session_id.in_(session_ids),
             ExerciseRecord.exercise_id.in_(exercise_ids),
         )
-        .order_by(ExerciseRecord.date)
     )
+    
+    for i in range(len(records)):
+        records[i].date = db.query(models.Session).filter(models.Session.id == records[i].session_id).first().date
 
     return records
 

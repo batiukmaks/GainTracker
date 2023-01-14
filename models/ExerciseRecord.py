@@ -6,7 +6,6 @@ class ExerciseRecord(Base):
     __tablename__ = 'exercise_record'
 
     id = Column(Integer, primary_key=True)
-    date = Column(Date)
 
     session_id = Column(Integer, ForeignKey("session.id", ondelete="CASCADE"))
     exercise_id = Column(Integer, ForeignKey("exercise.id", ondelete="CASCADE"))

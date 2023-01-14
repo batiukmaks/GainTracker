@@ -102,7 +102,6 @@ def create_session():
 
         for record in new_session_schema["records"]:
             exercise_record = ExerciseRecord(
-                date=session.date,
                 session_id=session.id,
                 exercise_id=record["exercise_id"],
             )
