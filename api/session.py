@@ -55,8 +55,11 @@ def create_session():
                 jsonify({"Error": "You have no permission to user this workout."}),
                 401,
             )
+
         return render_template(
-            "sessions/session_create.html", workout=get_workout_info_schema(workout.id)
+            "sessions/session_create.html",
+            workout=get_workout_info_schema(workout.id),
+            prev_session=get_last_session(workout.id),
         )
     elif request.method == "POST":
         new_session_schema = {
@@ -152,3 +155,8 @@ def get_record_info_schema(id):
     }
 
     return exercise_record_schema
+
+
+def get_last_session(workout_id):
+    session = db.query(Session).filter(Session.workout_id == workout_id).order_by(Session.date.desc()).first()
+    return get_session_info_schema(session.id) if session is not None else None

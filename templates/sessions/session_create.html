@@ -5,12 +5,13 @@
 {% block content %}
 <form method="post" action="/sessions/add">
   <input type="hidden" name="workout_id" value="{{workout.id}}" />
-  <div class="container mt-4">
-    <div style="text-align:left; width: 20%; display: inline-block">
-      <button class='btn create-button my-4'>Create session</button>
+  <div class="container d-flex justify-content-between mt-4 pt-4">
+    <div>
+      <button class='btn create-button'>Create session</button>
     </div>
-    <h1 style="color:rgb(93, 93, 93); text-align:center; width: 60%; display: inline-block; font-size:30px">
-      {{workout.name}}</h1>
+    <div>
+      <h1>{{workout.name}}</h1>
+    </div>
   </div>
 
   <div class="container mt-4">
@@ -24,33 +25,58 @@
             <div>
               <button type="button" class="btn btn-outline-secondary rounded-circle"
                 onclick="add_new_set({{exercise.id}})">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus"
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg"
                   viewBox="0 0 16 16">
-                  <path
-                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z">
-                  </path>
+                  <path fill-rule="evenodd"
+                    d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
                 </svg>
                 <span class="visually-hidden">Button</span>
               </button>
             </div>
           </div>
-          <table class="table text-center">
+          <table id="{{exercise.id}}" class="table text-center">
             <thead>
               <th scope="col">Weight</th>
               <th scope="col">Reps</th>
               <th scope="col">Time</th>
             </thead>
             <tbody id="sets_{{exercise.id}}">
+              {% set outer_loop = loop %}
+              {% if prev_session %}
+              {% for set in prev_session.records[outer_loop.index - 1].sets %}
+              <tr scope="row">
+                <td><input placeholder="{{set.weight}}" type="number" step="0.1" class="form-control rounded-4"
+                    name="records[{{exercise.id}}][weight]" required></td>
+                <td><input placeholder="{{set.reps}}" type="number" step="0.1" class="form-control rounded-4"
+                    name="records[{{exercise.id}}][reps]" required></td>
+                <td><input placeholder="{{set.time}}" type="number" step="0.1" class="form-control rounded-4"
+                    name="records[{{exercise.id}}][time]" required></td>
+              </tr>
+              {% endfor %}
+              {% else %}
               <tr scope="row">
                 <td><input type="number" step="0.1" class="form-control rounded-4"
-                    name="records[{{exercise.id}}][weight]"></td>
+                    name="records[{{exercise.id}}][weight]" required></td>
                 <td><input type="number" step="0.1" class="form-control rounded-4"
-                    name="records[{{exercise.id}}][reps]"></td>
+                    name="records[{{exercise.id}}][reps]" required></td>
                 <td><input type="number" step="0.1" class="form-control rounded-4"
-                    name="records[{{exercise.id}}][time]"></td>
+                    name="records[{{exercise.id}}][time]" required></td>
               </tr>
+              {% endif %}
             </tbody>
           </table>
+          <div class="d-flex justify-content-end">
+            <div>
+              <button type="button" class="btn btn-outline-secondary rounded-circle"
+                onclick="delete_last_set({{exercise.id}})">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg"
+                  viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z" />
+                </svg>
+                <span class="visually-hidden">Button</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
       {% endfor %}
@@ -59,20 +85,27 @@
 </form>
 
 <script>
-  const iterators = Array(100).fill(2);
   function add_new_set(exercise_id) {
     let template = `
       <tr scope="row">
-        <td><input type="number" step="0.1" class="form-control rounded-4" name="records[${exercise_id}][weight]"></td>
-        <td><input type="number" step="0.1" class="form-control rounded-4" name="records[${exercise_id}][reps]"></td>
-        <td><input type="number" step="0.1" class="form-control rounded-4" name="records[${exercise_id}][time]"></td>
+        <td><input type="number" step="0.1" class="form-control rounded-4" name="records[${exercise_id}][weight]" required></td>
+        <td><input type="number" step="0.1" class="form-control rounded-4" name="records[${exercise_id}][reps]" required></td>
+        <td><input type="number" step="0.1" class="form-control rounded-4" name="records[${exercise_id}][time]" required></td>
       </tr>`;
 
     let container = document.getElementById('sets_' + exercise_id);
     let tr = document.createElement('tr');
     tr.innerHTML = template;
     container.appendChild(tr);
-    iterators[exercise_id]++;
+  }
+
+  function delete_last_set(exercise_id) {
+    var table = document.getElementById(exercise_id);
+    var rowCount = table.rows.length;
+
+    if (rowCount > 1) {
+      table.deleteRow(rowCount - 1);
+    }
   }
 </script>
 {% endblock %}
