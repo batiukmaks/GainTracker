@@ -1,5 +1,6 @@
 body {
     font-family: 'Montserrat', sans-serif;
+    color: #7f878c;
 }
 
 li,
@@ -52,7 +53,19 @@ header {
     box-shadow: none;
 }
 
-.form-select {
+
+
+/* Auth */
+
+.sex-select {
+    color: #7f878c;
     height: 40px;
-    align-items:center;
+    align-items: center;
 }
+
+.goto_login_or_signup {
+    font-size: 20px;
+    text-decoration: underline;
+    color: rgb(93, 93, 93);
+}
+

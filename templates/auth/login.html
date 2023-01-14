@@ -3,11 +3,10 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='auth/css/login.css')}}" />
 {% endblock %}
 
-
 {% block header_logo %}
-<div class="header-title">
+<div class="container text-center">
   <a href="/about">
-    <h2>GainTracker</h2>
+    <h1>GainTracker</h1>
   </a>
 </div>
 {% endblock %}
@@ -22,27 +21,27 @@
     </h2>
   </div>
 
-  <div class="my-5 mt-5"  style="font-size: 24px">
+  <div class="my-5 mt-5">
     <form method="post" action="login">
       <div class="container text-center">
         <div>
-          <input class="mb-3 ps-3 rounded rounded-4 border border-dark log-in-placeholder" type="text"
+          <input class="mb-3 ps-3 fs-4 rounded rounded-4 border border-dark log-in-placeholder" type="text"
             placeholder="username or email" name="username_or_email" autocomplete="off" required />
         </div>
         <div>
-          <input class="ps-3 rounded rounded-4 border border-dark log-in-placeholder" type="password"
+          <input class="ps-3 fs-4 rounded rounded-4 border border-dark log-in-placeholder" type="password"
             placeholder="password" name="password" autocomplete="off" required />
         </div>
       </div>
 
       <div class="container mt-4 w-100 text-center">
-        <button class="btn btn-outline-secondary px-5 rounded rounded-4 border border-dark login_button" type="submit"
-         >Log in</button>
+        <button class="btn btn-outline-secondary px-5 fs-4 rounded rounded-4 border border-dark login_button"
+          type="submit">Log in</button>
       </div>
-      <div class="my-3 dont_have_ac">
+      <div class="my-3 fs-4">
         Don't have account yet?
         <br />
-        <a href="signup" class="sign_up_link">Sign up</a>
+        <a href="signup" class="goto_login_or_signup">Sign up</a>
       </div>
     </form>
   </div>
