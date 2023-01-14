@@ -4,7 +4,7 @@
   <p class="session-page-title fs-2">List of sessions</p>
 </div>
 
-{% if sessions == [] %}  
+{% if sessions == [] %}
 <div class="container text-center no-records">
   <h3 class="fs-2">You do not have any sessions yet. Create them by going to workouts!</h3>
 </div>
@@ -15,7 +15,8 @@
     {% for session in sessions %}
     <div class="col">
       <a href="{{session.id}}">
-        <div class="d-flex justify-content-between session-wrapper border border-secondary border-2 rounded rounded-4 px-3 py-2">
+        <div
+          class="d-flex justify-content-between session-wrapper border border-secondary border-2 rounded rounded-4 px-3 py-2">
           <p class="m-0">{{session.workout_name}}</p>
           <p class="m-0">{{session.date}}</p>
         </div>

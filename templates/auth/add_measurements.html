@@ -1,10 +1,6 @@
 {% extends "auth/base.html" %}
-{% block styles_css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='auth/css/measurements.css')}}" />
-{% endblock %}
 
-
-{% block header_measurements %}
+{% block header %}
 {% include 'base_templates/navbar.html' %}
 {% endblock %}
 

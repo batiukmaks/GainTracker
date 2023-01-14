@@ -36,7 +36,7 @@
             <input type="checkbox" value="{{ exercise.id }}" name="exercises">
             <p class="m-0 fs-5 exercise-name">{{ exercise.name|title }}</p>
             <div class="excercise-icon-wrapper"><img
-                src="{{url_for('static', filename='workouts/img/icons/no_equipment.png' if exercise.equipment == 'not required' else 'workouts/img/icons/equipment.png')}}">
+                src="{{url_for('static', filename='img/workouts/icons/no_equipment.png' if exercise.equipment == 'not required' else 'img/workouts/icons/equipment.png')}}">
             </div>
           </div>
 

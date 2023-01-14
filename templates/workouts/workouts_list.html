@@ -25,7 +25,7 @@
           'man_workout_1.jpg', 'man_workout_2.jpg', 'man_workout_4.jpg',
           'man_workout_5.jpg', 'man_workout_6.jpg'] %}
           {% set selected_image = images|random %}
-          <img src="{{url_for('static', filename='workouts/img/'+selected_image)}}">
+          <img src="{{url_for('static', filename='img/workouts/'+selected_image)}}">
           <p class="text-light fs-3 workout-list-name">{{ workout.name }}</p>
         </div>
       </a>

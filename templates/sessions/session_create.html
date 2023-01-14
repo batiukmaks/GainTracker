@@ -9,7 +9,8 @@
     <div style="text-align:left; width: 20%; display: inline-block">
       <button class='btn create-button my-4'>Create session</button>
     </div>
-    <h1 style="color:rgb(93, 93, 93); text-align:center; width: 60%; display: inline-block; font-size:30px">{{workout.name}}</h1>
+    <h1 style="color:rgb(93, 93, 93); text-align:center; width: 60%; display: inline-block; font-size:30px">
+      {{workout.name}}</h1>
   </div>
 
   <div class="container mt-4">
@@ -21,7 +22,8 @@
             <h4>{{loop.index}}</h4>
             <h4>{{exercise.name|title}}</h4>
             <div>
-              <button type="button" class="btn btn-outline-secondary rounded-circle" onclick="add_new_set({{exercise.id}})">
+              <button type="button" class="btn btn-outline-secondary rounded-circle"
+                onclick="add_new_set({{exercise.id}})">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus"
                   viewBox="0 0 16 16">
                   <path
@@ -40,9 +42,12 @@
             </thead>
             <tbody id="sets_{{exercise.id}}">
               <tr scope="row">
-                <td><input type="number" step="0.1" class="form-control rounded-4" name="records[{{exercise.id}}][weight]"></td>
-                <td><input type="number" step="0.1" class="form-control rounded-4" name="records[{{exercise.id}}][reps]"></td>
-                <td><input type="number" step="0.1" class="form-control rounded-4" name="records[{{exercise.id}}][time]"></td>
+                <td><input type="number" step="0.1" class="form-control rounded-4"
+                    name="records[{{exercise.id}}][weight]"></td>
+                <td><input type="number" step="0.1" class="form-control rounded-4"
+                    name="records[{{exercise.id}}][reps]"></td>
+                <td><input type="number" step="0.1" class="form-control rounded-4"
+                    name="records[{{exercise.id}}][time]"></td>
               </tr>
             </tbody>
           </table>

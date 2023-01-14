@@ -6,11 +6,11 @@
   <h1>{{session.date}}</h1>
 </div>
 
-<div class="container mt-4" >
-  <div class="row row-cols-3 gx-5 gy-4" >
+<div class="container mt-4">
+  <div class="row row-cols-3 gx-5 gy-4">
     {% for exercise in session.records %}
-    <div class="col" >
-      <div class="p-3 border border-secondary border-2 rounded-4"  style="color:rgb(93, 93, 93); font-size:13px;">
+    <div class="col">
+      <div class="p-3 border border-secondary border-2 rounded-4" style="color:rgb(93, 93, 93); font-size:13px;">
         <div class="d-flex justify-content-between">
           <h3>{{loop.index}}</h3>
           <h3>{{exercise.exercise_name|title}}</h3>
