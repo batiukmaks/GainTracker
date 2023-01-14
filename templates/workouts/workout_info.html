@@ -10,7 +10,7 @@
       </form>
     </div>
     <div class="col my-4 text-center">
-      <h1 class="fs-2 workout-info-name">{{ workout.name }}</h1>
+      <h1 class="fs-2">{{ workout.name }}</h1>
     </div>
     <div class="col d-flex justify-content-end">
       <form action="{{workout.id}}" method="post">
@@ -23,7 +23,7 @@
   <div class="row row-cols-3 gy-3 gx-3">
     {% for exercise in workout.exercises %}
     <div class="col">
-      <div class="rounded rounded-4 exercise-wrapper h-100 px-4 pb-4">
+      <div class="rounded rounded-4 border border-2 border-secondary h-100 px-4 pb-4">
         <div class="exercise-header my-4 d-flex justify-content-between">
           <p class="m-0 fs-5 numbers">{{loop.index}}</p>
           <p class="m-0 fs-5 exercise-name">{{ exercise.name|title }}</p>
