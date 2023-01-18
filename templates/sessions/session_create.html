@@ -14,11 +14,11 @@
     </div>
   </div>
 
-  <div class="container mt-4">
-    <div class="row row-cols-3 gx-5 gy-4">
+  <div class="container my-5">
+    <div class="row row-cols-lg-3 row-cols-sm-1 gx-5 gy-4">
       {% for exercise in workout.exercises %}
       <div class="col">
-        <div class="p-3 border border-secondary border-2 rounded-4" style="color:rgb(93, 93, 93); font-size:13px;">
+        <div class="h-100 p-3 border border-secondary border-2 rounded-4" style="color:rgb(93, 93, 93); font-size:13px;">
           <div class="d-flex justify-content-between">
             <h4>{{loop.index}}</h4>
             <h4>{{exercise.name|title}}</h4>

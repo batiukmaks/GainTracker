@@ -20,13 +20,13 @@
     </div>
   </div>
 
-  <div class="row row-cols-3 gy-3 gx-3">
+  <div class="row row-cols-lg-3 row-cols-sm-2 gy-3 gx-3">
     {% for exercise in workout.exercises %}
     <div class="col">
       <div class="rounded rounded-4 border border-2 border-secondary h-100 px-4 pb-4">
         <div class="exercise-header my-4 d-flex justify-content-between">
-          <p class="m-0 fs-5 numbers">{{loop.index}}</p>
-          <p class="m-0 fs-5 exercise-name">{{ exercise.name|title }}</p>
+          <h4 class="m-0">{{loop.index}}</h4>
+          <h4 class="m-0">{{ exercise.name|title }}</h4>
           <div class="excercise-icon-wrapper"><img
               src="{{url_for('static', filename='img/workouts/icons/no_equipment.png' if exercise.equipment == 'not required' else 'img/workouts/icons/equipment.png')}}">
           </div>

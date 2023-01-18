@@ -142,8 +142,10 @@ a {
     color: white;
 }
 
-.apply-filters-button {
-    height: 30px;
+@media only screen and (min-width: 992px) {
+    .apply-filters-button {
+        height: 30px;
+    }
 }
 
 .apply-filters-button:hover {
