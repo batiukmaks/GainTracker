@@ -186,15 +186,19 @@ def get_records_for_exercises(exercises):
     ]
 
     records = list(
-        db.query(ExerciseRecord)
-        .filter(
+        db.query(ExerciseRecord).filter(
             ExerciseRecord.session_id.in_(session_ids),
             ExerciseRecord.exercise_id.in_(exercise_ids),
         )
     )
-    
+
     for i in range(len(records)):
-        records[i].date = db.query(models.Session).filter(models.Session.id == records[i].session_id).first().date
+        records[i].date = (
+            db.query(models.Session)
+            .filter(models.Session.id == records[i].session_id)
+            .first()
+            .date
+        )
 
     return records
 

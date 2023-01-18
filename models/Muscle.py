@@ -2,6 +2,7 @@ from sqlalchemy import Column, String, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 from models.Base import Base
 
+
 class Muscle(Base):
     __tablename__ = "muscle"
 
@@ -9,6 +10,7 @@ class Muscle(Base):
     name = Column(String(255))
 
     muscles_worked = relationship("MuscleWorked", cascade="all, delete-orphan")
+
 
 class MuscleWorked(Base):
     __tablename__ = "muscle_worked"

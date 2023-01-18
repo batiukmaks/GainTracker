@@ -24,7 +24,7 @@ db = get_db()
 def signup():
     current_identity = get_jwt_identity()
     if not current_identity is None:
-        return redirect('logout')
+        return redirect("logout")
 
     if request.method == "GET":
         return render_template("auth/signup.html")
@@ -51,9 +51,15 @@ def signup():
         return jsonify({"Error": "Invalid input"}), 400
 
     if db.query(User).filter(User.username == new_user.username).first():
-        return render_template("auth/signup.html", error={'message': 'The user with such username already exists.'})
+        return render_template(
+            "auth/signup.html",
+            error={"message": "The user with such username already exists."},
+        )
     if db.query(User).filter(User.email == new_user.email).first():
-        return render_template("auth/signup.html", error={'message': 'The user with such email already exists.'})
+        return render_template(
+            "auth/signup.html",
+            error={"message": "The user with such email already exists."},
+        )
 
     db.add(new_user)
     db.commit()
@@ -66,11 +72,11 @@ def login():
     db.rollback()
     current_identity = get_jwt_identity()
     if not current_identity is None:
-        return redirect('logout')
+        return redirect("logout")
 
     if request.method == "GET":
         return render_template("auth/login.html")
-        
+
     username = request.form.get("username_or_email")
     password = request.form.get("password")
     user = (
@@ -78,9 +84,16 @@ def login():
         or db.query(User).filter(User.email == username).first()
     )
     if user is None:
-        return render_template("auth/login.html", error={'message': 'Cannot find the user. Check your login or create an account.'})
+        return render_template(
+            "auth/login.html",
+            error={
+                "message": "Cannot find the user. Check your login or create an account."
+            },
+        )
     if not check_password_hash(user.password, password):
-        return render_template("auth/login.html", error={'message': 'Invalid password. Try again.'})
+        return render_template(
+            "auth/login.html", error={"message": "Invalid password. Try again."}
+        )
 
     response = redirect("/user/progress/measurements")
     access_token = create_access_token(identity=user)

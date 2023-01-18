@@ -19,7 +19,8 @@
     <div class="container row row-cols-1 gy-3">
       {% for measurement in schema.measurements %}
       <div class="col">
-        <input type="number" step="0.01" placeholder="{{measurement}}" name="{{measurement}}" class="w-50 ps-3 border border-dark lh-sm fs-4 rounded rounded-3" />
+        <input type="number" step="0.01" placeholder="{{measurement}}" name="{{measurement}}"
+          class="w-50 ps-3 border border-dark lh-sm fs-4 rounded rounded-3" />
       </div>
       {% endfor %}
     </div>

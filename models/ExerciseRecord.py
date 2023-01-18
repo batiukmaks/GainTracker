@@ -2,8 +2,9 @@ from sqlalchemy import Column, String, Integer, Date, Float, ForeignKey
 from sqlalchemy.orm import relationship
 from models.Base import Base
 
+
 class ExerciseRecord(Base):
-    __tablename__ = 'exercise_record'
+    __tablename__ = "exercise_record"
 
     id = Column(Integer, primary_key=True)
 
@@ -12,8 +13,9 @@ class ExerciseRecord(Base):
 
     exercise_sets = relationship("ExerciseSet", cascade="all, delete-orphan")
 
+
 class ExerciseSet(Base):
-    __tablename__ = 'exercise_set'
+    __tablename__ = "exercise_set"
 
     id = Column(Integer, primary_key=True)
     sequence_number = Column(Integer)
@@ -21,4 +23,6 @@ class ExerciseSet(Base):
     time = Column(Float)
     weight = Column(Float)
 
-    exercise_record_id = Column(Integer, ForeignKey("exercise_record.id", ondelete="CASCADE"))
+    exercise_record_id = Column(
+        Integer, ForeignKey("exercise_record.id", ondelete="CASCADE")
+    )

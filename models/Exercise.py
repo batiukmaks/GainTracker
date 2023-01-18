@@ -2,6 +2,7 @@ from sqlalchemy import Column, String, Integer, ForeignKey, Text
 from sqlalchemy.orm import relationship
 from models.Base import Base
 
+
 class Exercise(Base):
     __tablename__ = "exercise"
 

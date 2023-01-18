@@ -158,5 +158,10 @@ def get_record_info_schema(id):
 
 
 def get_last_session(workout_id):
-    session = db.query(Session).filter(Session.workout_id == workout_id).order_by(Session.date.desc()).first()
+    session = (
+        db.query(Session)
+        .filter(Session.workout_id == workout_id)
+        .order_by(Session.date.desc())
+        .first()
+    )
     return get_session_info_schema(session.id) if session is not None else None
