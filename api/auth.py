@@ -20,12 +20,7 @@ db = get_db()
 
 
 @auth.route("/signup", methods=["GET", "POST"])
-@jwt_required(optional=True)
 def signup():
-    current_identity = get_jwt_identity()
-    if not current_identity is None:
-        return redirect("logout")
-
     if request.method == "GET":
         return render_template("auth/signup.html")
 
@@ -67,13 +62,8 @@ def signup():
 
 
 @auth.route("/login", methods=["GET", "POST"])
-@jwt_required(optional=True)
 def login():
     db.rollback()
-    current_identity = get_jwt_identity()
-    if not current_identity is None:
-        return redirect("logout")
-
     if request.method == "GET":
         return render_template("auth/login.html")
 

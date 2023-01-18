@@ -28,14 +28,14 @@ def user_lookup_callback(_jwt_header, jwt_data):
     return db.query(User).filter(User.id == identity).first()
 
 
-# @jwt.expired_token_loader
-# def my_expired_token_callback(jwt_header, jwt_payload):
-#     return redirect("/user/logout")
+@jwt.expired_token_loader
+def my_expired_token_callback(jwt_header, jwt_payload):
+    return redirect("/user/login")
 
 
-# @jwt.unauthorized_loader
-# def my_expired_token_callback(jwt_header):
-#     return redirect("/user/logout")
+@jwt.unauthorized_loader
+def my_expired_token_callback(jwt_header):
+    return redirect("/user/login")
 
 
 # Using an `after_request` callback, we refresh any token that is within 30
