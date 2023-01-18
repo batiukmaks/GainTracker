@@ -11,6 +11,11 @@
   </div>
 
   <div class="mt-4">
+    {% if error %}
+    <div class="alert alert-warning" role="alert">
+      {{error.message}}
+    </div>
+    {% endif %}
     <form method="post" action="signup">
       <div class="container row row-cols-2 signup-buttons text-center">
         <div class="col">
@@ -34,7 +39,8 @@
               class="validity"></span>
           </div>
           <div class="mt-3">
-            <select name="sex" class="form-select form-select-sm sex-select ps-3 w-100 py-0 fs-4 rounded rounded-4 border border-dark">
+            <select name="sex"
+              class="form-select form-select-sm sex-select ps-3 w-100 py-0 fs-4 rounded rounded-4 border border-dark">
               <option value="none" selected>sex</option>
               <option value="male">male</option>
               <option value="female">female</option>

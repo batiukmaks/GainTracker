@@ -2,6 +2,7 @@ from sqlalchemy import Column, String, Integer, ForeignKey, Text
 from sqlalchemy.orm import relationship
 from models.Base import Base
 
+
 class Exercise(Base):
     __tablename__ = "exercise"
 
@@ -9,6 +10,7 @@ class Exercise(Base):
     name = Column(String(255))
     equipment = Column(String(255))
     description = Column(Text)
+    author_id = Column(Integer, ForeignKey("user.id", ondelete="CASCADE"))
 
     muscles_worked = relationship("MuscleWorked", cascade="all, delete-orphan")
     workout_exercises = relationship("WorkoutExercise", cascade="all, delete-orphan")

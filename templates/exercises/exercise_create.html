@@ -1,0 +1,52 @@
+{% extends 'exercises/base.html' %}
+{% block content %}
+<div class="container mt-5 py-4 w-50 border border-dark rounded rounded-5 text-center signup-container">
+	<div class="container">
+		<h1>Add your own exercise!</h1>
+	</div>
+	<form method="post" action="add">
+		<div class="container row row-cols-2 signup-buttons text-center">
+			<div class="col mt-3">
+				<input class="ps-3 w-100 fs-4 rounded rounded-4 border border-dark" type="text" placeholder="Name" name="name"
+					autocomplete="off" required />
+			</div>
+			<div class="col mt-3">
+				<select name="equipment"
+					class="form-select form-select-sm sex-select ps-3 w-100 py-0 fs-4 rounded rounded-4 border border-dark">
+					<option value="not required" selected>Equipment</option>
+					<option value="required">required</option>
+					<option value="not required">not required</option>
+				</select>
+			</div>
+		</div>
+		<div class="container d-flex flex-row flex-wrap mt-3 gap-2">
+			{% for type in schema.types %}
+			<div class="flex-column">
+				<input name="types" value="{{type}}" type="checkbox" class="btn-check" id="{{type}}" autocomplete="off">
+				<label class="px-2 pt-1 rounded rounded-3 exercise-filter" for="{{type}}">{{type|title}}</label>
+			</div>
+			{% endfor %}
+		</div>
+		<div class="container d-flex flex-row flex-wrap mt-3 gap-2">
+			{% for muscle in schema.muscles %}
+			<div class="flex-column">
+				<input name="muscles" value="{{muscle.id}}" type="checkbox" class="btn-check" id="{{muscle.id}}"
+					autocomplete="off" {% if muscle.id in schema.chosen_filters %} checked {% endif %}>
+				<label class="px-2 pt-1 rounded rounded-3 exercise-filter" for="{{muscle.id}}">{{muscle.name|title}}</label>
+			</div>
+			{% endfor %}
+		</div>
+		<div class="container row text-center">
+			<div class="col mt-3">
+				<textarea class="ps-3 w-100 fs-4 rounded rounded-4 border border-dark" type="text" placeholder="Description"
+					name="description" autocomplete="off"></textarea>
+			</div>
+		</div>
+		<div class="container mt-4 w-100 text-center d-flex justify-content-around">
+			<a href="/workouts/add" class="btn btn-outline-secondary px-5 fs-4 rounded rounded-4 border border-dark">Back</a>
+			<button class="btn btn-outline-secondary px-5 fs-4 rounded rounded-4 border border-dark"
+				type="submit">Create</button>
+		</div>
+	</form>
+</div>
+{% endblock %}

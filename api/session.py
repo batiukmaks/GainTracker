@@ -1,6 +1,5 @@
 from flask import Blueprint, request, jsonify, render_template, redirect
 from flask_jwt_extended import jwt_required, current_user
-from marshmallow import ValidationError
 from sqlalchemy import desc
 from schemas import *
 from models import *
@@ -55,8 +54,11 @@ def create_session():
                 jsonify({"Error": "You have no permission to user this workout."}),
                 401,
             )
+
         return render_template(
-            "sessions/session_create.html", workout=get_workout_info_schema(workout.id)
+            "sessions/session_create.html",
+            workout=get_workout_info_schema(workout.id),
+            prev_session=get_last_session(workout.id),
         )
     elif request.method == "POST":
         new_session_schema = {
@@ -102,7 +104,6 @@ def create_session():
 
         for record in new_session_schema["records"]:
             exercise_record = ExerciseRecord(
-                date=session.date,
                 session_id=session.id,
                 exercise_id=record["exercise_id"],
             )
@@ -153,3 +154,13 @@ def get_record_info_schema(id):
     }
 
     return exercise_record_schema
+
+
+def get_last_session(workout_id):
+    session = (
+        db.query(Session)
+        .filter(Session.workout_id == workout_id)
+        .order_by(Session.date.desc())
+        .first()
+    )
+    return get_session_info_schema(session.id) if session is not None else None

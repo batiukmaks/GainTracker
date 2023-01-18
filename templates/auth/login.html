@@ -11,6 +11,11 @@
   </div>
 
   <div class="my-5 mt-5">
+    {% if error %}
+    <div class="alert alert-warning" role="alert">
+      {{error.message}}
+    </div>
+    {% endif %}
     <form method="post" action="login">
       <div class="container text-center">
         <div>
