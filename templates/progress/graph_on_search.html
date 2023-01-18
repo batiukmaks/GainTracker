@@ -32,9 +32,9 @@
   }
 </script>
 
-<div class="container mt-4">
-  <div class="row row-cols-12">
-    <div class="col col-3">
+<div class="container my-4">
+  <div class="row row-cols-1 gy-3">
+    <div class="col">
       <form class="form-inline" action="{% block form_action %}{% endblock %}" method="post">
         <div class="input-group">
           <button class="btn btn-outline-secondary" type="submit">
@@ -49,7 +49,7 @@
       </form>
     </div>
     {% if 'graph' in schema %}
-    <div class="col-9">
+    <div class="col">
       <div class="card">
         <div class="card-body text-center">
           <p class="fs-3">{{ schema.graph.graph_name|title }}</p>
