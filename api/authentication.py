@@ -22,9 +22,9 @@ def user_lookup_callback(_jwt_header, jwt_data):
 
 @jwt.expired_token_loader
 def my_expired_token_callback(jwt_header, jwt_payload):
-    return redirect("/user/login")
+    return redirect("/user/logout")
 
 
 @jwt.unauthorized_loader
 def my_expired_token_callback(jwt_header):
-    return redirect("/user/login")
+    return redirect("/user/logout")
