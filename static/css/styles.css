@@ -142,6 +142,12 @@ a {
     color: white;
 }
 
+.btn-check:not(:checked)+.exercise-filter {
+    background-color: white;
+    color: rgb(155, 155, 155);
+
+}
+
 @media only screen and (min-width: 992px) {
     .apply-filters-button {
         height: 30px;
