@@ -8,12 +8,13 @@ class UserCreationSchema(Schema):
     password = fields.Str()
     first_name = fields.Str()
     last_name = fields.Str()
-    sex = fields.Str(validate=validate.OneOf(['male', 'female']))
+    sex = fields.Str(validate=validate.OneOf(["male", "female"]))
     birthday = fields.Date()
 
     @post_load
     def make_set(self, data, **kwargs):
         return User(**data)
+
 
 class UserFullInfoSchema(UserCreationSchema):
     id = fields.Integer()
@@ -25,5 +26,5 @@ class UserInfoSchema(Schema):
     email = fields.Email()
     first_name = fields.Str()
     last_name = fields.Str()
-    sex = fields.Str(validate=validate.OneOf(['male', 'female']))
+    sex = fields.Str(validate=validate.OneOf(["male", "female"]))
     birthday = fields.Date()

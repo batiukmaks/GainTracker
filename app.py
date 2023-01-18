@@ -1,6 +1,6 @@
 from db import *
 from models import *
-from flask import Flask, render_template
+from flask import Flask
 from flask_cors import CORS
 
 from datetime import timedelta
@@ -29,13 +29,14 @@ def create_app(test_config=None):
 
     db_init()
 
-    from api import auth, progress, workout, session, general
+    from api import auth, progress, workout, session, general, exercise
 
     app.register_blueprint(auth.auth)
     app.register_blueprint(progress.progress)
     app.register_blueprint(workout.workout)
     app.register_blueprint(session.session)
     app.register_blueprint(general.general)
+    app.register_blueprint(exercise.exercise)
 
     return app
 

@@ -20,9 +20,12 @@
   </form>
   <form action="add" method="post">
     <div class="row row-cols-3 my-3">
-      <div class="col offset-md-4">
-        <input class="my-4 w-100 rounded rounded-3 text-center border border-2 border-secondary create-workout-name" type="text" name="name"
-          placeholder="Set Workout Name Here" autocomplete="off" required />
+      <div class="col d-flex justify-content-start my-4">
+        <a href="/exercises/add" class="btn rounded rounded-3 create-button">Create exercise</a>
+      </div>
+      <div class="col">
+        <input class="my-4 w-100 rounded rounded-3 text-center border border-2 border-secondary create-workout-name"
+          type="text" name="name" placeholder="Set Workout Name Here" autocomplete="off" required />
       </div>
       <div class="col d-flex justify-content-end my-4">
         <button class="btn rounded rounded-3 create-button" type="submit">Create workout</button>
@@ -34,8 +37,11 @@
         <div class="rounded rounded-4 border border-2 border-secondary h-100 px-4 pb-4">
           <div class="exercise-header my-4 d-flex justify-content-between">
             <input type="checkbox" value="{{ exercise.id }}" name="exercises">
-            <p class="m-0 fs-5 exercise-name">{{ exercise.name|title }}</p>
-            <div class="excercise-icon-wrapper"><img
+            <a href="/exercises/{{exercise.id}}">
+              <p class="m-0 fs-5 exercise-name">{{ exercise.name|title }}</p>
+            </a>
+            <div class="excercise-icon-wrapper">
+              <img
                 src="{{url_for('static', filename='img/workouts/icons/no_equipment.png' if exercise.equipment == 'not required' else 'img/workouts/icons/equipment.png')}}">
             </div>
           </div>
