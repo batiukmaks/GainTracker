@@ -4,6 +4,7 @@ from marshmallow import ValidationError
 from schemas import *
 from models import *
 from db import get_db
+from sqlalchemy import or_
 
 workout = Blueprint("workouts", __name__, url_prefix="/workouts")
 db = get_db()
@@ -22,16 +23,28 @@ def get_workouts():
 def add_workout():
     if request.method == "GET":
         muscles = [int(muscle_id) for muscle_id in request.args.getlist("muscles")]
-        exercises = db.query(Exercise)
+        exercises = db.query(Exercise).filter(
+            or_(
+                Exercise.author_id == None,
+                Exercise.author_id == current_user.id,
+            )
+        )
         if -1 in muscles or len(muscles) == 0:
             exercises = exercises.all()
             muscles = [-1]
         else:
-            exercise_ids = [mv.exercise_id for mv in db.query(MuscleWorked).filter(MuscleWorked.muscle_id.in_(muscles)).all()]
+            exercise_ids = [
+                mv.exercise_id
+                for mv in db.query(MuscleWorked)
+                .filter(MuscleWorked.muscle_id.in_(muscles))
+                .all()
+            ]
             exercises = exercises.filter(Exercise.id.in_(exercise_ids)).all()
         schema = {
-            "exercises": [get_exercise_info_schema(exercise.id) for exercise in exercises],
-            "muscles": [Muscle(id=-1, name='all')] + db.query(Muscle).all(),
+            "exercises": [
+                get_exercise_info_schema(exercise.id) for exercise in exercises
+            ],
+            "muscles": [Muscle(id=-1, name="all")] + db.query(Muscle).all(),
             "chosen_filters": muscles,
         }
         return render_template("workouts/workout_create.html", schema=schema)
@@ -91,9 +104,12 @@ def get_workout_info_schema(id):
 def get_exercise_info_schema(id):
     exercise = db.query(Exercise).filter(Exercise.id == id).first()
     exercise_schema = ExerciseInfoSchema().dump(exercise)
-    exercise_schema["types"] = (et.exercise_type for et in
-        db.query(ExerciseType).filter(ExerciseType.exercise_id == exercise.id).all()
-    )
+    exercise_schema["types"] = [
+        et.exercise_type
+        for et in db.query(ExerciseType)
+        .filter(ExerciseType.exercise_id == exercise.id)
+        .all()
+    ]
     muscles_worked = db.query(MuscleWorked).filter(MuscleWorked.exercise_id == id)
     exercise_schema["muscles"] = []
     for muscle_worked in muscles_worked:

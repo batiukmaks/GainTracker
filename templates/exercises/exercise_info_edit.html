@@ -1,0 +1,75 @@
+{% extends 'exercises/base.html' %}
+{% block content %}
+<div class="container mt-5 py-4 w-50 border border-dark rounded rounded-5 text-center signup-container">
+	<div class="container row row-cols-3">
+		<span></span>
+		<div class="col">
+			<h1>Editing</h1>
+		</div>
+		{% if schema.author_id is not none %}
+		<div class="col d-flex justify-content-end">
+			<form method="post" action="{{schema.id}}">
+				<input type="hidden" name="_method" value="DELETE" />
+				<button class="btn rounded rounded-3 delete-button" type="submit">Delete exercise</button>
+			</form>
+		</div>
+		{% endif %}
+	</div>
+	<div class="container">
+		<form method="post" action="{{schema.id}}">
+			<input type="hidden" name="_method" value="PUT" />
+			<div class="container row row-cols-2 signup-buttons text-center">
+				<div class="col mt-3">
+					<input class="ps-3 w-100 fs-4 rounded rounded-4 border border-dark" type="text" placeholder="Name" name="name"
+						autocomplete="off" value="{{schema.name}}" required {% if schema.author_id is none %}disabled{% endif %} />
+				</div>
+				<div class="col mt-3">
+					<select name="equipment"
+						class="form-select form-select-sm sex-select ps-3 w-100 py-0 fs-4 rounded rounded-4 border border-dark" {%
+						if schema.author_id is none %}disabled{% endif %}>
+						<option value="not required">Equipment</option>
+						<option value="required" {% if schema.equipment=='required' %} selected {% endif %}>required
+						</option>
+						<option value="not required" {% if schema.equipment=='not required' %} selected {% endif %}>not
+							required</option>
+					</select>
+				</div>
+			</div>
+			<div class="container d-flex flex-row flex-wrap mt-3 gap-2">
+				{% for type in filters.types %}
+				<div class="flex-column">
+					<input name="types" value="{{type}}" type="checkbox" class="btn-check" id="{{type}}" autocomplete="off" {% if
+						type in schema.types %} checked {% endif %} {% if schema.author_id is none %}disabled{% endif %}>
+					<label class="px-2 pt-1 rounded rounded-3 exercise-filter" for="{{type}}">{{type|title}}</label>
+				</div>
+				{% endfor %}
+			</div>
+			<div class="container d-flex flex-row flex-wrap mt-3 gap-2">
+				{% for muscle in filters.muscles %}
+				<div class="flex-column">
+					<input name="muscles" value="{{muscle.id}}" type="checkbox" class="btn-check" id="{{muscle.id}}"
+						autocomplete="off" {% if muscle.id in schema.muscles %} checked {% endif %} {% if schema.author_id is none
+						%}disabled{% endif %}>
+					<label class="px-2 pt-1 rounded rounded-3 exercise-filter" for="{{muscle.id}}">{{muscle.name|title}}</label>
+				</div>
+				{% endfor %}
+			</div>
+			<div class="container row text-center">
+				<div class="col mt-3">
+					<textarea class="ps-3 w-100 fs-4 rounded rounded-4 border border-dark" type="text" placeholder="Description"
+						name="description" autocomplete="off" {% if schema.author_id is none %}disabled{% endif
+						%}>{{schema.description}}</textarea>
+				</div>
+			</div>
+			<div class="container mt-4 w-100 text-center d-flex justify-content-around">
+				<a href="/workouts/add"
+					class="btn btn-outline-secondary px-5 fs-4 rounded rounded-4 border border-dark">Back</a>
+				{% if schema.author_id is not none %}
+				<button class="btn btn-outline-secondary px-5 fs-4 rounded rounded-4 border border-dark"
+					type="submit">Save</button>
+				{% endif %}
+			</div>
+		</form>
+	</div>
+</div>
+{% endblock %}

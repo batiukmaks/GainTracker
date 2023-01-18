@@ -17,3 +17,4 @@ class User(Base):
     body_measurement_records = relationship("BodyMeasurementRecord", cascade="all, delete-orphan")
     workouts = relationship("Workout", cascade="all, delete-orphan")
     sessions = relationship("Session", cascade="all, delete-orphan")
+    exercises = relationship("Exercise", cascade="all, delete-orphan")

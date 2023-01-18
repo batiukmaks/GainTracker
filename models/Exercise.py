@@ -9,6 +9,7 @@ class Exercise(Base):
     name = Column(String(255))
     equipment = Column(String(255))
     description = Column(Text)
+    author_id = Column(Integer, ForeignKey("user.id", ondelete="CASCADE"))
 
     muscles_worked = relationship("MuscleWorked", cascade="all, delete-orphan")
     workout_exercises = relationship("WorkoutExercise", cascade="all, delete-orphan")

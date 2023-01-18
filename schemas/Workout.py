@@ -12,6 +12,7 @@ class ExerciseInfoSchema(Schema):
     type = fields.Str()
     muscles = fields.List(fields.Nested(MuscleInfoSchema))
     description = fields.Str()
+    author_id = fields.Int()
 
 class WorkoutCreationSchema(Schema):
     name = fields.Str(required=True)
