@@ -1,6 +1,5 @@
 from flask import Blueprint, request, jsonify, render_template, redirect
 from flask_jwt_extended import jwt_required, current_user
-from marshmallow import ValidationError
 from sqlalchemy import desc
 from schemas import *
 from models import *

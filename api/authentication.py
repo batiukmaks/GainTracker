@@ -1,4 +1,4 @@
-from flask import redirect, make_response
+from flask import redirect
 from flask_jwt_extended import JWTManager
 from models import *
 from schemas import *

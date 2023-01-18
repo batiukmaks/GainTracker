@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, render_template, redirect, url_for
+from flask import Blueprint, request, jsonify, render_template, redirect
 from flask_jwt_extended import (
     create_access_token,
     jwt_required,

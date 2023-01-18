@@ -1,5 +1,4 @@
 from marshmallow import Schema, fields
-from models import Workout
 
 
 class MuscleInfoSchema(Schema):
