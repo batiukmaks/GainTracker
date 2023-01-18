@@ -31,6 +31,17 @@ def add_workout():
         if -1 in muscles or len(muscles) == 0:
             exercises = exercises.all()
             muscles = [-1]
+        elif -2 in muscles:
+            exercises = exercises.filter(Exercise.author_id == current_user.id)
+            if len(muscles) > 1:
+                exercise_ids = [
+                    mv.exercise_id
+                    for mv in db.query(MuscleWorked)
+                    .filter(MuscleWorked.muscle_id.in_(muscles))
+                    .all()
+                ]
+                exercises = exercises.filter(Exercise.id.in_(exercise_ids))
+            exercises = exercises.all()
         else:
             exercise_ids = [
                 mv.exercise_id
@@ -43,7 +54,8 @@ def add_workout():
             "exercises": [
                 get_exercise_info_schema(exercise.id) for exercise in exercises
             ],
-            "muscles": [Muscle(id=-1, name="all")] + db.query(Muscle).all(),
+            "muscles": [Muscle(id=-1, name="all"), Muscle(id=-2, name="created by you")]
+            + db.query(Muscle).all(),
             "chosen_filters": muscles,
         }
         return render_template("workouts/workout_create.html", schema=schema)
