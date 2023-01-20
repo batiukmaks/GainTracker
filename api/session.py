@@ -121,7 +121,17 @@ def create_session():
 def get_session_info_schema(id):
     session = db.query(Session).filter(Session.id == id).first()
     workout = db.query(Workout).filter(Workout.id == session.workout_id).first()
-    exercise_records = db.query(ExerciseRecord).filter(ExerciseRecord.session_id == id)
+    exercise_records = (
+        db.query(ExerciseRecord).filter(ExerciseRecord.session_id == id).all()
+    )
+    workout_exercises_ids = [
+        we.exercise_id for we in
+        db.query(WorkoutExercise)
+        .filter(WorkoutExercise.workout_id == workout.id)
+        .order_by(WorkoutExercise.sequence_number)
+        .all()
+    ]
+    exercise_records.sort(key=lambda er: workout_exercises_ids.index(er.exercise_id))
 
     session_schema = SessionInfoForListSchema().dump(session)
     session_schema["workout_name"] = workout.name
