@@ -100,11 +100,38 @@ def get_workout_by_id(id):
         return redirect("/workouts")
 
 
+@workout.route("/<id>/edit", methods=["GET", "POST"])
+@jwt_required()
+def edit_workout(id):
+    if request.method == "GET":
+        return render_template(
+            "workouts/workout_edit.html", schema=get_workout_info_schema(id)
+        )
+    else:
+        order = list(map(int, request.form.getlist("order")))
+        if len(order) != len(set(order)):
+            return redirect("edit")
+        exercises = (
+            db.query(WorkoutExercise)
+            .filter(WorkoutExercise.workout_id == id)
+            .order_by(WorkoutExercise.sequence_number)
+            .all()
+        )
+        for i in range(len(exercises)):
+            exercises[i].sequence_number = order.index(exercises[i].exercise_id) + 1
+        db.add_all(exercises)
+        db.commit()
+        return redirect(f"/workouts/{id}")
+
+
 def get_workout_info_schema(id):
     workout = db.query(Workout).filter(Workout.id == id).first()
     workout_schema = WorkoutInfoSchema().dump(workout)
     workout_exercises = (
-        db.query(WorkoutExercise).filter(WorkoutExercise.workout_id == id).all()
+        db.query(WorkoutExercise)
+        .filter(WorkoutExercise.workout_id == id)
+        .order_by(WorkoutExercise.sequence_number)
+        .all()
     )
     workout_schema["exercises"] = [
         get_exercise_info_schema(exercise.exercise_id) for exercise in workout_exercises

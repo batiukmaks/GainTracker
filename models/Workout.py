@@ -19,5 +19,6 @@ class WorkoutExercise(Base):
     __tablename__ = "workout_exercise"
 
     id = Column(Integer, primary_key=True)
+    sequence_number = Column(Integer)
     workout_id = Column(Integer, ForeignKey("workout.id", ondelete="CASCADE"))
     exercise_id = Column(Integer, ForeignKey("exercise.id", ondelete="CASCADE"))
