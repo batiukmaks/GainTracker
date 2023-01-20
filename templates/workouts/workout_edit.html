@@ -1,0 +1,45 @@
+{% extends 'exercises/base.html' %}
+{% block content %}
+<div class="container mt-5 p-4 w-50 border border-dark rounded rounded-5 signup-container">
+  <div class="container mb-5 d-flex justify-content-between">
+    <div class="">
+      <h1>Edit exercise order</h1>
+    </div>
+    <div class="d-flex">
+      <form action="{{schema.id}}" method="post">
+        <input type="hidden" name="_method" value="DELETE" />
+        <button class="btn rounded rounded-3 delete-button" type="submit">Delete workout</button>
+      </form>
+    </div>
+  </div>
+  <div class="container">
+    <form method="post" action="edit">
+      <div class="row row-cols-1 gy-3">
+        {% for number in range(1, schema.exercises|length + 1) %}
+        <div class="col d-flex gy-3">
+          <div class="col-1">
+            <h4>{{loop.index}}</h4>
+          </div>
+          <div class="col-11">
+            <select name="order"
+              class="form-select form-select-sm sex-select ps-3 w-100 py-0 fs-4 rounded rounded-4 border border-dark">
+              {% set outer_loop = loop %}
+              {% for exercise in schema.exercises %}
+              <option value="{{exercise.id}}" {% if number==loop.index %} selected {% endif %}>{{exercise.name|title}}
+              </option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="container mt-4 w-100 text-center d-flex justify-content-around">
+        <a href="/workouts/{{schema.id}}"
+          class="btn btn-outline-secondary px-5 fs-4 rounded rounded-4 border border-dark">Back</a>
+        <button class="btn btn-outline-secondary px-5 fs-4 rounded rounded-4 border border-dark"
+          type="submit">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
