@@ -1,6 +1,6 @@
 # **GainTracker**
 
-:chart_with_upwards_trend: GainTracker is a simple web application that allows you to track your daily workouts and monitor your progress towards your fitness goals. The app is built using :snake: **Flask**, a lightweight web framework for **Python**, and uses :file_folder: **MySQL** as its database.
+:chart_with_upwards_trend:  GainTracker is a simple web application that allows you to track your daily workouts and monitor your progress towards your fitness goals. :computer:  The app is built using :snake: **Flask**, a lightweight web framework for **Python**, and uses :file_folder: **MySQL** as its database.
 
 ## Features
 :busts_in_silhouette:  User Authentication and Registration: Create an account or log in to your existing account to use GainTracker.\
